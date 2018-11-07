@@ -16,6 +16,9 @@
 		<ul class="navbar-nav mr-auto nav-tabs-standard ml-3">
 			<?php if($userSession->user_type == 'admin'): ?>
 			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/users' ? 'active' : ''?>" href="<?= base_url()?>admin/users"> Users</a>
 			</li>
 			<li class="nav-item">

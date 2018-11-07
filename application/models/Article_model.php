@@ -5,7 +5,7 @@ class Article_model extends CI_Model{
     public function __construct(){
         $this->user = isset($this->session->userdata['user']) ? $this->session->userdata['user'] : 1; //get session
     }
-    public function getArticles(){
+    public function getArticles($id = 0){
         $this->db->select("a.id,
                     a.title,
                     CONCAT(ui.fname, ' ', ui.mname, ' ', ui.lname) NAME
@@ -18,8 +18,12 @@ class Article_model extends CI_Model{
         ->from("tbl_article a")
         ->join("tbl_article_type a_type","ON a_type.id = a.article_type","left")
         ->join("tbl_user_info ui","ON ui.user_id = a.created_by","left");
-        $where = "a_type.`type` LIKE '%".$_GET['type']."%' AND a.id LIKE '%%'";
-        $this->db->where($where);
+        if($id == 0){
+            $where = "a_type.`type` LIKE '%".$_GET['type']."%' AND a.id LIKE '%%'";
+            $this->db->where($where);
+        } else {
+            $this->db->where('a.id', $id);
+        }
         $this->db->order_by("a.date_created DESC");
 
         $query = $this->db->get();

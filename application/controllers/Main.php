@@ -34,7 +34,7 @@ class Main extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND user_type = 'student'");
+            $this->db->where("username = '$user' AND user_type = 'student' AND status = 'saved'");
             $query = $this->db->get();
             $data = $query->result();
 
