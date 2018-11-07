@@ -40,9 +40,9 @@
 				 	Welcome! <strong><?= $userInfo[0]->fname.' '.($userInfo[0]->mname != '' ? substr(ucwords($userInfo[0]->mname), 0, 1).'.' : '').' '. $userInfo[0]->lname?></strong>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#"><i class="ti-settings"></i> Manage Accounts</a>
+					<!-- <a class="dropdown-item" href="#"><i class="ti-settings"></i> Manage Accounts</a>
 					<a class="dropdown-item" href="#"><i class="ti-key"></i> Change Password</a>
-					<div class="dropdown-divider"></div>
+					<div class="dropdown-divider"></div> -->
 					<a class="dropdown-item" href="<?=base_url()?>admin/logout"><i class="ti-power-off"></i> Logout</a>
 				</div>
 			</li>

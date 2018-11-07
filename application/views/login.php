@@ -27,8 +27,7 @@
     </head>
     <body>
         <form class="form-signin" action="" method="post">
-            <div class="text-center mb-4" style="font-size: 25px;"><span>INTEL</span><span><strong>PRESS</strong></span></div>
-            <div class="text-center mb-4">Administrator</div>
+            <div class="text-center mb-5" style="font-size: 25px;"><span>INTEL</span><span><strong>PRESS</strong></span></div>
             <div class="form-group">
                 <label for="inputEmail" class="sr-only">Username</label>
                 <input type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" name="username">
