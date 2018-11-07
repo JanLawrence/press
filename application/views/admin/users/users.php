@@ -16,8 +16,9 @@
                         <tr>
                             <th style="width: 5%">#</th>
                             <th style="width: 50%">Name</th>
-                            <th style="width: 20%">Email</th>
-                            <th style="width: 15%">Type</th>
+                            <th style="width: 20%">Username</th>
+                            <th style="width: 15%">User Level</th>
+                            <th style="width: 15%">Article</th>
                             <th style="width: 10%"><i class="ti-settings"></i></th>
                         </tr>
                     </thead>
@@ -31,8 +32,9 @@
                             <tr>
                                 <td><?= $ctr++?></td>
                                 <td><?= $each->name?></td>
-                                <td><?= $each->email?></td>
+                                <td><?= $each->username?></td>
                                 <td><?= $each->user_type?></td>
+                                <td><?= $each->article_type?></td>
                                 <td>
                                     <button class="btn btn-primary btn-sm btn-edit" 
                                     userid="<?= $each->user_id?>" 
