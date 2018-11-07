@@ -25,8 +25,15 @@ class Article extends CI_Controller {
     }
     public function articles(){
         $data['articles'] = $this->article_model->getArticles();
+        $data['articleType'] = ucwords($_GET['type']);
         $this->load->view('templates/header');
         $this->load->view('article/article',$data);
+        $this->load->view('templates/footer');
+    }
+    public function view(){
+        $data['article'] = $this->article_model->getArticles($_GET['id']);
+        $this->load->view('templates/header');
+        $this->load->view('article/view',$data);
         $this->load->view('templates/footer');
     }
 }

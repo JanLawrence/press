@@ -1,9 +1,13 @@
 <?php 
 	$controller = $this->router->fetch_class();
 	$method = $this->router->fetch_method();
-	// $userSession = $this->session->userdata['user'];
-	// $userInfo = $this->db->get_where('tbl_user_info', array('user_id' => $userSession->id));
-	// $userInfo = $userInfo->result();
+	$userSession = $this->session->userdata['user'];
+	$userInfo = $this->db->get_where('tbl_user_info', array('user_id' => $userSession->id));
+	$userInfo = $userInfo->result();
+
+	$this->db->where("type NOT LIKE '%all%' AND status = 'saved'");
+	$article2 = $this->db->get('tbl_article_type');
+	$data = $article2->result();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand ml-2" href="#">INTEL<strong>PRESS</strong></a>
@@ -20,9 +24,9 @@
 					Article
 				</a>
 				<div class="dropdown-menu dropdown-article" aria-labelledby="articleDropdown">
-					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=news">News</a>
-					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=sports">Sports</a>
-					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=entertainment">Entretainment</a>
+					<?php foreach($data as $each):?>
+						<a class="dropdown-item" href="<?=base_url()?>article/articles?type=<?=$each->type?>"><?= ucwords($each->type)?></a>
+					<?php endforeach;?>
 				</div>
 			</li>
 		</ul>
@@ -31,8 +35,7 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 				 aria-expanded="false">
 					<!-- Display User Info of user -->
-				 	<!-- Welcome! <strong><?= $userInfo[0]->fname.' '.($userInfo[0]->mname != '' ? substr(ucwords($userInfo[0]->mname), 0, 1).'.' : '').' '. $userInfo[0]->lname?></strong> -->
-				 	Welcome JanJan!
+				 	Welcome! <strong><?= $userInfo[0]->fname.' '.($userInfo[0]->mname != '' ? substr(ucwords($userInfo[0]->mname), 0, 1).'.' : '').' '. $userInfo[0]->lname?></strong>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<!-- <a class="dropdown-item" href="#"><i class="ti-settings"></i> Manage Accounts</a>

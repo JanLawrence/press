@@ -45,7 +45,7 @@ class Admin extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor'");
+            $this->db->where("username = '$user' AND status = 'saved' AND user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor'");
             $query = $this->db->get();
             $data = $query->result();
 
@@ -129,7 +129,7 @@ class Admin extends CI_Controller {
 	public function dashboard()
 	{
 		if(!empty($this->session->userdata['user'])){ // if has session
-			if($this->session->userdata['user']->user_type == 'editor' || $this->session->userdata['user']->user_type == 'writer'){ // if user type writer or editor  if($this->session->userdata['user']->user_type == 'editor' && $this->session->userdata['user']->user_type == 'writer'){ // if user type writer and editor 
+			if($this->session->userdata['user']->user_type != 'student'){ // if user type writer or editor or admin
                 // load view
                 if($this->session->userdata['user']->user_type == 'writer'){
                     $total1 = $this->db->get_where('tbl_article', array('created_by' => $this->session->userdata['user']->id, 'edited' => 'yes'));
@@ -141,6 +141,14 @@ class Admin extends CI_Controller {
                     $total1 = $total1->result();
                     $total2 = $this->db->get_where('tbl_article', array('edited' => 'no'));
                     $total2 = $total2->result();
+                } else if($this->session->userdata['user']->user_type == 'admin') {
+                    $total1 = $this->db->get_where('tbl_user', array('user_type' => 'editor'));
+                    $total1 = $total1->result();
+                    $total2 = $this->db->get_where('tbl_user', array('user_type' => 'writer'));
+                    $total2 = $total2->result();
+                    $total3 = $this->db->get_where('tbl_article', array('status' => 'saved'));
+                    $total3 = $total3->result();
+                    $data['total3'] = $total3;
                 }
                 $data['total1'] = $total1; 
                 $data['total2'] = $total2;
