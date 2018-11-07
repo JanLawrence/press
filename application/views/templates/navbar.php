@@ -14,8 +14,16 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto nav-tabs-standard ml-3">
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'article' ? 'active' : ''?>" href="<?= base_url()?>admin/users"> Article</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link <?= $controller.'/'.$method == 'article' ? 'active' : ''?>" id="articleDropdown" 
+				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Article
+				</a>
+				<div class="dropdown-menu dropdown-article" aria-labelledby="articleDropdown">
+					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=news">News</a>
+					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=sports">Sports</a>
+					<a class="dropdown-item" href="<?=base_url()?>article/articles?type=entertainment">Entretainment</a>
+				</div>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto nav-tabs-standard">

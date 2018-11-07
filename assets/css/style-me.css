@@ -45,3 +45,6 @@ body{
 .stories-box .story-card:last-child{
     border-bottom: none;
 }
+.dropdown:hover>.dropdown-menu{
+    display:block;
+}

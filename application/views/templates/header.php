@@ -14,6 +14,7 @@
         <script src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
         <script src="<?= base_url();?>assets/datatables/datatables.min.js"></script>
         <script src="<?= base_url();?>assets/ckeditor/ckeditor.js"></script>
+        <script src="<?= base_url();?>assets/js/js-me.js"></script>
         <script>
             var URL = "<?= base_url()?>";
         </script>
