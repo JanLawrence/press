@@ -83,19 +83,20 @@ class Admin extends CI_Controller {
 				$this->load->view('admin/users/users', $data);
 				$this->load->view('admin/templates/footer');
 			} else { 
-				show_404(); // show 404 error page
+                show_404(); // show 404 error page
 			}
 		} else {
-			show_404(); // show 404 error page
+            show_404(); // show 404 error page
 		}
 	}
 	public function articletype()
 	{
-		if(!empty($this->session->userdata['user'])){ // if has session
+        if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
 				// load view
+                $data['articleList'] = $this->admin_model->articleTypeList();
 				$this->load->view('admin/templates/header');
-				$this->load->view('admin/articletype/articletype');
+				$this->load->view('admin/articletype/articletype', $data);
 				$this->load->view('admin/templates/footer');
 			} else { 
 				show_404(); // show 404 error page
@@ -153,5 +154,17 @@ class Admin extends CI_Controller {
         } else if($session->user_type== 'student'){
             redirect('');
         }
+    }
+    public function addArticleType(){
+        $this->admin_model->addArticleType();
+    }
+    public function editArticleType(){
+        $this->admin_model->editArticleType();
+    }
+    public function deleteArticleType(){
+        $this->admin_model->deleteArticleType();
+    }
+    public function addArticle(){
+        $this->admin_model->addArticle();
     }
 }

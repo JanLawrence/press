@@ -25,7 +25,7 @@ $(function(){
                     if(returnData == 1){ // if existing username
                         alert('Existing Username.') // alert error
                     } else {
-                        alert('You have successfully saved the user.') // alert success
+                        alert('You have successfully saved this user.') // alert success
                         location.reload(); // reload if success
                     }
                 })

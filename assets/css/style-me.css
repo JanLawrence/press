@@ -4,6 +4,12 @@ body{
     font-size: 13px;
     background: #f8f9fa!important;
 }
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1200px;
+    }
+  }
 
 /* navbar style */
 

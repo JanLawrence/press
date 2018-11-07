@@ -37,8 +37,7 @@ class Admin_model extends CI_Model{
                 "username" => $_POST['username'],
                 "password" => $this->encryptpass->pass_crypt($_POST['password']),
                 "user_type" => $_POST['usertype'],
-                "created_by" => 1,
-                // "created_by" => $this->user->id,
+                "created_by" => $this->user->id,
                 "date_created" => date('Y-m-d H:i:s')
             );
             $this->db->insert('tbl_user',$data); //insert data to tbl_user
@@ -51,8 +50,7 @@ class Admin_model extends CI_Model{
                 "mname" => $_POST['mname'],
                 "lname" => $_POST['lname'],
                 "email" => $_POST['email'],
-                "created_by" => 1,
-                // "created_by" => $this->user->id,
+                "created_by" => $this->user->id,
                 "date_created" => date('Y-m-d H:i:s')
             );
             $this->db->insert('tbl_user_info',$data); //insert data to tbl_user_info
@@ -62,8 +60,7 @@ class Admin_model extends CI_Model{
                 $data = array(
                     "user_id" => $userid,
                     "article_type_id" => $_POST['article'],
-                    "created_by" => 1,
-                    // "created_by" => $this->user->id,
+                    "created_by" => $this->user->id,
                     "date_created" => date('Y-m-d H:i:s')
                 );
                 $this->db->insert('tbl_user_article_type',$data); //insert data to tbl_user_article_type
@@ -83,8 +80,7 @@ class Admin_model extends CI_Model{
                 $this->db->set('username', $_POST['username']);
                 $this->db->set('password', $this->encryptpass->pass_crypt($_POST['password']));
                 $this->db->set('user_type', $_POST['usertype']);
-                $this->db->set('modified_by', 1); 
-                // $this->db->set('modified_by', $this->user->id); 
+                $this->db->set('modified_by', $this->user->id); 
                 $this->db->set('date_modified', date('Y-m-d H:i:s'));
                 $this->db->where('id', $_POST['id']);
                 $this->db->update('tbl_user');
@@ -94,8 +90,7 @@ class Admin_model extends CI_Model{
                 $this->db->set('mname', $_POST['mname']);
                 $this->db->set('lname', $_POST['lname']);
                 $this->db->set('email', $_POST['email']);
-                $this->db->set('modified_by', 1);
-                // $this->db->set('modified_by', $this->user->id);
+                $this->db->set('modified_by', $this->user->id);
                 $this->db->set('date_modified', date('Y-m-d H:i:s'));
                 $this->db->where('user_id', $_POST['id']);
                 $this->db->update('tbl_user_info');
@@ -103,8 +98,7 @@ class Admin_model extends CI_Model{
                 if($_POST['usertype']!= 'admin' &&  $_POST['usertype'] != 'student'){
                     //data that will be updated to tbl_user_article_type
                     $this->db->set('article_type_id', $_POST['article']);
-                    $this->db->set('modified_by', 1);
-                    // $this->db->set('modified_by', $this->user->id);
+                    $this->db->set('modified_by', $this->user->id);
                     $this->db->set('date_modified', date('Y-m-d H:i:s'));
                     $this->db->where('user_id', $_POST['id']);
                     $this->db->update('tbl_user_article_type');
@@ -117,8 +111,7 @@ class Admin_model extends CI_Model{
             $this->db->set('username', $_POST['username']);
             $this->db->set('password', $this->encryptpass->pass_crypt($_POST['password']));
             $this->db->set('user_type', $_POST['usertype']);
-            $this->db->set('modified_by', 1);
-            // $this->db->set('modified_by', $this->user->id);
+            $this->db->set('modified_by', $this->user->id);
             $this->db->set('date_modified', date('Y-m-d H:i:s'));
             $this->db->where('id', $_POST['id']);
             $this->db->update('tbl_user');
@@ -128,8 +121,7 @@ class Admin_model extends CI_Model{
             $this->db->set('mname', $_POST['mname']);
             $this->db->set('lname', $_POST['lname']);
             $this->db->set('email', $_POST['email']);
-            $this->db->set('modified_by', 1);
-            // $this->db->set('modified_by', $this->user->id);
+            $this->db->set('modified_by', $this->user->id);
             $this->db->set('date_modified', date('Y-m-d H:i:s'));
             $this->db->where('user_id', $_POST['id']);
             $this->db->update('tbl_user_info');
@@ -137,8 +129,7 @@ class Admin_model extends CI_Model{
             if( $_POST['usertype']!= 'admin' &&  $_POST['usertype'] != 'student'){
                 //data that will be updated to tbl_user_article_type
                 $this->db->set('article_type_id', $_POST['article']);
-                $this->db->set('modified_by', 1);
-                // $this->db->set('modified_by', $this->user->id);
+                $this->db->set('modified_by', $this->user->id);
                 $this->db->set('date_modified', date('Y-m-d H:i:s'));
                 $this->db->where('user_id', $_POST['id']);
                 $this->db->update('tbl_user_article_type');
@@ -158,5 +149,59 @@ class Admin_model extends CI_Model{
         $this->db->set('status', 'deleted'); //update status deleted by user_id tbl_user_article_type
         $this->db->where('user_id', $_POST['id']);
         $this->db->update('tbl_user_article_type');
+    }
+    public function addArticleType(){
+        $check = $this->db->get_where('tbl_article_type', array('type'=>$_POST['type'])); //check if type inputed is exisiting
+        if(empty($check->result())){ // if not existing insert article type
+            //data that will be inserted to tbl_article_type
+            $data = array(
+                "type" => $_POST['type'],
+                "created_by" => $this->user->id,
+                "date_created" => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_article_type',$data); //insert data to tbl_article_type
+        } else {
+            echo 1;
+        }
+    }
+    public function editArticleType(){
+        $checkById = $this->db->get_where('tbl_article_type', array('id' => $_POST['id'])); //get data by user id
+        $checkById= $checkById->result();
+        $check = $this->db->get_where('tbl_article_type', array('type'=>$_POST['type'])); //check if type inputed is exisiting
+        if(!empty($check->result())){  // if existing type
+            if($checkById[0]->type == $_POST['type']){ // if inputed is same in data by type id
+                //data that will be updated to tbl_article_type
+                $this->db->set('type', $_POST['type']);
+                $this->db->where('id', $_POST['id']);
+                $this->db->update('tbl_article_type');
+            } else {
+                echo 1;
+            }
+        } else {
+             //data that will be updated to tbl_article_type
+             $this->db->set('type', $_POST['type']);
+             $this->db->where('id', $_POST['id']);
+             $this->db->update('tbl_article_type');
+        }
+    }
+    public function deleteArticleType(){
+        $id = $_POST['id'];
+        $this->db->set('status', 'deleted'); //update status deleted by id tbl_article_type
+        $this->db->where('id', $_POST['id']);
+        $this->db->update('tbl_article_type');
+    }
+    public function addArticle(){
+        $data = array(
+            "title" => $_POST['type'],
+            "writer" => $_POST['type'],
+            "article_type" => $_POST['type'],
+            "description" => $_POST['type'],
+            "article" => $_POST['type'],
+            "edited" => $_POST['type'],
+            "date_published" => date('Y-m-d H:i:s'),
+            "created_by" => $this->user->id,
+            "date_created" => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_article_type',$data); //insert data to tbl_article_type
     }
 }
