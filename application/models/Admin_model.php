@@ -190,10 +190,23 @@ class Admin_model extends CI_Model{
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article_type');
     }
+    public function getArticleTypePerUser(){
+        $this->db->select("at.id , at.type")
+        ->from("tbl_user_article_type uat")
+        ->join("tbl_article_type at", "ON at.id = uat.article_type_id", "inner");
+        $this->db->where('uat.user_id', $this->user->id); 
+        $article = $this->db->get();
+        $article = $article->result();
+        $data = array();
+        if(strtolower($article[0]->type) == 'all'){
+
+        }
+        
+    }
     public function addArticle(){
         $data = array(
-            "title" => $_POST['type'],
-            "writer" => $_POST['type'],
+            "title" => $_POST['title'],
+            "writer" => $_POST['writer'],
             "article_type" => $_POST['type'],
             "description" => $_POST['type'],
             "article" => $_POST['type'],
