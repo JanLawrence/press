@@ -109,9 +109,15 @@ class Admin extends CI_Controller {
 	{
 		if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'editor' || $this->session->userdata['user']->user_type == 'writer'){ // if user type writer or editor 
-				// load view
+                // load view
+                $data['type'] = $this->admin_model->getArticleTypePerUser();
+                if($this->session->userdata['user']->user_type == 'writer'){
+                    $data['articles'] = $this->admin_model->articleListPerWriter();
+                } else if($this->session->userdata['user']->user_type == 'editor'){
+                    $data['articles'] = $this->admin_model->articleListPerEditor();
+                }
 				$this->load->view('admin/templates/header');
-				$this->load->view('admin/article/article');
+				$this->load->view('admin/article/article', $data);
 				$this->load->view('admin/templates/footer');
 			} else { 
 				show_404(); // show 404 error page
@@ -124,9 +130,22 @@ class Admin extends CI_Controller {
 	{
 		if(!empty($this->session->userdata['user'])){ // if has session
 			if($this->session->userdata['user']->user_type == 'editor' || $this->session->userdata['user']->user_type == 'writer'){ // if user type writer or editor  if($this->session->userdata['user']->user_type == 'editor' && $this->session->userdata['user']->user_type == 'writer'){ // if user type writer and editor 
-				// load view
+                // load view
+                if($this->session->userdata['user']->user_type == 'writer'){
+                    $total1 = $this->db->get_where('tbl_article', array('created_by' => $this->session->userdata['user']->id, 'edited' => 'yes'));
+                    $total1 = $total1->result();
+                    $total2 = $this->db->get_where('tbl_article', array('created_by' => $this->session->userdata['user']->id));
+                    $total2 = $total2->result();
+                } else if($this->session->userdata['user']->user_type == 'editor') {
+                    $total1 = $this->db->get_where('tbl_article', array('edited' => 'yes'));
+                    $total1 = $total1->result();
+                    $total2 = $this->db->get_where('tbl_article', array('edited' => 'no'));
+                    $total2 = $total2->result();
+                }
+                $data['total1'] = $total1; 
+                $data['total2'] = $total2;
 				$this->load->view('admin/templates/header');
-				$this->load->view('admin/dashboard/dashboard');
+				$this->load->view('admin/dashboard/dashboard', $data);
 				$this->load->view('admin/templates/footer');
 			} else { 
 				show_404(); // show 404 error page
@@ -166,5 +185,11 @@ class Admin extends CI_Controller {
     }
     public function addArticle(){
         $this->admin_model->addArticle();
+    }
+    public function editArticle(){
+        $this->admin_model->editArticle();
+    }
+    public function deleteArticle(){
+        $this->admin_model->deleteArticle();
     }
 }

@@ -191,30 +191,103 @@ class Admin_model extends CI_Model{
         $this->db->update('tbl_article_type');
     }
     public function getArticleTypePerUser(){
-        $this->db->select("at.id , at.type")
+        $this->db->select("at.*")
         ->from("tbl_user_article_type uat")
         ->join("tbl_article_type at", "ON at.id = uat.article_type_id", "inner");
         $this->db->where('uat.user_id', $this->user->id); 
+        $this->db->where('at.status', 'saved'); 
         $article = $this->db->get();
         $article = $article->result();
         $data = array();
         if(strtolower($article[0]->type) == 'all'){
-
+            $this->db->where("type NOT LIKE '%all%' AND status = 'saved'");
+            $article2 = $this->db->get('tbl_article_type');
+            $data = $article2->result();
+        } else {
+            $data = $article;
         }
-        
+        return $data;
+    }
+    public function articleListPerWriter(){
+        $this->db->select("a.*, at.type artice_type_name, ui.user_id, CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) editor_name")
+        ->from("tbl_article a")
+        ->join("tbl_article_type at", "ON at.id = a.article_type", "inner")
+        ->join("tbl_article_editor ae", "ON ae.article_id = a.id", "left")
+        ->join("tbl_user_info ui", "ON ui.user_id = ae.user_id", "left");
+        $this->db->where('a.created_by', $this->user->id); 
+        $this->db->where('a.status', 'saved'); 
+        $article = $this->db->get();
+        return $article->result();
+    }
+    public function articleListPerEditor(){
+        $articleArr = array();
+        foreach($this->getArticleTypePerUser() as $each){
+            $articleArr[] = $each->id;
+        }
+        $articleType = implode(',',  $articleArr);
+        $this->db->select("a.*, at.type artice_type_name, ui.user_id, CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) editor_name")
+        ->from("tbl_article a")
+        ->join("tbl_article_type at", "ON at.id = a.article_type", "inner")
+        ->join("tbl_article_editor ae", "ON ae.article_id = a.id", "left")
+        ->join("tbl_user_info ui", "ON ui.user_id = ae.user_id", "left");
+        $this->db->where('a.article_type IN ('.$articleType.')'); 
+        $this->db->where('a.status', 'saved'); 
+        $this->db->where('a.edited = "no" OR ae.user_id = '.$this->user->id); 
+        $article = $this->db->get();
+        return $article->result();
     }
     public function addArticle(){
         $data = array(
             "title" => $_POST['title'],
             "writer" => $_POST['writer'],
             "article_type" => $_POST['type'],
-            "description" => $_POST['type'],
-            "article" => $_POST['type'],
-            "edited" => $_POST['type'],
+            "description" => $_POST['description'],
+            "article" => $_POST['content'],
             "date_published" => date('Y-m-d H:i:s'),
             "created_by" => $this->user->id,
             "date_created" => date('Y-m-d H:i:s')
         );
-        $this->db->insert('tbl_article_type',$data); //insert data to tbl_article_type
+        $this->db->insert('tbl_article',$data); //insert data to tbl_article
+    }
+    public function editArticle(){
+        if($this->user->user_type == 'writer'){
+
+            $this->db->set("title", $_POST['title']);
+            $this->db->set("writer", $_POST['writer']);
+            $this->db->set("article_type", $_POST['type']);
+            $this->db->set("description", $_POST['description']);
+            $this->db->set("article", $_POST['content']);
+            $this->db->set("modified_by", $this->user->id);
+            $this->db->set("date_modified", date('Y-m-d H:i:s'));
+            $this->db->where('id', $_POST['id']);
+            $this->db->update('tbl_article');//update data to tbl_article
+        } else if($this->user->user_type == 'editor') {
+            $this->db->set("title", $_POST['title']);
+            $this->db->set("writer", $_POST['writer']);
+            $this->db->set("article_type", $_POST['type']);
+            $this->db->set("description", $_POST['description']);
+            $this->db->set("article", $_POST['content']);
+            $this->db->set("edited", 'yes');
+            $this->db->set("editor_date_modified", date('Y-m-d H:i:s'));
+            $this->db->where('id', $_POST['id']);
+            $this->db->update('tbl_article');//update data to tbl_article
+            
+            $checkArticleEditor = $this->db->get_where('tbl_article_editor', array('user_id' => $this->user->id, 'article_id' => $_POST['id']));
+            $checkArticleEditor = $checkArticleEditor->result();
+            if(empty($checkArticleEditor)){
+                $data = array(
+                    "user_id" => $this->user->id,
+                    "article_id" => $_POST['id'],
+                    "created_by" => $this->user->id,
+                    "date_created" => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_article_editor',$data); //insert data to tbl_article_editor
+            }
+        }
+    }
+    public function deleteArticle(){
+        $this->db->set("status", 'deleted');
+        $this->db->where('id', $_POST['id']);
+        $this->db->update('tbl_article');//update data to tbl_article set to deleted
     }
 }
