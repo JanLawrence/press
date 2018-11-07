@@ -20,7 +20,13 @@ class Article extends CI_Controller {
         // }
         
         $this->load->view('templates/header');
-        $this->load->view('article/article');
+        $this->load->view('article/dashboard');
         $this->load->view('templates/footer');
-	}
+    }
+    public function articles(){
+        $data['articles'] = $this->article_model->getArticles();
+        $this->load->view('templates/header');
+        $this->load->view('article/article',$data);
+        $this->load->view('templates/footer');
+    }
 }
