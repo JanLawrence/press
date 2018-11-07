@@ -5,19 +5,6 @@ class Article_model extends CI_Model{
     public function __construct(){
         $this->user = isset($this->session->userdata['user']) ? $this->session->userdata['user'] : 1; //get session
     }
-    public function getArticleTypePerUser(){
-        $this->db->select("at.id , at.type")
-        ->from("tbl_user_article_type uat")
-        ->join("tbl_article_type at", "ON at.id = uat.article_type_id", "inner");
-        $this->db->where('uat.user_id', $this->user->id); 
-        $article = $this->db->get();
-        $article = $article->result();
-        $data = array();
-        if(strtolower($article[0]->type) == 'all'){
-
-        }
-        
-    }
     public function getArticles(){
         $this->db->select("a.id,
                     a.title,
