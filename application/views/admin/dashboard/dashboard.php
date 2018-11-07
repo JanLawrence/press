@@ -13,11 +13,7 @@
     </div>
     <div class="col-md-6">
         <div class="card text-white bg-dark mb-3 pt-1">
-<<<<<<< HEAD
-            <div class="card-header text-center"><h6>Number of articles submitted</h6></div>
-=======
             <div class="card-header text-center"><h6>Number of Articles Submitted</h6></div>
->>>>>>> 554ddf0522fc8b09e750bfbcb467679349a89564
             <div class="card-body">
                 <h1 class="card-title text-center"><?= count($total2)?></h1>
             </div>

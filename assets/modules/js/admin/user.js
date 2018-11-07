@@ -8,10 +8,10 @@ $(function(){
         var type = $(this).val();
         if(type == 'admin' || type == 'student'){
             $('.articleBox').hide();
-            $('select[name=article]').prop('required', 'false');
+            $('select[name=article]').prop('required', false);
         } else {
             $('.articleBox').show();
-            $('select[name=article]').prop('required', 'true');
+            $('select[name=article]').prop('required', true);
         }
     })
     $('#addForm').submit(function(){ // submit add user form
@@ -51,10 +51,12 @@ $(function(){
         var password = $(this).attr('u_password');
         var article = $(this).attr('u_article');
         
-        if(article == 'admin' || article == 'student'){
+        if(userType == 'admin' || userType == 'student'){
             $('.articleBox').hide();
+            $('select[name=article]').prop('required', false);
         } else {
             $('.articleBox').show();
+            $('select[name=article]').prop('required', true);
         }
 
         // put attr values on each specific input 
