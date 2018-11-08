@@ -45,7 +45,7 @@ class Admin extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND status = 'saved' AND user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor'");
+            $this->db->where("username = '$user' AND status = 'saved' AND (user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor')");
             $query = $this->db->get();
             $data = $query->result();
 
