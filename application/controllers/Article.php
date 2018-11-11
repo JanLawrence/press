@@ -19,6 +19,21 @@ class Article extends CI_Controller {
         }
      
     }
+    public function newspaper(){
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'student'){ // if user type student 
+                // load view
+                $data['publish'] = $this->admin_model->getPublish();
+                $this->load->view('templates/header');
+                $this->load->view('article/newspaper', $data);
+                $this->load->view('templates/footer');
+			} else { 
+				show_404(); // show 404 error page
+			}
+		} else {
+			show_404(); // show 404 error page
+        }
+    }
     public function articles(){
         if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'student'){ // if user type student 

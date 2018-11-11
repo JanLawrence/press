@@ -30,7 +30,7 @@ class Admin extends CI_Controller {
 	}
 	public function redirect_admin($type){ // redirect based on user_type 
         if($type == 'admin'){
-            redirect('admin/users');
+            redirect('admin/dashboard');
         } else if($type == 'writer'){
             redirect('admin/dashboard');
 		} else if($type=="editor"){

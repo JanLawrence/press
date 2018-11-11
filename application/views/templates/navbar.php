@@ -24,6 +24,7 @@
 					Article
 				</a>
 				<div class="dropdown-menu dropdown-article" aria-labelledby="articleDropdown">
+					<a class="dropdown-item" href="<?=base_url()?>article/newspaper">Newspaper</a>
 					<?php foreach($data as $each):?>
 						<a class="dropdown-item" href="<?=base_url()?>article/articles?type=<?=$each->type?>"><?= ucwords($each->type)?></a>
 					<?php endforeach;?>
