@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <?php if(!empty($publish)):?>
                         <?php if($publish[0]->active == 'yes'):?>
-                            <embed src="<?=base_url($publish[0]->directory)?>" type="application/pdf" width="100%" height="900px">
+                            <embed src="<?=base_url($publish[0]->directory).'#toolbar=0'?>" type="application/pdf" width="100%" height="900px">
                         <?php else:?>
                             <div class="text-center">
                                 <h4> No published newspaper found. </h4>
