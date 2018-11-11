@@ -292,4 +292,55 @@ class Admin_model extends CI_Model{
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article');//update data to tbl_article set to deleted
     }
+    public function getPublish(){
+        $this->db->order_by("date_created");
+        $data = $this->db->get('tbl_newspaper');
+        return $data->result();
+
+    }
+    public function addPublish(){
+        if(!isset($_POST['id'])){ // if replace is not existing
+
+            if(isset($_FILES['file']) && $_FILES['file']['tmp_name']!=''){ //if statement is true
+                
+                $dir = 'assets/newspaper';
+                $config['upload_path'] = './'.$dir.'/';
+                $config['allowed_types'] = 'pdf';
+                $this->load->library('upload', $config);
+                if(!$this->upload->do_upload('file')){
+                    echo strip_tags($this->upload->display_errors());
+                } else {
+                    $data = $this->upload->data();
+                    //insert attachment
+                    list($fileName , $ext) = explode('.', $_FILES['file']['name']);
+                    $tmpName  = $_FILES['file']['tmp_name'];            
+                    $fileSize = $_FILES['file']['size'];                
+                    $fileType = $_FILES['file']['type'];   
+                    $fileNewTemp = file_get_contents($tmpName);     
+                    if(!get_magic_quotes_gpc())
+                    {  
+                        $fileName = addslashes($fileName);
+                    }
+                    
+                    $data = array(
+                        'name' => $fileName,
+                        'type' => $fileType,
+                        'size' => $fileSize,
+                        'content' => $fileNewTemp,
+                        'directory' =>  $dir.'/'. $_FILES['file']['name'],
+                        'created_by' => $this->user->id,
+                        'date_created' => date('Y-m-d H:i:s')
+                    );
+                    $this->db->insert('tbl_newspaper', $data);
+                    echo 1;
+                }
+                
+            }
+        } else { // if replace publish
+            $this->db->set('active', 'no');
+            $this->db->where('id', $_POST['id']);
+            $this->db->update('tbl_newspaper');//update data to tbl_newspaper set to active no
+            echo 2;
+        }
+    }
 }

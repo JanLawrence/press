@@ -200,4 +200,25 @@ class Admin extends CI_Controller {
     public function deleteArticle(){
         $this->admin_model->deleteArticle();
     }
+
+    public function publish()
+	{
+		if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+				// load view
+				$data['publish'] = $this->admin_model->getPublish();
+				$this->load->view('admin/templates/header');
+				$this->load->view('admin/publish/publish', $data);
+				$this->load->view('admin/templates/footer');
+			} else { 
+                show_404(); // show 404 error page
+			}
+		} else {
+            show_404(); // show 404 error page
+		}
+	}
+    public function addPublish()
+	{
+		$this->admin_model->addPublish();
+	}
 }
