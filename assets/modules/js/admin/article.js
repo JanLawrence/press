@@ -1,6 +1,7 @@
 $(function(){
     CKEDITOR.replace( 'editor' ); // toggle ckeditor on textarea with id = editor
-   
+    CKEDITOR.replace( 'editor2' ); // toggle ckeditor on textarea with id = editor2
+    // $('textarea[name="article"]').ckeditor();
     $('#tableList').DataTable();
 
 
@@ -25,7 +26,8 @@ $(function(){
         $('#editForm').find('select[name="type"]').val(type).change();
         $('#editForm').find('textarea[name="description"]').val(description);
         $('#editForm').find('textarea[name="article"]').val(article);
-        CKEDITOR.replace( 'editor2' ); // toggle ckeditor on textarea with id = editor2
+        CKEDITOR.instances['editor2'].setData(article)
+     
         return false;
     })
     $("#tableList").on('click','.btn-delete',function(){ // on click edit button on article type list
