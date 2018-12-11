@@ -136,11 +136,13 @@ class Admin extends CI_Controller {
                     $total1 = $total1->result();
                     $total2 = $this->db->get_where('tbl_article', array('created_by' => $this->session->userdata['user']->id));
                     $total2 = $total2->result();
+                    $notif = $this->admin_model->notifByUser();
                 } else if($this->session->userdata['user']->user_type == 'editor') {
                     $total1 = $this->db->get_where('tbl_article', array('edited' => 'yes'));
                     $total1 = $total1->result();
                     $total2 = $this->db->get_where('tbl_article', array('edited' => 'no'));
                     $total2 = $total2->result();
+                    $notif = $this->admin_model->notifByUser();
                 } else if($this->session->userdata['user']->user_type == 'admin') {
                     $total1 = $this->db->get_where('tbl_user', array('user_type' => 'editor'));
                     $total1 = $total1->result();
@@ -148,10 +150,12 @@ class Admin extends CI_Controller {
                     $total2 = $total2->result();
                     $total3 = $this->db->get_where('tbl_article', array('status' => 'saved'));
                     $total3 = $total3->result();
+                    $notif = array();
                     $data['total3'] = $total3;
                 }
                 $data['total1'] = $total1; 
                 $data['total2'] = $total2;
+                $data['notif'] = $notif;
 				$this->load->view('admin/templates/header');
 				$this->load->view('admin/dashboard/dashboard', $data);
 				$this->load->view('admin/templates/footer');
@@ -220,5 +224,55 @@ class Admin extends CI_Controller {
     public function addPublish()
 	{
 		$this->admin_model->addPublish();
-	}
+    }
+    public function coe()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+
+                // load view
+                $data['coe'] = $this->admin_model->getCoe();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/coe/coe', $data);
+                $this->load->view('admin/templates/footer');
+                
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function saveCoe(){
+        $this->admin_model->saveCoe();
+    }
+    public function getNameByUser(){
+        $this->admin_model->getNameByUser();
+    }
+    public function addNotif(){
+        $this->admin_model->addNotif();
+    }
+    public function notifById(){
+        $this->admin_model->notifById();
+    }
+    public function notification()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+
+                // load view
+                $data['notifList'] = $this->admin_model->notifList();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/notification/notification' ,$data);
+                $this->load->view('admin/templates/footer');
+                
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
 }

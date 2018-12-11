@@ -1,3 +1,11 @@
+<style>
+html body #sidebarContainer{
+  display: none !important; /* hide PDF viewer toolbar */
+}
+html body #mainContainer .toolbar {
+    display: none !important; /* hide PDF viewer toolbar */
+}
+</style>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">

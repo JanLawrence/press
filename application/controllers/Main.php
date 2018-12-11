@@ -60,4 +60,67 @@ class Main extends CI_Controller {
             return FALSE;
         }
     }
+    public function register(){
+            $this->form_validation->set_rules('fname', 'First Name', 'required');
+            $this->form_validation->set_rules('lname', 'Last Name', 'required');
+            $this->form_validation->set_rules('bday', 'Birthday', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('course', 'Course', 'required');
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tbl_user.username]');
+            $this->form_validation->set_rules('password', 'Password', 'callback_validateconfirm'); // validation is on validate method
+
+            if($this->form_validation->run() == TRUE){ // validation success
+                 //data that will be inserted to tbl_user
+                $data = array(
+                    "username" => $_POST['username'],
+                    "password" => $this->encryptpass->pass_crypt($_POST['password']),
+                    "user_type" => 'student',
+                    "created_by" => 0,
+                    "date_created" => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_user',$data); //insert data to tbl_user
+                $userid = $this->db->insert_id(); // getting the id of the inserted data
+                
+                //data that will be inserted to tbl_user_info
+                $data2 = array(
+                    "user_id" => $userid,
+                    "fname" => $_POST['fname'],
+                    "mname" => $_POST['mname'],
+                    "lname" => $_POST['lname'],
+                    "email" => $_POST['email'],
+                    "bday" => $_POST['bday'],
+                    "contact_no" => $_POST['contact'],
+                    "course_section" => $_POST['course'],
+                    "status" => 'saved',
+                    "created_by" => 0,
+                    "date_created" => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_user_info',$data2); //insert data to tbl_user_info
+                // get tbl_user data to be set to "user" session
+                $user = $this->input->post('username');
+                $query = $this->db->get_where('tbl_user', array('username' => $user));
+                $data = $query->result();
+                $this->session->set_userdata('user', $data[0]);
+                // set session and redirect based on user_type
+                $userSession = $this->session->userdata['user'];
+                redirect(base_url('article'));
+            } else {
+				$this->load->view('register'); // redirect to register page if validation failed
+            }
+       
+    }
+    public function validateconfirm($pass){
+        $confirm = $this->input->post('confirmpass');
+        if($confirm != ''){ // if confirm pass is inputed
+           if($pass == $confirm){
+                return TRUE;
+           } else {
+                $this->form_validation->set_message('validateconfirm', 'Password does not match'); // if pass is not equal to confirm pass
+                return FALSE;
+           }
+        } else { // if confirm pass is not inputed validation false
+            $this->form_validation->set_message('validateconfirm', 'Password does not match');
+            return FALSE;
+        }
+    }
 }

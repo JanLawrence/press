@@ -7,9 +7,11 @@ class Article extends CI_Controller {
 	{
         if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'student'){ // if user type student 
-				// load view
+                // load view
+                $data['notif'] = $this->admin_model->notifByUser();
+                
                 $this->load->view('templates/header');
-                $this->load->view('article/dashboard');
+                $this->load->view('article/dashboard', $data);
                 $this->load->view('templates/footer');
 			} else { 
 				show_404(); // show 404 error page

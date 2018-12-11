@@ -53,7 +53,7 @@ $(function(){
             $.post(URL+'admin/addArticle', form)
             .done(function(returnData){
                 alert("You have successfully saved this article.");
-                location.reload();s
+                location.reload();
             })
         } else {
             return false;

@@ -298,6 +298,12 @@ class Admin_model extends CI_Model{
         return $data->result();
 
     }
+    public function getNotifList(){
+        $this->db->order_by("date_created");
+        $data = $this->db->get('tbl_newspaper');
+        return $data->result();
+
+    }
     public function addPublish(){
         if(!isset($_POST['id'])){ // if replace is not existing
 
@@ -341,6 +347,109 @@ class Admin_model extends CI_Model{
             $this->db->where('id', $_POST['id']);
             $this->db->update('tbl_newspaper');//update data to tbl_newspaper set to active no
             echo 2;
+        }
+    }
+    public function getNameByUser(){
+        $this->db->select("ui.user_id,
+            CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name
+        ")
+        ->from("tbl_user_info ui")
+        ->join("tbl_user u","ON u.id = ui.user_id","inner");
+        $this->db->where("u.status", "saved");
+        $this->db->where("u.user_type", $_POST['user']);
+        $this->db->order_by("ui.lname");
+        $query = $this->db->get();
+        echo json_encode($query->result());
+    }
+    public function notifList(){
+        $this->db->select("n.user_type, n.summary, n.content, n.date_created, GROUP_CONCAT(CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname)) names
+        ")
+        ->from("tbl_notif n")
+        ->join("tbl_notif_name_list nl","ON nl.notif_id = n.id","inner")
+        ->join("tbl_user_info ui","ON ui.user_id = nl.user_id","inner");
+        $this->db->where("n.status", "saved");
+        $this->db->order_by("n.date_created");
+        $this->db->group_by("n.id");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function notifByUser(){
+        $this->db->select("n.id, n.user_type, n.summary, n.content, n.date_created, GROUP_CONCAT(CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname)) names
+        ")
+        ->from("tbl_notif n")
+        ->join("tbl_notif_name_list nl","ON nl.notif_id = n.id","inner")
+        ->join("tbl_user_info ui","ON ui.user_id = nl.user_id","inner");
+        $this->db->where("n.status", "saved");
+        $this->db->where("nl.user_id", $this->user->id);
+        $this->db->order_by("n.date_created");
+        $this->db->group_by("n.id");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function notifById(){
+        $this->db->select("n.id, n.user_type, n.summary, n.content, n.date_created, GROUP_CONCAT(CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname)) names
+        ")
+        ->from("tbl_notif n")
+        ->join("tbl_notif_name_list nl","ON nl.notif_id = n.id","inner")
+        ->join("tbl_user_info ui","ON ui.user_id = nl.user_id","inner");
+        $this->db->where("n.status", "saved");
+        $this->db->where("n.id", $_POST['id']);
+        $this->db->order_by("n.date_created");
+        $this->db->group_by("n.id");
+        $query = $this->db->get();
+        echo json_encode($query->result());
+    }
+    public function getCoe(){
+        $data = $this->db->get('tbl_coe');
+        return $data->result();
+    }
+    public function saveCoe(){
+        $validate = $this->getCoe();
+        if(empty($validate)){   
+            $data = array(
+                "mission" => $_POST['mission'],
+                "vision" => $_POST['vision'],
+                "core_values" => $_POST['core_values'],
+                "palantaw_tinguha" => $_POST['palantaw_tinguha'],
+                "objectives" => $_POST['objectives'],
+                "program_mission" => $_POST['program_mission'],
+                "created_by" => $this->user->id,
+                "date_created" => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_coe',$data); //insert data to tbl_coe
+        } else {
+            $this->db->set("mission", $_POST['mission']);
+            $this->db->set("vision", $_POST['vision']);
+            $this->db->set("core_values", $_POST['core_values']);
+            $this->db->set("palantaw_tinguha", $_POST['palantaw_tinguha']);
+            $this->db->set("objectives", $_POST['objectives']);
+            $this->db->set("program_mission", $_POST['program_mission']);
+            $this->db->set("modified_by", $this->user->id);
+            $this->db->set("date_modified", date('Y-m-d H:i:s'));
+            $this->db->where('id',$validate[0]->id);
+            $this->db->update('tbl_coe');//update data to tbl_coe
+        }
+    }
+    public function addNotif(){
+        $data = array(
+            "user_type" => $_POST['user'],
+            "summary" => $_POST['summary'],
+            "content" => $_POST['content'],
+            "status" => 'saved',
+            "created_by" => $this->user->id,
+            "date_created" => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_notif',$data);  //insert data to tbl_notif
+        $notifId = $this->db->insert_id(); // getting the id of the inserted data
+
+        foreach($_POST['name'] as $key => $each){
+            $data = array(
+                "notif_id" =>  $notifId,
+                "user_id" => $each,
+                "created_by" => $this->user->id,
+                "date_created" => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_notif_name_list',$data);  //insert data to tbl_notif_name_list
         }
     }
 }
