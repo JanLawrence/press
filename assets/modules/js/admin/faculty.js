@@ -3,18 +3,47 @@ $(function(){
     $('.btn-add').click(function(){
         $('#addModal').modal('toggle');
     })
+    $('#btnAppendSched').click(function(){
+        var sample = '<tr>'+
+                        '<td><input class="form-control" name="subject[]"></td>'+
+                        '<td><input class="form-control" name="days[]"></td>'+
+                        '<td><input class="form-control" name="time[]"></td>'+
+                        '<td><button type="button" class="btn btn-danger btn-sm btnRemoveSched"><i class="ti-minus"></i></button></td>'+
+                    '</tr>';
+        $('#appendSched tbody').append(sample);
+        $('.btnRemoveSched').click(function(){
+            $(this).closest('tr').remove();
+        })
+    })
     $('#addForm').submit(function(){
+        // if(confirm('Are you sure you want to save this faculty member?') == true){
+        //     var form = $(this).serialize();
+        //     $.post(URL+'admin/addFaculty', form)
+        //     .done(function(returnData){
+        //         alert("You have successfully saved this faculty member.");
+        //         location.reload();
+        //     })
+        // } else {
+        //     return false;
+        // }
+        // return false;
         if(confirm('Are you sure you want to save this faculty member?') == true){
-            var form = $(this).serialize();
-            $.post(URL+'admin/addFaculty', form)
-            .done(function(returnData){
-                alert("You have successfully saved this faculty member.");
-                location.reload();
-            })
+            var form = new FormData(this); // get form data
+            $.ajax({
+                url: URL + 'admin/addFaculty', // post to admin/addPublish
+                type: "POST",
+                data:  form,
+                contentType: false, // for file uploading purposes
+                cache: false,  // for file uploading purposes
+                processData:false, // for file uploading purposes
+                success: function(returnData){ // get returned data in the posted link by using returnData variable
+                    alert("You have successfully saved this faculty member.");
+                    location.reload();
+                }
+            });
         } else {
             return false;
         }
-        return false;
     })
      $('#editForm').submit(function(){
         if(confirm('Are you sure you want to edit this faculty member?') == true){

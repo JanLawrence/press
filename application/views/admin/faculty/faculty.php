@@ -5,6 +5,19 @@
         $posi[]= $eachpos->position;
     }
 ?>
+<style>
+    div.file {
+        position: relative;
+        overflow: hidden;
+    }
+    input[type=file]{
+        position: absolute;
+        font-size: 50px;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="card rounded-0">
@@ -72,7 +85,7 @@
         </div>
     </div>
 </div>
-<form id="addForm" method="post">
+<form id="addForm" method="post" enctype="multipart/form-data">
     <div class="modal" id="addModal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -89,7 +102,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label> Middle Name:</label>
-                                    <input type="text" class="form-control" name="mname" required>
+                                    <input type="text" class="form-control" name="mname">
                                 </div>
                                 <div class="col-md-4">
                                     <label> Last Name:</label>
@@ -138,6 +151,27 @@
                                     </div>
                                 </div> -->
                             </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success btn-sm" id="btnAppendSched"><i class="ti-plus"></i></button>
+                                <table class="table table-bordered" id="appendSched">
+                                    <thead>
+                                        <tr>
+                                            <th>Subjectsss</th>
+                                            <th>Days</th>
+                                            <th>Time</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>   
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <div class="file btn btn-info text-center">
+                                    <i class="ti-upload"></i> <label class="m-0"> Upload Profile Pic</label>
+                                    <input type="file" name="file"/>
+                                </div>
+                            </div>
                         </div>
                     </div>                
                 </div>
@@ -169,7 +203,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label> Middle Name:</label>
-                                    <input type="text" class="form-control" name="mname" required>
+                                    <input type="text" class="form-control" name="mname">
                                 </div>
                                 <div class="col-md-4">
                                     <label> Last Name:</label>

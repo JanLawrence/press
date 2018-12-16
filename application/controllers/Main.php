@@ -3,7 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends CI_Controller {
 
-	public function index() // login page of admin
+    public function index(){
+        $data['coe'] = $this->admin_model->getCoe();
+        $data['faculty'] = $this->admin_model->getFaculty();
+        $data['pres'] = $this->admin_model->getPres();
+        $data['vice'] = $this->admin_model->getVicePres();
+        $data['dean'] = $this->admin_model->getDean();
+        $data['head'] = $this->admin_model->getHead();
+        $this->load->view('homepage' ,$data); 
+    }
+	public function login() // login page of admin
 	{
         if(empty($this->session->userdata['user'])){ // if empty session
 
