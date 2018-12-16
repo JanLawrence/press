@@ -430,6 +430,63 @@ class Admin_model extends CI_Model{
             $this->db->update('tbl_coe');//update data to tbl_coe
         }
     }
+    public function addFaculty(){
+        $data = array(
+            "fname" => $_POST['fname'],
+            "mname" => $_POST['mname'],
+            "lname" => $_POST['lname'],
+            "address" => $_POST['address'],
+            "department" => $_POST['department'],
+            "position" => $_POST['position'],
+            "contact_num" => $_POST['contact'],
+            "email" => $_POST['email'],
+            "created_by" => $this->user->id,
+            "date_created" => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_faculty', $data);
+    }
+    public function editFaculty(){
+        $data = $this->showFacultyList($_POST['id']);
+        if(!empty($data)){
+            $this->db->set("fname", $_POST['fname']);
+            $this->db->set("mname", $_POST['mname']);
+            $this->db->set("lname", $_POST['lname']);
+            $this->db->set("address", $_POST['address']);
+            $this->db->set("department", $_POST['department']);
+            $this->db->set("position", $_POST['position']);
+            $this->db->set("contact_num", $_POST['contact']);
+            $this->db->set("email", $_POST['email']);
+            $this->db->set("modified_by", $this->user->id);
+            $this->db->set("date_modified", date('Y-m-d H:i:s'));
+            $this->db->where('id',$_POST['id']);
+            $this->db->update('tbl_faculty');//update data to tbl_coe
+        }
+    }
+    public function deleteFaculty(){
+        $this->db->set("status", 'deleted');
+        $this->db->where('id', $_POST['id']);
+        $this->db->update('tbl_faculty');//update data to tbl_article set to deleted
+    }
+    public function showFacultyList($id){
+        $this->db->select('f.*, CONCAT(f.lname,", ",f.fname," ",f.mname) name')
+        ->from('tbl_faculty f');
+        $this->db->where('f.status','saved');
+        if($id != 0){
+            $this->db->where('f.id',$id);
+        }
+        $this->db->order_by('f.lname');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function showPositionList(){
+        $this->db->select('f.position')
+        ->from('tbl_faculty f');
+        $this->db->where('f.position NOT LIKE "%Faculty%"');
+        $this->db->group_by('f.position');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function addNotif(){
         $data = array(
             "user_type" => $_POST['user'],

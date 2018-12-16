@@ -33,6 +33,9 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/coe' ? 'active' : ''?>" href="<?= base_url()?>admin/coe"> Mission/Vision</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/faculty' ? 'active' : ''?>" href="<?= base_url()?>admin/faculty"> Faculty</a>
+			</li>
 			<?php endif; ?>
 			<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
 				<li class="nav-item">

@@ -247,6 +247,36 @@ class Admin extends CI_Controller {
     public function saveCoe(){
         $this->admin_model->saveCoe();
     }
+    
+    public function faculty()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+
+                // load view
+                $data['faculty'] = $this->admin_model->showFacultyList($id=0);
+                $data['position'] = $this->admin_model->showPositionList();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/faculty/faculty', $data);
+                $this->load->view('admin/templates/footer');
+                
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function addFaculty(){
+        $this->admin_model->addFaculty();
+    }
+    public function editFaculty(){
+        $this->admin_model->editFaculty();
+    }
+    public function deleteFaculty(){
+        $this->admin_model->deleteFaculty();
+    }
     public function getNameByUser(){
         $this->admin_model->getNameByUser();
     }

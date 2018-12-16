@@ -1,5 +1,10 @@
 $(function(){
-    $('input[name="file"]').change(function() {
+    
+    $('.btn-publish').click(function(){
+        $('#publishModal').modal('toggle');
+    })
+
+    /* $('input[name="file"]').change(function() {
         var i = $(this).prev('label').clone();
         var file = $('input[name="file"]')[0].files[0].name;
         $(this).prev('label').text(file);
@@ -38,5 +43,5 @@ $(function(){
             return false;
         }
         return false;
-    })
+    }) */
 })
