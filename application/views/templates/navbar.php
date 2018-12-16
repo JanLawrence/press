@@ -18,7 +18,7 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto nav-tabs-standard ml-3">
-			<li class="nav-item dropdown">
+			<!-- <li class="nav-item dropdown">
 				<a class="nav-link <?= $controller.'/'.$method == 'article' ? 'active' : ''?>" id="articleDropdown" 
 				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Article
@@ -29,6 +29,9 @@
 						<a class="dropdown-item" href="<?=base_url()?>article/articles?type=<?=$each->type?>"><?= ucwords($each->type)?></a>
 					<?php endforeach;?>
 				</div>
+			</li> -->
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'article/articles' ? 'active' : ''?>" href="<?= base_url()?>article/articles"> Article</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto nav-tabs-standard">
