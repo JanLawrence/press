@@ -444,6 +444,44 @@ class Admin_model extends CI_Model{
             "date_created" => date('Y-m-d H:i:s')
         );
         $this->db->insert('tbl_faculty', $data);
+        $facultyId = $this->db->insert_id(); 
+        
+        list($fileName , $ext) = explode('.', $_FILES['file']['name']);
+        $tmpName  = $_FILES['file']['tmp_name'];            
+        $fileSize = $_FILES['file']['size'];                
+        $fileType = $_FILES['file']['type'];   
+        $fileNewTemp = file_get_contents($tmpName);     
+        if(!get_magic_quotes_gpc())
+        {  
+            $fileName = addslashes($fileName);
+        }
+        
+        $data = array(
+            'faculty_id' => $facultyId,
+            'name' => $fileName,
+            'type' => $fileType,
+            'size' => $fileSize,
+            'content' => $fileNewTemp,
+            'directory' =>  $dir.'/'. $_FILES['file']['name'],
+            'created_by' => $this->user->id,
+            'date_created' => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_faculty_picture', $data);
+
+        if(isset($_POST['subject'])){
+            foreach($_POST['subject'] as $key=> $each){
+                $data = array(
+                    'faculty_id' => $facultyId,
+                    'subject' => $each,
+                    'days' => $_POST['days'][$key],
+                    'time' => $_POST['time'][$key],
+                    'created_by' => $this->user->id,
+                    'date_created' => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_faculty_schedule', $data);
+            }
+        }
+        echo 1;
     }
     public function editFaculty(){
         $data = $this->showFacultyList($_POST['id']);
@@ -508,5 +546,55 @@ class Admin_model extends CI_Model{
             );
             $this->db->insert('tbl_notif_name_list',$data);  //insert data to tbl_notif_name_list
         }
+    }
+    public function getFaculty(){
+        $this->db->select("fp.faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.position", "Faculty");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getPres(){
+        $this->db->select("fp.faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.position LIKE '%University President%'");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getVicePres(){
+        $this->db->select("fp.faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.position LIKE '%Vice President%'");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getDean(){
+        $this->db->select("fp.faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.position LIKE '%Dean%'");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getHead(){
+        $this->db->select("fp.faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.position LIKE '%Head%'");
+        $query = $this->db->get();
+        return $query->result();
     }
 }
