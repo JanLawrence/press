@@ -210,7 +210,8 @@ class Admin extends CI_Controller {
 		if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
 				// load view
-				$data['publish'] = $this->admin_model->getPublish();
+				// $data['publish'] = $this->admin_model->getPublish();
+				$data['article'] = $this->admin_model->showArticle();
 				$this->load->view('admin/templates/header');
 				$this->load->view('admin/publish/publish', $data);
 				$this->load->view('admin/templates/footer');
@@ -224,6 +225,9 @@ class Admin extends CI_Controller {
     public function addPublish()
 	{
 		$this->admin_model->addPublish();
+    }
+    public function unpublish(){
+        $this->admin_model->unpublish();
     }
     public function coe()
 	{

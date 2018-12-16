@@ -1,9 +1,5 @@
 <?php 
     $userSession = $this->session->userdata['user'];
-    // $posi = array();
-    // foreach($position as $eachpos){
-    //     $posi[]= $eachpos->position;
-    // }
 ?>
 <style>
     div.file {
@@ -28,8 +24,6 @@
                     </div>
                     <div class="float-right">
                         <a href="#" class="btn btn-secondary btn-sm mb-4 btn-headline">Headline</a>
-                        <a href="#" class="btn btn-secondary btn-sm mb-4 btn-publish">Publish</a>
-                        <a href="#" class="btn btn-secondary btn-sm mb-4 btn-unpublish">Unpublish</a>
                     </div>
                 </div>
                 <table class="table table-bordered table-striped table-hovered" id="tableList">
@@ -46,47 +40,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <?php 
+                        <?php 
                             $ctr = 1;
-                            foreach($faculty as $each){
+                            foreach($article as $each){
                                 ?>
                             <tr>
                                 <td><?= $ctr++?></td>
-                                <td><?= $each->name?></td>
-                                <td><?= $each->department?></td>
-                                <td><?= $each->position?></td>
-                                <td><?= $each->contact_num?></td>
-                                <td><?= $each->address?></td>
-                                <td><?= $each->email?></td>
-                                <td></td>
+                                <td><?= $each->title?></td>
+                                <td><?= $each->type?></td>
+                                <td><?= $each->author?></td>
+                                <td><?= $each->published == 'yes' ? 'Published' : 'Unpublished'?></td>
+                                <td><?= $each->date_published?></td>
+                                <td class="text-center">
+                                    <?php
+                                        if(!empty($each->ab_type)){
+                                    ?>
+                                            <img style="width:20%"; src="data:image/<?= $each->ab_type?>;base64, <?= base64_encode($each->content) ?>" >
+                                    <?php        
+                                        }
+                                    ?>
+                                </td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm btn-edit" 
-                                    a_id="<?= $each->id?>" 
-                                    a_fname="<?= $each->fname?>"
-                                    a_mname="<?= $each->mname?>"
-                                    a_lname="<?= $each->lname?>"
-                                    a_dept="<?= $each->department?>"
-                                    a_position="<?= $each->position?>"
-                                    a_contact="<?= $each->contact_num?>"
-                                    a_address="<?= $each->address?>"
-                                    a_email="<?= $each->email?>"
+                                    <button class="btn btn-primary btn-sm btn-publish"
+                                    id ="<?= $each->id?>" 
+                                    article ="<?= $each->title?>"
+                                    type ="<?= $each->type?>"
+                                    author="<?= $each->author?>"
                                     >
-                                        <i class="ti-pencil-alt"></i> 
+                                        Publish 
                                     </button>
-                                    <button class="btn btn-danger btn-sm btn-delete" 
+                                    <button class="btn btn-danger btn-sm btn-unpublish" 
                                     a_id="<?= $each->id?>">
-                                        <i class="ti-trash"></i> 
+                                        Unpublish 
                                     </button>
                                 </td>
                             </tr>
-                        <?php } ?> -->
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<form id="publishForm" method="post">
+<form id="publishForm" method="post" enctype="multipart/form-data">
     <div class="modal" id="publishModal">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -99,6 +95,7 @@
                             <div class="form-group">
                                 <label> Article:</label>
                                 <input type="text" class="form-control" name="article" readonly>
+                                <input type="hidden" class="form-control" name="id" readonly>
                             </div>
                             <div class="form-group">
                                 <label> Author:</label>
@@ -120,86 +117,7 @@
                 <div class="modal-footer">
                     <div class="form-group">
                         <a href="#" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="ti-close"></i> Close</a>
-                        <button class="btn btn-success btn-sm btn-submit" type="submit"><i class="ti-save"></i> Publish Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>   
-    </div>
-</form>
-<form id="editForm" method="post">
-    <div class="modal" id="editModal">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4><i class="ti-plus"></i> Edit Faculty</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group row">
-                                <div class="col-md-4">
-                                    <label> First Name:</label>
-                                    <input type="text" class="form-control" name="fname" required>
-                                    <input type="hidden" class="form-control" name="id" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label> Middle Name:</label>
-                                    <input type="text" class="form-control" name="mname" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label> Last Name:</label>
-                                    <input type="text" class="form-control" name="lname" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label> Address:</label>
-                                    <textarea name="address" class="form-control" type="text" required></textarea>
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Department:</label>
-                                    <input type="text" class="form-control" name="department" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label> Contact Number:</label>
-                                    <input type="text" class="form-control" name="contact" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Position:</label>
-                                    <select name="position" class="form-control" required>
-                                        <option value="" selected disabled> Select Position</option>
-                                        <?php 
-                                            $pos = array('University President','Vice President of Academic Affairs','Dean, College of Engineering','Head','Faculty');
-                                            foreach($pos as $each){
-                                        ?>
-                                            <option value="<?= $each?>" <?= in_array($each, $posi) ? 'hidden' : ''?>><?= $each?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label> Email:</label>
-                                    <input type="text" class="form-control" name="email" required>
-                                </div>
-                                <!-- <div class="col-md-6">
-                                    <label> Upload Profile Picture:</label>
-                                    <div class="file btn btn-info">
-                                        <i class="ti-upload"></i> <label class="m-0"> Upload</label>
-                                        <input type="file" name="file"/>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>                
-                </div>
-                <div class="modal-footer">
-                    <div class="form-group">
-                        <a href="#" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="ti-close"></i> Close</a>
-                        <button class="btn btn-success btn-sm btn-submit" type="submit"><i class="ti-save"></i> Save</button>
+                        <button class="btn btn-success btn-sm btn-submit" type="submit"><i class="ti-save" atr-type="publish"></i> Publish Now</button>
                     </div>
                 </div>
             </div>

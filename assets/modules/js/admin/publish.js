@@ -1,16 +1,48 @@
 $(function(){
     
-    $('.btn-publish').click(function(){
-        $('#publishModal').modal('toggle');
+    // $('.btn-publish').click(function(){
+    //     $('#publishModal').modal('toggle');
+    // })
+    $("#tableList").on('click','.btn-publish',function(){ // on click edit button on list
+        $('#publishModal').modal('toggle'); // toggle edit modal
+        // get values on attr of the button clicked
+        var id = $(this).attr('id');
+        var article = $(this).attr('article');
+        var type = $(this).attr('type');
+        var author = $(this).attr('author');
+
+        // put attr values on each specific input 
+        $('#publishForm').find('input[name="id"]').val(id);
+        $('#publishForm').find('input[name="article"]').val(article);
+        $('#publishForm').find('input[name="author"]').val(type);
+        $('#publishForm').find('input[name="type"]').val(author);
+        return false;
     })
 
-    /* $('input[name="file"]').change(function() {
+    $("#tableList").on('click','.btn-unpublish',function(){ // on click edit button on list
+        // get values on attr of the button clicked
+        var id = $(this).attr('a_id');
+
+        if(confirm('Are you sure you want to unpublish this article?') == true){
+            $.post(URL+'admin/unpublish', {'id': id})
+            .done(function(returnData){
+                alert("You have successfully unpublished this article.");
+                location.reload();
+            })
+        } else {
+            return false;
+        }
+        return false;
+    })
+
+    $('input[name="file"]').change(function() {
         var i = $(this).prev('label').clone();
         var file = $('input[name="file"]')[0].files[0].name;
         $(this).prev('label').text(file);
     });
     $('#publishForm').submit(function(){
         var type = $(this).find('button[type="submit"]').attr('atr-type');
+        var form = new FormData(this); // get form data
         
         //alert message
         if(type=='publish'){
@@ -20,7 +52,6 @@ $(function(){
         }
 
         if(confirm(alrtmsg)){ // if yes in alert message
-            var form = new FormData(this); // get form data
             $.ajax({
                 url: URL + 'admin/addPublish', // post to admin/addPublish
                 type: "POST",
@@ -29,13 +60,15 @@ $(function(){
                 cache: false,  // for file uploading purposes
                 processData:false, // for file uploading purposes
                 success: function(returnData){ // get returned data in the posted link by using returnData variable
+                    // alert(returnData);
+                    // return false;
                     if(returnData == 1){ // if returned data is equal to 1 success
-                        alert('Newspaper was successfully published.') //alert success
+                        alert('Article was successfully published.') //alert success
                         location.reload(); //reload page
                     } else if(returnData == 2){ // if returned data is equal to 2 deleted
                         location.reload(); //reload page
                     } else {
-                        alert(returnData); return false; // show error
+                        // alert(returnData); return false; // show error
                     }
                 }
             });
@@ -43,5 +76,5 @@ $(function(){
             return false;
         }
         return false;
-    }) */
+    }) 
 })
