@@ -40,8 +40,9 @@ class Article extends CI_Controller {
         if(!empty($this->session->userdata['user'])){ // if has session
             if($this->session->userdata['user']->user_type == 'student'){ // if user type student 
 				// load view
-                $data['articles'] = $this->article_model->getArticles();
-                $data['articleType'] = ucwords($_GET['type']);
+                // $data['articles'] = $this->article_model->getArticles();
+                // $data['articleType'] = ucwords($_GET['type']);
+                $data['article_type'] = $this->article_model->getArticlesType();
                 $this->load->view('templates/header');
                 $this->load->view('article/article',$data);
                 $this->load->view('templates/footer');
