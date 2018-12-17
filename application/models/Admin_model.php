@@ -463,7 +463,7 @@ class Admin_model extends CI_Model{
             'type' => $fileType,
             'size' => $fileSize,
             'content' => $fileNewTemp,
-            'directory' =>  $dir.'/'. $_FILES['file']['name'],
+            'directory' =>  '',
             'created_by' => $this->user->id,
             'date_created' => date('Y-m-d H:i:s')
         );
@@ -500,15 +500,76 @@ class Admin_model extends CI_Model{
             $this->db->where('id',$_POST['id']);
             $this->db->update('tbl_faculty');//update data to tbl_coe
         }
+         
+        list($fileName , $ext) = explode('.', $_FILES['file']['name']);
+        $tmpName  = $_FILES['file']['tmp_name'];            
+        $fileSize = $_FILES['file']['size'];                
+        $fileType = $_FILES['file']['type'];   
+        $fileNewTemp = file_get_contents($tmpName);     
+        if(!get_magic_quotes_gpc())
+        {  
+            $fileName = addslashes($fileName);
+        }
+        if($_FILES['file']['name'] != ''){
+
+            $this->db->set('name', $fileName);
+            $this->db->set('type', $fileType);
+            $this->db->set('size', $fileSize);
+            $this->db->set('content', $fileNewTemp);
+            $this->db->set('directory', '');
+            $this->db->set("modified_by", $this->user->id);
+            $this->db->set("date_modified", date('Y-m-d H:i:s'));
+            $this->db->where('faculty_id', $_POST['id']);
+            $this->db->update('tbl_faculty_picture');
+        }
+            
+        $getSched = $this->db->get_where('tbl_faculty_schedule', array('faculty_id' => $_POST['id']));
+        foreach($getSched->result() as $each){
+            $this->db->delete('tbl_faculty_schedule', array('id' => $each->id)); 
+        }        
+
+        if(isset($_POST['subject'])){
+            foreach($_POST['subject'] as $key=> $each){
+                $data = array(
+                    'faculty_id' =>$_POST['id'],
+                    'subject' => $each,
+                    'days' => $_POST['days'][$key],
+                    'time' => $_POST['time'][$key],
+                    'created_by' => $this->user->id,
+                    'date_created' => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_faculty_schedule', $data);
+            }
+        }
     }
     public function deleteFaculty(){
         $this->db->set("status", 'deleted');
         $this->db->where('id', $_POST['id']);
-        $this->db->update('tbl_faculty');//update data to tbl_article set to deleted
+        $this->db->update('tbl_faculty');
+
+        $this->db->set("active", 'no');
+        $this->db->where('faculty_id', $_POST['id']);
+        $this->db->update('tbl_faculty_picture');
+
+        $getSched = $this->db->get_where('tbl_faculty_schedule', array('faculty_id' => $_POST['id']));
+        foreach($getSched->result() as $each){
+            $this->db->set("status", 'deleted');
+            $this->db->where('id', $each->id);
+            $this->db->update('tbl_faculty_schedule');
+        }    
+    }
+    public function getFacultySched(){
+        $this->db->select('fs.*')
+        ->from('tbl_faculty f')
+        ->join('tbl_faculty_schedule fs', 'fs.faculty_id = f.id', 'left');
+        $this->db->where('f.id',$_POST['id']);
+        $query = $this->db->get();
+        echo json_encode($query->result());
     }
     public function showFacultyList($id){
-        $this->db->select('f.*, CONCAT(f.lname,", ",f.fname," ",f.mname) name')
-        ->from('tbl_faculty f');
+        $this->db->select('f.*, CONCAT(f.lname,", ",f.fname," ",f.mname) name, fp.name image_name, fp.content image_content, fp.type image_type')
+        ->from('tbl_faculty f')
+        ->join('tbl_faculty_picture fp', 'fp.faculty_id = f.id', 'left');
         $this->db->where('f.status','saved');
         if($id != 0){
             $this->db->where('f.id',$id);

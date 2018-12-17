@@ -57,7 +57,13 @@
                                 <td><?= $each->contact_num?></td>
                                 <td><?= $each->address?></td>
                                 <td><?= $each->email?></td>
-                                <td></td>
+                                <td>
+                                    <?php if($each->image_name != ''):?>
+                                        <img class="card-img-top" src="data:image/<?= $each->image_type?>;base64, <?= base64_encode($each->image_content) ?>" style="width: 30%" alt="Card image cap">
+                                    <?php else:?>
+                                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="width: 30%">
+                                    <?php endif;1?>
+                                </td>
                                 <td>
                                     <button class="btn btn-primary btn-sm btn-edit" 
                                     a_id="<?= $each->id?>" 
@@ -152,7 +158,7 @@
                                 </div> -->
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-success btn-sm" id="btnAppendSched"><i class="ti-plus"></i></button>
+                                <button type="button" class="btn btn-success btn-sm btnAppendSched"><i class="ti-plus"></i></button>
                                 <table class="table table-bordered" id="appendSched">
                                     <thead>
                                         <tr>
@@ -185,7 +191,7 @@
         </div>   
     </div>
 </form>
-<form id="editForm" method="post">
+<form id="editForm" method="post" enctype="multipart/form-data">
     <div class="modal" id="editModal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -250,6 +256,27 @@
                                         <input type="file" name="file"/>
                                     </div>
                                 </div> -->
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success btn-sm btnAppendSched"><i class="ti-plus"></i></button>
+                                <table class="table table-bordered appendSchedEdit" id="appendSched">
+                                    <thead>
+                                        <tr>
+                                            <th>Subjectsss</th>
+                                            <th>Days</th>
+                                            <th>Time</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>   
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <div class="file btn btn-info text-center">
+                                    <i class="ti-upload"></i> <label class="m-0"> Upload Profile Pic</label>
+                                    <input type="file" name="file"/>
+                                </div>
                             </div>
                         </div>
                     </div>                

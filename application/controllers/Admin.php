@@ -272,6 +272,9 @@ class Admin extends CI_Controller {
         }
         
     }
+    public function getFacultySched(){
+        $this->admin_model->getFacultySched();
+    }
     public function addFaculty(){
         $this->admin_model->addFaculty();
     }
