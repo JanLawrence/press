@@ -17,8 +17,12 @@
                         <textarea class="form-control" type="text" name="core_values" required><?= isset($coe[0]->core_values) ? $coe[0]->core_values : ''?></textarea>
                     </div>    
                     <div class="form-group">
-                        <label>EVSU PALANTAW TINGUHA: </label>
-                        <textarea class="form-control" type="text" name="palantaw_tinguha" required><?= isset($coe[0]->palantaw_tinguha) ? $coe[0]->palantaw_tinguha : ''?></textarea>
+                        <label>EVSU PALANTAW: </label>
+                        <textarea class="form-control" type="text" name="palantaw" required><?= isset($coe[0]->palantaw) ? $coe[0]->palantaw : ''?></textarea>
+                    </div>    
+                    <div class="form-group">
+                        <label>EVSU TINGUHA: </label>
+                        <textarea class="form-control" type="text" name="tinguha" required><?= isset($coe[0]->tinguha) ? $coe[0]->tinguha : ''?></textarea>
                     </div>    
                     <div class="form-group">
                         <label>OBJECTIVES: </label>
@@ -27,6 +31,10 @@
                     <div class="form-group">
                         <label>PROGRAM MISSION: </label>
                         <textarea class="form-control" type="text" name="program_mission" required><?= isset($coe[0]->program_mission) ? $coe[0]->program_mission : ''?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>PROGRAM EDUCATIONAL OBJECTIVE(INTEL PRESS): </label>
+                        <textarea class="form-control" type="text" name="prog_obj" required><?= isset($coe[0]->educational_objective) ? $coe[0]->educational_objective : ''?></textarea>
                     </div>
                 </div>
                 <div class="card-footer text-right">

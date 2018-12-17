@@ -49,8 +49,12 @@
                     <?= isset($coe[0]->core_values) ? $coe[0]->core_values : ''?>
                 </div>    
                 <div class="form-group">
-                    <label>EVSU PALANTAW TINGUHA: </label>
-                    <?= isset($coe[0]->palantaw_tinguha) ? $coe[0]->palantaw_tinguha : ''?>
+                    <label>EVSU PALANTAW: </label>
+                    <?= isset($coe[0]->palantaw) ? $coe[0]->palantaw : ''?>
+                </div>    
+                <div class="form-group">
+                    <label>EVSU TINGUHA: </label>
+                    <?= isset($coe[0]->tinguha) ? $coe[0]->tinguha : ''?>
                 </div>    
                 <div class="form-group">
                     <label>OBJECTIVES: </label>
@@ -59,6 +63,10 @@
                 <div class="form-group">
                     <label>PROGRAM MISSION: </label>
                     <?= isset($coe[0]->program_mission) ? $coe[0]->program_mission : ''?>
+                </div>
+                <div class="form-group">
+                    <label>PROGRAM EDUCATIONAL OBJECTIVE(INTEL PRESS): </label>
+                    <?= isset($coe[0]->educational_objective) ? $coe[0]->educational_objective : ''?>
                 </div>
             </div>
         </div>

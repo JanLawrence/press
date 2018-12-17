@@ -411,9 +411,11 @@ class Admin_model extends CI_Model{
                 "mission" => $_POST['mission'],
                 "vision" => $_POST['vision'],
                 "core_values" => $_POST['core_values'],
-                "palantaw_tinguha" => $_POST['palantaw_tinguha'],
+                "palantaw" => $_POST['palantaw'],
+                "tinguha" => $_POST['tinguha'],
                 "objectives" => $_POST['objectives'],
                 "program_mission" => $_POST['program_mission'],
+                "educational_objective" => $_POST['prog_obj'],
                 "created_by" => $this->user->id,
                 "date_created" => date('Y-m-d H:i:s')
             );
@@ -422,9 +424,11 @@ class Admin_model extends CI_Model{
             $this->db->set("mission", $_POST['mission']);
             $this->db->set("vision", $_POST['vision']);
             $this->db->set("core_values", $_POST['core_values']);
-            $this->db->set("palantaw_tinguha", $_POST['palantaw_tinguha']);
+            $this->db->set("palantaw", $_POST['palantaw']);
+            $this->db->set("tinguha", $_POST['tinguha']);
             $this->db->set("objectives", $_POST['objectives']);
             $this->db->set("program_mission", $_POST['program_mission']);
+            $this->db->set("educational_objective", $_POST['prog_obj']);
             $this->db->set("modified_by", $this->user->id);
             $this->db->set("date_modified", date('Y-m-d H:i:s'));
             $this->db->where('id',$validate[0]->id);
