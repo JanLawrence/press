@@ -293,6 +293,9 @@ class Admin extends CI_Controller {
     public function notifById(){
         $this->admin_model->notifById();
     }
+    public function getFacultyById(){
+        $this->admin_model->getFacultyById();
+    }
     public function notification()
 	{
         if(!empty($this->session->userdata['user'])){ // if has session

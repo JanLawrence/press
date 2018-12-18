@@ -614,7 +614,7 @@ class Admin_model extends CI_Model{
         }
     }
     public function getFaculty(){
-        $this->db->select("fp.faculty_id,
+        $this->db->select("f.id faculty_id,
             CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
         ")
         ->from("tbl_faculty f")
@@ -623,8 +623,32 @@ class Admin_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+    public function getFacultyById(){
+        $data = array();
+        $this->db->select("f.id faculty_id,
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, f.address, fp.type, fp.name image_name, fp.content, f.position
+        ")
+        ->from("tbl_faculty f")
+        ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
+        $this->db->where("f.id", $_REQUEST['id']);
+        $query1 = $this->db->get();
+        $query1 = $query1->result();
+        foreach($query1 as $each){
+            $each->content = $each->content != '' ? base64_encode($each->content) : '';
+        }
+        $data['info'] = isset($query1[0]) ? $query1[0] : array();
+
+        $this->db->select("fp.*")
+        ->from("tbl_faculty_schedule fp");
+        $this->db->where("fp.faculty_id", $_REQUEST['id']);
+        $query2 = $this->db->get();
+        $query2 = $query2->result();
+        $data['sched'] = isset($query2) ? $query2 : array();
+
+        echo json_encode($data);
+    }
     public function getPres(){
-        $this->db->select("fp.faculty_id,
+        $this->db->select("f.id faculty_id,
             CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
         ")
         ->from("tbl_faculty f")
@@ -634,7 +658,7 @@ class Admin_model extends CI_Model{
         return $query->result();
     }
     public function getVicePres(){
-        $this->db->select("fp.faculty_id,
+        $this->db->select("f.id faculty_id,
             CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
         ")
         ->from("tbl_faculty f")
@@ -644,7 +668,7 @@ class Admin_model extends CI_Model{
         return $query->result();
     }
     public function getDean(){
-        $this->db->select("fp.faculty_id,
+        $this->db->select("f.id faculty_id,
             CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
         ")
         ->from("tbl_faculty f")
@@ -654,7 +678,7 @@ class Admin_model extends CI_Model{
         return $query->result();
     }
     public function getHead(){
-        $this->db->select("fp.faculty_id,
+        $this->db->select("f.id faculty_id,
             CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, fp.type, fp.name image_name, fp.content, f.position
         ")
         ->from("tbl_faculty f")
