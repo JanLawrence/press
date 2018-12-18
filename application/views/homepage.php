@@ -30,8 +30,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group text-right">
-            <a class="btn btn-info btn-lg" href="<?=base_url('main/login')?>">Login</a>
-            <a class="btn btn-info btn-lg" href="<?=base_url('main/register')?>">Signup</a>
+            <a href="<?=base_url('main/login')?>">Login</a> | 
+            <a href="<?=base_url('main/register')?>">Signup</a>
         </div>
         <div class="card rounded-0 p-5">
             <div class="card-body" style="font-size: 20px;">
