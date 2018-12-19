@@ -39,6 +39,7 @@ class Admin_model extends CI_Model{
                 "username" => $_POST['username'],
                 "password" => $this->encryptpass->pass_crypt($_POST['password']),
                 "user_type" => $_POST['usertype'],
+                "confirm" => 'yes',
                 "created_by" => $this->user->id,
                 "date_created" => date('Y-m-d H:i:s')
             );
