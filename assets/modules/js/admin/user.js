@@ -4,6 +4,7 @@ $(function(){
         $('select[name=article]').prop('required', 'false');
         $('#addModal').modal('toggle'); // toggle add modal
     });
+    $("#tableList").dataTable();
     $('select[name=usertype]').change(function(){
         var type = $(this).val();
         if(type == 'admin' || type == 'student'){
