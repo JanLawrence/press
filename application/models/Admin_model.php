@@ -30,6 +30,39 @@ class Admin_model extends CI_Model{
 
         return $query->result();
     }
+    public function userListStudent(){
+        // get data from tbl_user_info and tbl_user
+        $this->db->select("ui.user_id,
+            CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name, u.user_type, u.confirm,
+            ui.fname f_name,ui.lname l_name, ui.mname m_name , ui.email, 
+            u.username, u.password, uat.article_type_id, at.type article_type
+        ")
+        ->from("tbl_user_info ui")
+        ->join("tbl_user u","ON u.id = ui.user_id","inner")
+        ->join("tbl_user_article_type uat","ON uat.user_id = ui.user_id","left")
+        ->join("tbl_article_type at","ON at.id = uat.article_type_id","left");
+        $this->db->where("u.status", "saved");
+        $this->db->where("u.user_type", "student");
+        $this->db->order_by("ui.lname");
+        $query = $this->db->get();
+    
+        foreach($query->result() as $each){
+            $each->password = $this->encryptpass->pass_crypt($each->password, 'd');
+        }
+
+        return $query->result();
+    }
+    public function confirmStudent(){
+        if($_POST['status'] == 'activate'){
+            $this->db->set('confirm', 'yes');
+            $this->db->where('id', $_POST['id']);
+            $this->db->update('tbl_user');
+        } else if($_POST['status'] == 'deactivate'){
+            $this->db->set('confirm', 'no');
+            $this->db->where('id', $_POST['id']);
+            $this->db->update('tbl_user');
+        }
+    }
     public function saveUser(){
 
         $check = $this->db->get_where('tbl_user', array('username'=>$_POST['username'])); //check if username inputed is exisiting

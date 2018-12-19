@@ -45,7 +45,7 @@ class Admin extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND status = 'saved' AND (user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor')");
+            $this->db->where("username = '$user' AND status = 'saved' AND confirm = 'yes' AND (user_type = 'admin' OR user_type = 'writer' OR user_type = 'editor')");
             $query = $this->db->get();
             $data = $query->result();
 
@@ -88,6 +88,26 @@ class Admin extends CI_Controller {
 		} else {
             show_404(); // show 404 error page
 		}
+	}
+	public function student()
+	{
+		if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+				// load view
+				$data['userList'] = $this->admin_model->userListStudent();
+				$this->load->view('admin/templates/header');
+				$this->load->view('admin/users/students', $data);
+				$this->load->view('admin/templates/footer');
+			} else { 
+                show_404(); // show 404 error page
+			}
+		} else {
+            show_404(); // show 404 error page
+		}
+	}
+	public function confirmStudent()
+	{
+		$this->admin_model->confirmStudent();
 	}
 	public function articletype()
 	{

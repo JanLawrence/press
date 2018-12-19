@@ -87,6 +87,34 @@ $(function(){
         }    
         return false;
     })
+    $("#tableList").on('click','.btn-act',function(){ 
+        if(confirm('Are you sure you want to activate this user?')){
+            var uid = $(this).attr('userid');
+            var stat = $(this).attr('stat');
+            $.post(URL+'admin/confirmStudent', {'id': uid, 'status': stat})
+            .done(function(){
+                alert('You have successfully activated this user.'); //alert success
+                location.reload(); // reload
+            })
+        } else {
+            return false;
+        }    
+        return false;
+    })
+    $("#tableList").on('click','.btn-deac',function(){
+        if(confirm('Are you sure you want to deactivate this user?')){
+            var uid = $(this).attr('userid');
+            var stat = $(this).attr('stat');
+            $.post(URL+'admin/confirmStudent', {'id': uid, 'status': stat})
+            .done(function(){
+                alert('You have successfully deactivated this user.'); //alert success
+                location.reload(); // reload
+            })
+        } else {
+            return false;
+        }    
+        return false;
+    })
     $('#editForm').submit(function(){ // submit edit user form
         if(confirm('Are you sure you want to edit this user?')){
             var pass = $(this).find('input[name="password"]').val();

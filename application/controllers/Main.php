@@ -43,7 +43,7 @@ class Main extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND user_type = 'student' AND status = 'saved'");
+            $this->db->where("username = '$user' AND user_type = 'student' AND status = 'saved' AND confirm = 'yes'");
             $query = $this->db->get();
             $data = $query->result();
 
@@ -84,6 +84,7 @@ class Main extends CI_Controller {
                     "username" => $_POST['username'],
                     "password" => $this->encryptpass->pass_crypt($_POST['password']),
                     "user_type" => 'student',
+                    "confirm" => 'no',
                     "created_by" => 0,
                     "date_created" => date('Y-m-d H:i:s')
                 );
@@ -105,14 +106,14 @@ class Main extends CI_Controller {
                     "date_created" => date('Y-m-d H:i:s')
                 );
                 $this->db->insert('tbl_user_info',$data2); //insert data to tbl_user_info
-                // get tbl_user data to be set to "user" session
-                $user = $this->input->post('username');
-                $query = $this->db->get_where('tbl_user', array('username' => $user));
-                $data = $query->result();
-                $this->session->set_userdata('user', $data[0]);
-                // set session and redirect based on user_type
-                $userSession = $this->session->userdata['user'];
-                redirect(base_url('article'));
+                // // get tbl_user data to be set to "user" session
+                // $user = $this->input->post('username');
+                // $query = $this->db->get_where('tbl_user', array('username' => $user));
+                // $data = $query->result();
+                // $this->session->set_userdata('user', $data[0]);
+                // // set session and redirect based on user_type
+                // $userSession = $this->session->userdata['user'];
+                redirect(base_url('main/login'));
             } else {
 				$this->load->view('register'); // redirect to register page if validation failed
             }
