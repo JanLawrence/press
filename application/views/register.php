@@ -80,7 +80,7 @@
                 <input type="password" class="form-control" required="" name="confirmpass">
             </div>
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
                 <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
             </div>
         </form>
