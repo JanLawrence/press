@@ -21,7 +21,7 @@
                 width: 100%;
                 max-width: 330px;
                 padding: 15px;
-                margin: 0 auto;
+                margin: 0 auto; display: block;in: 0 auto;
             }
         </style>
     </head>
@@ -46,36 +46,42 @@
                             <?= isset($coe[0]->vision) ? $coe[0]->vision : ''?>
                         </div>  
                     </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">EVSU CORE VALUES: </label></br>
-                        <?= isset($coe[0]->core_values) ? $coe[0]->core_values : ''?>
-                    </div>    
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">EVSU PALANTAW: </label></br>
-                        <?= isset($coe[0]->palantaw) ? $coe[0]->palantaw : ''?>
-                    </div>    
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">EVSU TINGUHA: </label></br>
-                        <?= isset($coe[0]->tinguha) ? $coe[0]->tinguha : ''?>
-                    </div> 
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">OBJECTIVES: </label></br>
-                        <?= isset($coe[0]->objectives) ? $coe[0]->objectives : ''?>
-                    </div>    
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">PROGRAM MISSION: </label></br>
-                        <?= isset($coe[0]->program_mission) ? $coe[0]->program_mission : ''?>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">EVSU CORE VALUES: </label></br>
+                            <?= isset($coe[0]->core_values) ? $coe[0]->core_values : ''?>
+                        </div>    
                     </div>
-                    <div class="form-group">
-                        <label style="font-weight:bolder;">PROGRAM EDUCATIONAL OBJECTIVE(INTEL PRESS): </label></br>
-                        <?= isset($coe[0]->educational_objective) ? $coe[0]->educational_objective : ''?>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">EVSU PALANTAW: </label></br>
+                            <?= isset($coe[0]->palantaw) ? $coe[0]->palantaw : ''?>
+                        </div>    
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">EVSU TINGUHA: </label></br>
+                            <?= isset($coe[0]->tinguha) ? $coe[0]->tinguha : ''?>
+                        </div> 
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">OBJECTIVES: </label></br>
+                            <?= isset($coe[0]->objectives) ? $coe[0]->objectives : ''?>
+                        </div>
                     </div>
                 </div>
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">PROGRAM MISSION: </label></br>
+                            <?= isset($coe[0]->program_mission) ? $coe[0]->program_mission : ''?>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label style="font-weight:bolder;">PROGRAM EDUCATIONAL OBJECTIVE(INTEL PRESS): </label></br>
+                            <?= isset($coe[0]->educational_objective) ? $coe[0]->educational_objective : ''?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,9 +94,9 @@
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
                 <div class="card">
                     <?php if($each->image_name != ''):?>
-                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
-                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 220px">
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
                     <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
@@ -107,9 +113,9 @@
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
                 <div class="card">
                     <?php if($each->image_name != ''):?>
-                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
-                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 220px">
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
                     <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
@@ -126,9 +132,9 @@
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
                 <div class="card">
                     <?php if($each->image_name != ''):?>
-                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
-                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 220px">
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
                     <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
@@ -145,9 +151,9 @@
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
                 <div class="card">
                     <?php if($each->image_name != ''):?>
-                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
-                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 220px">
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
                     <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
@@ -164,9 +170,9 @@
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
                 <div class="card">
                     <?php if($each->image_name != ''):?>
-                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px" alt="Card image cap">
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
-                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 220px">
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
                     <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
@@ -183,7 +189,7 @@
         <div class="modal-content">
             <div class="modal-body text-center">
                 <div class="form-group">
-                    <img class="facultyPic" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 220px; display: block; margin: 0 auto;" alt="Card image cap">
+                    <img class="facultyPic" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;; display: block; margin: 0 auto; display: block;in: 0 auto;" alt="Card image cap">
                 </div>
                 <div class="form-group">
                     <h4 class="facultyName"></h4>

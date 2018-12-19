@@ -17,8 +17,6 @@
                             <th style="width: 5%">#</th>
                             <th style="width: 50%">Name</th>
                             <th style="width: 20%">Username</th>
-                            <th style="width: 15%">User Level</th>
-                            <th style="width: 15%">Article</th>
                             <th style="width: 10%"><i class="ti-settings"></i></th>
                         </tr>
                     </thead>
@@ -33,8 +31,6 @@
                                 <td><?= $ctr++?></td>
                                 <td><?= $each->name?></td>
                                 <td><?= $each->username?></td>
-                                <td><?= $each->user_type?></td>
-                                <td><?= $each->article_type?></td>
                                 <td>
                                     <?php if($each->confirm == 'no') :?>
                                         <button class="btn btn-primary btn-sm btn-act" 
