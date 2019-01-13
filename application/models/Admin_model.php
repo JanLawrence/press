@@ -99,11 +99,26 @@ class Admin_model extends CI_Model{
 
                 if($_POST['usertype']!= 'admin' &&  $_POST['usertype'] != 'student'){
                     //data that will be updated to tbl_user_article_type
-                    $this->db->set('article_type_id', $_POST['article']);
-                    $this->db->set('modified_by', $this->user->id);
-                    $this->db->set('date_modified', date('Y-m-d H:i:s'));
-                    $this->db->where('user_id', $_POST['id']);
-                    $this->db->update('tbl_user_article_type');
+                    $checkArticle = $this->db->get_where('tbl_user_article_type', array('user_id' => $_POST['id'])); //get data by user id
+                    $checkArticle= $checkArticle->result();
+
+                    if(!empty($checkArticle)){
+
+                        $this->db->set('article_type_id', $_POST['article']);
+                        $this->db->set('modified_by', $this->user->id);
+                        $this->db->set('date_modified', date('Y-m-d H:i:s'));
+                        $this->db->where('user_id', $_POST['id']);
+                        $this->db->update('tbl_user_article_type');
+                    } else {
+                        //data that will be inserted to tbl_user_article_type
+                        $data = array(
+                            "user_id" => $_POST['id'],
+                            "article_type_id" => $_POST['article'],
+                            "created_by" => $this->user->id,
+                            "date_created" => date('Y-m-d H:i:s')
+                        );
+                        $this->db->insert('tbl_user_article_type',$data); //insert data to tbl_user_article_type
+                    }
                 }
             } else {
                 echo 1;
@@ -129,12 +144,25 @@ class Admin_model extends CI_Model{
             $this->db->update('tbl_user_info');
 
             if( $_POST['usertype']!= 'admin' &&  $_POST['usertype'] != 'student'){
-                //data that will be updated to tbl_user_article_type
-                $this->db->set('article_type_id', $_POST['article']);
-                $this->db->set('modified_by', $this->user->id);
-                $this->db->set('date_modified', date('Y-m-d H:i:s'));
-                $this->db->where('user_id', $_POST['id']);
-                $this->db->update('tbl_user_article_type');
+                $checkArticle = $this->db->get_where('tbl_user_article_type', array('user_id' => $_POST['id'])); //get data by user id
+                $checkArticle= $checkArticle->result();
+                
+                if(!empty($checkArticle)){
+                    //data that will be updated to tbl_user_article_type
+                    $this->db->set('article_type_id', $_POST['article']);
+                    $this->db->set('modified_by', $this->user->id);
+                    $this->db->set('date_modified', date('Y-m-d H:i:s'));
+                    $this->db->where('user_id', $_POST['id']);
+                    $this->db->update('tbl_user_article_type');
+                } else {
+                    $data = array(
+                        "user_id" => $_POST['id'],
+                        "article_type_id" => $_POST['article'],
+                        "created_by" => $this->user->id,
+                        "date_created" => date('Y-m-d H:i:s')
+                    );
+                    $this->db->insert('tbl_user_article_type',$data); //insert data to tbl_user_article_type
+                }
             }
         }
     }  
