@@ -61,12 +61,17 @@
                 <input type="text" class="form-control" autofocus="" name="contact">
             </div>
             <div class="form-group">
-                <label>Course Section</label>
+                <label>Course</label>
                 <input type="text" class="form-control" required="" autofocus="" name="course">
                 <?= form_error('course', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>
             <div class="form-group">
-                <label>Username</label>
+                <label>Section</label>
+                <input type="text" class="form-control" required="" autofocus="" name="section">
+                <?= form_error('section', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
+            </div>
+            <div class="form-group">
+                <label>Student ID</label>
                 <input type="text" class="form-control" required="" autofocus="" name="username">
                 <?= form_error('username', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>

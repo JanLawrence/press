@@ -43,7 +43,7 @@ class Main extends CI_Controller {
             // query user by username and user type is equal to admin or president
             $this->db->select('*')
                     ->from('tbl_user');
-            $this->db->where("username = '$user' AND user_type = 'student' AND status = 'saved'");
+            $this->db->where("username = '$user' AND user_type = 'student' AND status = 'saved' AND confirm = 'yes'");
             $query = $this->db->get();
             $data = $query->result();
 
@@ -75,6 +75,7 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('bday', 'Birthday', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
             $this->form_validation->set_rules('course', 'Course', 'required');
+            $this->form_validation->set_rules('section', 'Section', 'required');
             $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tbl_user.username]');
             $this->form_validation->set_rules('password', 'Password', 'callback_validateconfirm'); // validation is on validate method
 
@@ -84,6 +85,7 @@ class Main extends CI_Controller {
                     "username" => $_POST['username'],
                     "password" => $this->encryptpass->pass_crypt($_POST['password']),
                     "user_type" => 'student',
+                    "confirm" => 'no',
                     "created_by" => 0,
                     "date_created" => date('Y-m-d H:i:s')
                 );
@@ -97,22 +99,24 @@ class Main extends CI_Controller {
                     "mname" => $_POST['mname'],
                     "lname" => $_POST['lname'],
                     "email" => $_POST['email'],
+                    "student_id" => $_POST['username'],
                     "bday" => $_POST['bday'],
                     "contact_no" => $_POST['contact'],
-                    "course_section" => $_POST['course'],
+                    "course" => $_POST['course'],
+                    "section" => $_POST['section'],
                     "status" => 'saved',
                     "created_by" => 0,
                     "date_created" => date('Y-m-d H:i:s')
                 );
                 $this->db->insert('tbl_user_info',$data2); //insert data to tbl_user_info
-                // get tbl_user data to be set to "user" session
-                $user = $this->input->post('username');
-                $query = $this->db->get_where('tbl_user', array('username' => $user));
-                $data = $query->result();
-                $this->session->set_userdata('user', $data[0]);
-                // set session and redirect based on user_type
-                $userSession = $this->session->userdata['user'];
-                redirect(base_url('article'));
+                // // get tbl_user data to be set to "user" session
+                // $user = $this->input->post('username');
+                // $query = $this->db->get_where('tbl_user', array('username' => $user));
+                // $data = $query->result();
+                // $this->session->set_userdata('user', $data[0]);
+                // // set session and redirect based on user_type
+                // $userSession = $this->session->userdata['user'];
+                redirect(base_url('main/login'));
             } else {
 				$this->load->view('register'); // redirect to register page if validation failed
             }

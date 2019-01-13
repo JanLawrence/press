@@ -31,6 +31,9 @@
 				</div>
 			</li> -->
 			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'article/index' ? 'active' : ''?>" href="<?= base_url()?>article"> Notification</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'article/articles' ? 'active' : ''?>" href="<?= base_url()?>article/articles"> Article</a>
 			</li>
 		</ul>

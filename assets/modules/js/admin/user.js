@@ -4,6 +4,7 @@ $(function(){
         $('select[name=article]').prop('required', 'false');
         $('#addModal').modal('toggle'); // toggle add modal
     });
+    $("#tableList").dataTable();
     $('select[name=usertype]').change(function(){
         var type = $(this).val();
         if(type == 'admin' || type == 'student'){
@@ -80,6 +81,34 @@ $(function(){
             $.post(URL+'admin/deleteUser', {'id': uid})  // post to admin/deleteUser
             .done(function(){
                 alert('You have successfully deleted this user.'); //alert success
+                location.reload(); // reload
+            })
+        } else {
+            return false;
+        }    
+        return false;
+    })
+    $("#tableList").on('click','.btn-act',function(){ 
+        if(confirm('Are you sure you want to activate this user?')){
+            var uid = $(this).attr('userid');
+            var stat = $(this).attr('stat');
+            $.post(URL+'admin/confirmStudent', {'id': uid, 'status': stat})
+            .done(function(){
+                alert('You have successfully activated this user.'); //alert success
+                location.reload(); // reload
+            })
+        } else {
+            return false;
+        }    
+        return false;
+    })
+    $("#tableList").on('click','.btn-deac',function(){
+        if(confirm('Are you sure you want to deactivate this user?')){
+            var uid = $(this).attr('userid');
+            var stat = $(this).attr('stat');
+            $.post(URL+'admin/confirmStudent', {'id': uid, 'status': stat})
+            .done(function(){
+                alert('You have successfully deactivated this user.'); //alert success
                 location.reload(); // reload
             })
         } else {
