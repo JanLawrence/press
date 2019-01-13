@@ -333,7 +333,7 @@ class Admin_model extends CI_Model{
 
     // }
     public function showArticle(){
-        $this->db->select('a.id,a.title,at.type,CONCAT(ui.fname," ",ui.mname," ",ui.lname) author,a.published,a.date_published,ab.content, ab.type ab_type')
+        $this->db->select('a.id,a.title,at.type,CONCAT(ui.fname," ",ui.mname," ",ui.lname) author,a.published,a.date_published,a.headline,ab.content, ab.type ab_type')
         ->from('tbl_article a')
         ->join('tbl_article_type at','ON at.id = a.article_type','left')
         ->join('tbl_article_banner ab', 'ON ab.article_id = a.id','left')
@@ -350,30 +350,34 @@ class Admin_model extends CI_Model{
 
     }
     public function addPublish(){
-        $dir = 'assets/newspaper';
-        list($fileName , $ext) = explode('.', $_FILES['file']['name']);
-        $tmpName  = $_FILES['file']['tmp_name'];            
-        $fileSize = $_FILES['file']['size'];                
-        $fileType = $_FILES['file']['type'];   
-        $fileNewTemp = file_get_contents($tmpName);     
-        if(!get_magic_quotes_gpc())
-        {  
-            $fileName = addslashes($fileName);
-        }
-        
-        $data = array(
-            'article_id' => $_POST['id'],
-            'name' => $fileName,
-            'type' => $fileType,
-            'size' => $fileSize,
-            'content' => $fileNewTemp,
-            'directory' =>  $dir.'/'. $_FILES['file']['name'],
-            'created_by' => $this->user->id,
-            'date_created' => date('Y-m-d H:i:s')
-        );
-        $this->db->insert('tbl_article_banner', $data);
+        if(!empty($_FILES['file']['name'])):
+            $dir = 'assets/newspaper';
+            list($fileName , $ext) = explode('.', $_FILES['file']['name']);
+            $tmpName  = $_FILES['file']['tmp_name'];            
+            $fileSize = $_FILES['file']['size'];                
+            $fileType = $_FILES['file']['type'];   
+            $fileNewTemp = file_get_contents($tmpName);     
+            if(!get_magic_quotes_gpc())
+            {  
+                $fileName = addslashes($fileName);
+            }
+            
+            $data = array(
+                'article_id' => $_POST['id'],
+                'name' => $fileName,
+                'type' => $fileType,
+                'size' => $fileSize,
+                'content' => $fileNewTemp,
+                'directory' =>  $dir.'/'. $_FILES['file']['name'],
+                'created_by' => $this->user->id,
+                'date_created' => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_article_banner', $data);
+        endif;
         
         $this->db->set("published", 'yes');
+        $this->db->set("published_by", $this->user->id);
+        $this->db->set("date_published", date('Y-m-d H:i:s'));
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article');
         
@@ -381,9 +385,39 @@ class Admin_model extends CI_Model{
     }
     public function unpublish(){
         $this->db->set("published", 'no');
+        $this->db->set("published_by", $this->user->id);
+        $this->db->set("date_published", date('Y-m-d H:i:s'));
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article');//update data to tbl_article set to deleted
     }
+    public function setHeadline(){
+        $this->db->select('count(a.headline) count')
+        ->from('tbl_article a');
+        $this->db->where('a.headline','yes');
+        $data = $this->db->get();
+        $data = $data->result();
+        $data = $data[0]->count;
+
+        $publish = $this->db->get_where('tbl_article', array('id' => $_POST['id']));
+        $publish = $publish->result();
+        $publish = $publish[0]->published;
+
+        if($publish == 'yes'){    
+            if($data != 3):
+                $this->db->set("headline", 'yes');
+                $this->db->set("headline_by", $this->user->id);
+                $this->db->set("date_headline", date('Y-m-d H:i:s'));
+                $this->db->where('id', $_POST['id']);
+                $this->db->update('tbl_article');//update data to tbl_article set to deleted
+                echo 1;
+            elseif($data == 3):
+                echo 2;
+            endif;
+        }else{
+            echo 3;
+        }
+    }
+
     public function getNameByUser(){
         $this->db->select("ui.user_id,
             CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name

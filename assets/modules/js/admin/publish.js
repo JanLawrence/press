@@ -34,6 +34,28 @@ $(function(){
         }
         return false;
     })
+    $("#tableList").on('click','.btn-yes',function(){ // on click edit button on list
+        // get values on attr of the button clicked
+        var id = $(this).attr('id');
+        if(confirm('Are you sure you want to set this headline?') == true){
+            $.post(URL+'admin/setHeadline', {'id': id})
+            .done(function(returnData){
+                // alert(returnData);
+                // return false;
+                if(returnData == 1){
+                    alert("You have successfully set this headline.");
+                }else if(returnData == 2){
+                    alert("There's already Top 3 Headlne.");
+                }else if(returnData == 3){
+                    alert("Publish article first.");
+                }
+                location.reload();
+            })
+        } else {
+            return false;
+        }
+        return false;
+    })
 
     $('input[name="file"]').change(function() {
         var i = $(this).prev('label').clone();

@@ -37,6 +37,7 @@
                             <th>Date</th>
                             <th>Picture</th>
                             <th><i class="ti-settings"></i></th>
+                            <th>Headline</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,18 +62,35 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm btn-publish"
-                                    id ="<?= $each->id?>" 
-                                    article ="<?= $each->title?>"
-                                    type ="<?= $each->type?>"
-                                    author="<?= $each->author?>"
-                                    >
-                                        Publish 
-                                    </button>
-                                    <button class="btn btn-danger btn-sm btn-unpublish" 
-                                    a_id="<?= $each->id?>">
-                                        Unpublish 
-                                    </button>
+                                    <?php if($each->published === 'no'):?>
+                                        <button class="btn btn-primary btn-sm btn-publish"
+                                        id ="<?= $each->id?>" 
+                                        article ="<?= $each->title?>"
+                                        type ="<?= $each->type?>"
+                                        author="<?= $each->author?>"
+                                        >
+                                            Publish 
+                                        </button>
+                                    <?php else:?>
+                                        <button class="btn btn-danger btn-sm btn-unpublish" 
+                                        a_id="<?= $each->id?>">
+                                            Unpublish 
+                                        </button>
+                                    <?php endif;?>
+                                </td>
+                                <td>
+                                    <?php if($each->headline === 'no'):?>
+                                        <button class="btn btn-success btn-sm btn-yes"
+                                        id ="<?= $each->id?>"
+                                        >
+                                            Yes 
+                                        </button>
+                                    <?php else:?>
+                                        <button class="btn btn-danger btn-sm btn-no" 
+                                        id="<?= $each->id?>">
+                                            No 
+                                        </button>
+                                    <?php endif;?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -117,7 +135,7 @@
                 <div class="modal-footer">
                     <div class="form-group">
                         <a href="#" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="ti-close"></i> Close</a>
-                        <button class="btn btn-success btn-sm btn-submit" type="submit"><i class="ti-save" atr-type="publish"></i> Publish Now</button>
+                        <button class="btn btn-success btn-sm btn-submit" type="submit" atr-type="publish"><i class="ti-save"></i> Publish Now</button>
                     </div>
                 </div>
             </div>

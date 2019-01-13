@@ -249,6 +249,9 @@ class Admin extends CI_Controller {
     public function unpublish(){
         $this->admin_model->unpublish();
     }
+    public function setHeadline(){
+        $this->admin_model->setHeadline();
+    }
     public function coe()
 	{
         if(!empty($this->session->userdata['user'])){ // if has session
