@@ -1,3 +1,8 @@
+<style>
+    .dropdown-toggle{
+        height: 38px;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="card rounded-0">
@@ -65,7 +70,7 @@
                                         <thead>
                                             <tr>
                                                 <td style="width: 80%">
-                                                    <select class="form-control" name="name[]">
+                                                    <select class="form-control selectpicker dropdown-toggle" name="name[]" data-live-search="true">
                                                     </select>
                                                 </td>
                                                 <td style="width: 20%">

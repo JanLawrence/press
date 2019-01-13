@@ -49,5 +49,6 @@ function getNameByUser(user,select){
             append += '<option value="'+a.user_id+'">'+a.name+'</option>';
         })
         $(select).html(append);
+        $(select).selectpicker('refresh');
     })
 }
