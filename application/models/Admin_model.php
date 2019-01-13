@@ -35,7 +35,7 @@ class Admin_model extends CI_Model{
         $this->db->select("ui.user_id,
             CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name, u.user_type, u.confirm,
             ui.fname f_name,ui.lname l_name, ui.mname m_name , ui.email, 
-            u.username, u.password, uat.article_type_id, at.type article_type
+            u.username, u.password, uat.article_type_id, at.type article_type, ui.contact_no, ui.course, ui.section, u.status 
         ")
         ->from("tbl_user_info ui")
         ->join("tbl_user u","ON u.id = ui.user_id","inner")
@@ -418,12 +418,17 @@ class Admin_model extends CI_Model{
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article');//update data to tbl_article set to deleted
     }
-    public function setHeadline(){
+
+    public function show3Headline(){
         $this->db->select('count(a.headline) count')
         ->from('tbl_article a');
         $this->db->where('a.headline','yes');
         $data = $this->db->get();
-        $data = $data->result();
+        return $data->result();
+    }
+
+    public function setHeadline(){
+        $data = $this->show3Headline();
         $data = $data[0]->count;
 
         $publish = $this->db->get_where('tbl_article', array('id' => $_POST['id']));

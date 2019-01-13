@@ -22,9 +22,9 @@
                     <div class="float-left">
                         <h3 class="card-title">Publish</h3>
                     </div>
-                    <div class="float-right">
+                    <!-- <div class="float-right">
                         <a href="#" class="btn btn-secondary btn-sm mb-4 btn-headline">Headline</a>
-                    </div>
+                    </div> -->
                 </div>
                 <table class="table table-bordered table-striped table-hovered" id="tableList">
                     <thead>

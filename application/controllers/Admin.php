@@ -252,6 +252,9 @@ class Admin extends CI_Controller {
     public function setHeadline(){
         $this->admin_model->setHeadline();
     }
+    public function unsetHeadline(){
+        $this->admin_model->unsetHeadline();
+    }
     public function coe()
 	{
         if(!empty($this->session->userdata['user'])){ // if has session

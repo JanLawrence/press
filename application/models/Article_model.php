@@ -53,4 +53,14 @@ class Article_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+    public function showHeadlineArticle(){
+        $this->db->select('a.id,a.title,at.type,CONCAT(ui.fname," ",ui.mname," ",ui.lname) author,a.published,a.date_published,a.headline,ab.content image_content, ab.type image_type')
+        ->from('tbl_article a')
+        ->join('tbl_article_type at','ON at.id = a.article_type','left')
+        ->join('tbl_article_banner ab', 'ON ab.article_id = a.id','left')
+        ->join('tbl_user_info ui','ON ui.user_id = a.created_by','left');
+        $this->db->where('a.headline','yes');
+        $data = $this->db->get();
+        return $data->result();
+    }
 }
