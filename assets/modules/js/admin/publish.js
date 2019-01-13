@@ -56,6 +56,21 @@ $(function(){
         }
         return false;
     })
+    $("#tableList").on('click','.btn-no',function(){ // on click edit button on list
+        // get values on attr of the button clicked
+        var id = $(this).attr('id');
+
+        if(confirm('Are you sure you want to unset this headline?') == true){
+            $.post(URL+'admin/unsetHeadline', {'id': id})
+            .done(function(returnData){
+                alert("You have successfully unset this headline.");
+                location.reload();
+            })
+        } else {
+            return false;
+        }
+        return false;
+    })
 
     $('input[name="file"]').change(function() {
         var i = $(this).prev('label').clone();

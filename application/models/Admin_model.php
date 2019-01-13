@@ -418,12 +418,17 @@ class Admin_model extends CI_Model{
         $this->db->where('id', $_POST['id']);
         $this->db->update('tbl_article');//update data to tbl_article set to deleted
     }
-    public function setHeadline(){
+
+    public function show3Headline(){
         $this->db->select('count(a.headline) count')
         ->from('tbl_article a');
         $this->db->where('a.headline','yes');
         $data = $this->db->get();
-        $data = $data->result();
+        return $data->result();
+    }
+
+    public function setHeadline(){
+        $data = $this->show3Headline();
         $data = $data[0]->count;
 
         $publish = $this->db->get_where('tbl_article', array('id' => $_POST['id']));
@@ -436,7 +441,7 @@ class Admin_model extends CI_Model{
                 $this->db->set("headline_by", $this->user->id);
                 $this->db->set("date_headline", date('Y-m-d H:i:s'));
                 $this->db->where('id', $_POST['id']);
-                $this->db->update('tbl_article');//update data to tbl_article set to deleted
+                $this->db->update('tbl_article');//update data to tbl_article set to yes
                 echo 1;
             elseif($data == 3):
                 echo 2;
@@ -444,6 +449,13 @@ class Admin_model extends CI_Model{
         }else{
             echo 3;
         }
+    }
+    public function unsetHeadline(){
+        $this->db->set("headline", 'no');
+        $this->db->set("headline_by", $this->user->id);
+        $this->db->set("date_headline", date('Y-m-d H:i:s'));
+        $this->db->where('id', $_POST['id']);
+        $this->db->update('tbl_article');//update data to tbl_article set to no
     }
 
     public function getNameByUser(){
