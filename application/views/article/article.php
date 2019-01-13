@@ -1,41 +1,33 @@
 <div class="container">
     <!-- Article Type -->
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-lg-12">
             <h3 class="my-4"><strong>Headline</strong></h3>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="stories-box">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="card" style="width:340px">
-                                    <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:40%">
-                                    <div class="card-img-overlay">
-                                        <h4 class="card-title text-center">John Doe</h4>
+                            <?php
+                                foreach($headline as $each):
+                            ?>
+                                    <div class="col-md-4">
+                                        <div class="card" style="width:340px">
+                                            <?php //if(!empty($each->image_type)): ?>
+                                                <img class="card-img-top" src="data:image/<?= $each->image_type?>;base64, <?= base64_encode($each->image_content) ?>" alt="<?= $each->title?>" style="width:100%; height:40%;">
+                                            <?php //endif;?>
+                                            <div class="card-img-overlay">
+                                                <h4 class="card-title text-center text-primary" style="margin-top:200px;"><?= $each->title?></h4>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" style="width:340px">
-                                    <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:40%">
-                                    <div class="card-img-overlay">
-                                        <h4 class="card-title text-center">John Doe</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card" style="width:340px">
-                                    <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:40%">
-                                    <div class="card-img-overlay">
-                                        <h4 class="card-title text-center">John Doe</h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                endforeach;
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <?php 
             $ci =&get_instance();
             $ci->load->model('article_model');

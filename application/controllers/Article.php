@@ -43,6 +43,7 @@ class Article extends CI_Controller {
                 // $data['articles'] = $this->article_model->getArticles();
                 // $data['articleType'] = ucwords($_GET['type']);
                 $data['article_type'] = $this->article_model->getArticlesType();
+                $data['headline'] = $this->article_model->showHeadlineArticle();
                 $this->load->view('templates/header');
                 $this->load->view('article/article',$data);
                 $this->load->view('templates/footer');

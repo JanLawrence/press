@@ -441,7 +441,7 @@ class Admin_model extends CI_Model{
                 $this->db->set("headline_by", $this->user->id);
                 $this->db->set("date_headline", date('Y-m-d H:i:s'));
                 $this->db->where('id', $_POST['id']);
-                $this->db->update('tbl_article');//update data to tbl_article set to yes
+                $this->db->update('tbl_article');//update data to tbl_article set to deleted
                 echo 1;
             elseif($data == 3):
                 echo 2;
@@ -449,13 +449,6 @@ class Admin_model extends CI_Model{
         }else{
             echo 3;
         }
-    }
-    public function unsetHeadline(){
-        $this->db->set("headline", 'no');
-        $this->db->set("headline_by", $this->user->id);
-        $this->db->set("date_headline", date('Y-m-d H:i:s'));
-        $this->db->where('id', $_POST['id']);
-        $this->db->update('tbl_article');//update data to tbl_article set to no
     }
 
     public function getNameByUser(){
