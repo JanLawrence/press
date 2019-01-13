@@ -319,6 +319,9 @@ class Admin extends CI_Controller {
     public function getFacultyById(){
         $this->admin_model->getFacultyById();
     }
+    public function saveUserlimit(){
+        $this->admin_model->saveUserlimit();
+    }
     public function notification()
 	{
         if(!empty($this->session->userdata['user'])){ // if has session
@@ -330,6 +333,44 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/notification/notification' ,$data);
                 $this->load->view('admin/templates/footer');
                 
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function userlimit()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+
+                // load view
+                $data['users'] = $this->admin_model->getAdminUsers();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/users/userlimit', $data);
+                $this->load->view('admin/templates/footer');
+                
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function returnLimit()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['user'] = $this->admin_model->getUserLimit($_POST['user'], 'user');
+                $data['publish'] = $this->admin_model->getUserLimit($_POST['user'], 'publish');
+                $data['notif'] = $this->admin_model->getUserLimit($_POST['user'], 'notif');
+                $data['mission'] = $this->admin_model->getUserLimit($_POST['user'], 'mission');
+                $data['faculty'] = $this->admin_model->getUserLimit($_POST['user'], 'faculty');
+                $this->load->view('admin/users/ajax/limit', $data);
             } else { 
                 show_404(); // show 404 error page
             }

@@ -8,6 +8,7 @@
                         <h3 class="card-title">User List</h3>
                     </div>
                     <div class="float-right">
+                        <a href="<?= base_url()?>admin/userlimit" class="btn btn-secondary btn-sm mb-4">User Limitation</a>
                         <a href="#" class="btn btn-secondary btn-sm mb-4 btn-add"><i class="ti-plus"></i> Add User</a>
                     </div>
                 </div>
