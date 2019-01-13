@@ -35,7 +35,7 @@ class Admin_model extends CI_Model{
         $this->db->select("ui.user_id,
             CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name, u.user_type, u.confirm,
             ui.fname f_name,ui.lname l_name, ui.mname m_name , ui.email, 
-            u.username, u.password, uat.article_type_id, at.type article_type
+            u.username, u.password, uat.article_type_id, at.type article_type, ui.contact_no, ui.course, ui.section, u.status 
         ")
         ->from("tbl_user_info ui")
         ->join("tbl_user u","ON u.id = ui.user_id","inner")
