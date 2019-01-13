@@ -367,7 +367,7 @@ class Admin_model extends CI_Model{
         ->join('tbl_article_banner ab', 'ON ab.article_id = a.id','left')
         ->join('tbl_user_info ui','ON ui.user_id = a.created_by','left');
         $this->db->where('a.status','saved');
-        $this->db->order_by('a.date_created DESC');
+        $this->db->order_by("a.headline = 'yes' DESC");
         $data = $this->db->get();
         return $data->result();
     }
