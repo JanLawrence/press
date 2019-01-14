@@ -73,7 +73,7 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('fname', 'First Name', 'required');
             $this->form_validation->set_rules('lname', 'Last Name', 'required');
             $this->form_validation->set_rules('bday', 'Birthday', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tbl_user_info.email]');
             $this->form_validation->set_rules('contact', 'Contact', 'required');
             $this->form_validation->set_rules('course', 'Course', 'required');
             $this->form_validation->set_rules('section', 'Section', 'required');

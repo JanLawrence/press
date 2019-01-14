@@ -788,4 +788,57 @@ class Admin_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+    public function getAdminUsers(){
+        $this->db->select("u.id,
+            CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name
+        ")
+        ->from("tbl_user u")
+        ->join("tbl_user_info ui","ON u.id = ui.user_id","left");
+        $this->db->where("u.user_type", 'admin');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getUserLimit($id,$type){
+        $sql = "SELECT m.id, m.module,
+                    IF(a.module_id IS NULL, 'no', 'yes') limits
+                FROM tbl_module m
+                LEFT JOIN
+                    (	SELECT * 
+                        FROM tbl_user_module
+                        WHERE user_id = $id
+                    ) a
+                ON a.module_id = m.id
+                WHERE module LIKE '%$type%' ";
+        // echo $sql; exit;
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    public function saveUserlimit(){
+        
+        $module = isset($_POST['module_id']) ? $_POST['module_id'] : array();
+
+        $query2 = $this->db->get('tbl_module');
+        $data2 = $query2->result();
+        foreach($data2 as $key => $each){
+            if(in_array($each->id, $module)){
+                $query = $this->db->get_where('tbl_user_module', array('user_id' => $_POST['user'], 'module_id' => $each->id));
+                $data = $query->result();
+                if(empty($data)){
+                    $dataInsert = array(
+                        "user_id" => $_POST['user'],
+                        "module_id" => $each->id,
+                        "created_by" => $this->user->id,
+                        "date_created" => date('Y-m-d H:i:s')
+                    );
+                    $this->db->insert('tbl_user_module', $dataInsert);
+                }
+            } else {
+                $query = $this->db->get_where('tbl_user_module', array('user_id' => $_POST['user'], 'module_id' => $each->id));
+                $data = $query->result();
+                if(!empty($data)){
+                    $this->db->delete('tbl_user_module', array('id' => $data[0]->id));
+                }
+            }
+        }
+    }
 }

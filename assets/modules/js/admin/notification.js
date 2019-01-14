@@ -6,7 +6,7 @@ $(function(){
     $('.btn-append').click(function(){
         var append = '<tr>'+
                         '<td style="width: 80%">'+
-                            '<select class="form-control name-'+count+'" name="name[]">'+
+                            '<select class="form-control selectpicker name-'+count+'" name="name[]" data-live-search="true">'+
                             '</select>'+
                         '</td>'+
                         '<td style="width: 20%">'+

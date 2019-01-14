@@ -4,6 +4,9 @@
     foreach($position as $eachpos){
         $posi[]= $eachpos->position;
     }
+    $ci =&get_instance();
+	$ci->load->model('admin_model');
+    $access = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'faculty');
 ?>
 <style>
     div.file {
@@ -27,7 +30,9 @@
                         <h3 class="card-title">Faculty</h3>
                     </div>
                     <div class="float-right">
-                        <a href="#" class="btn btn-secondary btn-sm mb-4 btn-add"><i class="ti-plus"></i> New</a>
+                        <?php if($access[0]->limits == 'yes'): ?>
+                            <a href="#" class="btn btn-secondary btn-sm mb-4 btn-add"><i class="ti-plus"></i> New</a>
+                        <?php endif?>
                     </div>
                 </div>
                 <table class="table table-bordered table-striped table-hovered" id="tableList">
@@ -62,9 +67,10 @@
                                         <img class="card-img-top" src="data:image/<?= $each->image_type?>;base64, <?= base64_encode($each->image_content) ?>" style="width: 30%" alt="Card image cap">
                                     <?php else:?>
                                         <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="width: 30%">
-                                    <?php endif;1?>
+                                    <?php endif;?>
                                 </td>
                                 <td>
+                                    <?php if($access[1]->limits == 'yes'): ?>
                                     <button class="btn btn-primary btn-sm btn-edit" 
                                     a_id="<?= $each->id?>" 
                                     a_fname="<?= $each->fname?>"
@@ -78,10 +84,13 @@
                                     >
                                         <i class="ti-pencil-alt"></i> 
                                     </button>
+                                    <?php endif;?>
+                                    <?php if($access[2]->limits == 'yes'): ?>
                                     <button class="btn btn-danger btn-sm btn-delete" 
                                     a_id="<?= $each->id?>">
                                         <i class="ti-trash"></i> 
                                     </button>
+                                    <?php endif;?>
                                 </td>
                             </tr>
                         <?php } ?>

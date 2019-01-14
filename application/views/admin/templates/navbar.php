@@ -4,6 +4,10 @@
 	$userSession = $this->session->userdata['user'];
 	$userInfo = $this->db->get_where('tbl_user_info', array('user_id' => $userSession->id));
 	$userInfo = $userInfo->result();
+	$ci =&get_instance();
+	$ci->load->model('admin_model');
+    $accessPublish = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'publish');
+    $accessMission = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'mission');
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand ml-2" href="#">INTEL<strong>PRESS</strong></a>
@@ -18,9 +22,11 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
 			</li>
+			<?php if($accessPublish[0]->limits == 'yes'): ?>
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/publish' ? 'active' : ''?>" href="<?= base_url()?>admin/publish"> Publish</a>
 			</li>
+			<?php endif;?>
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/users' ? 'active' : ''?>" href="<?= base_url()?>admin/users"> Users</a>
 			</li>
@@ -30,9 +36,11 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/notification' ? 'active' : ''?>" href="<?= base_url()?>admin/notification"> Notification</a>
 			</li>
+			<?php if($accessMission[0]->limits == 'yes'): ?>
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/coe' ? 'active' : ''?>" href="<?= base_url()?>admin/coe"> Mission/Vision</a>
 			</li>
+			<?php endif;?>
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/faculty' ? 'active' : ''?>" href="<?= base_url()?>admin/faculty"> Faculty</a>
 			</li>
