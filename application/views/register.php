@@ -53,12 +53,13 @@
             </div>
             <div class="form-group">
                 <label>Birthday</label>
-                <input type="text" class="form-control" required="" autofocus="" name="bday">
+                <input type="date" class="form-control" required="" autofocus="" name="bday">
                 <?= form_error('bday', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>
             <div class="form-group">
                 <label>Contact No.</label>
-                <input type="text" class="form-control" autofocus="" name="contact">
+                <input type="text" class="form-control" required="" autofocus="" name="contact">
+                <?= form_error('contact', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>
             <div class="form-group">
                 <label>Course</label>

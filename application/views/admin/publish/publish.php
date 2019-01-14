@@ -34,7 +34,7 @@
                             <th>Type</th>
                             <th>Author</th>
                             <th>Status</th>
-                            <th>Date</th>
+                            <th>Date Submitted</th>
                             <th>Picture</th>
                             <th><i class="ti-settings"></i></th>
                             <th>Headline</th>
