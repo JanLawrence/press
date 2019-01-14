@@ -1,4 +1,9 @@
 <!-- List of Users -->
+<style>
+    .dropdown-toggle{
+        height: 38px;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="card rounded-0">

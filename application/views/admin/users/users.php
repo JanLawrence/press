@@ -1,4 +1,9 @@
 <!-- List of Users -->
+<?php
+	$ci =&get_instance();
+	$ci->load->model('admin_model');
+    $access = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'user');
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="card rounded-0">
@@ -9,7 +14,9 @@
                     </div>
                     <div class="float-right">
                         <a href="<?= base_url()?>admin/userlimit" class="btn btn-secondary btn-sm mb-4">User Limitation</a>
+                        <?php if($access[0]->limits == 'yes'): ?>
                         <a href="#" class="btn btn-secondary btn-sm mb-4 btn-add"><i class="ti-plus"></i> Add User</a>
+                        <?php endif?>
                     </div>
                 </div>
                 <table class="table table-bordered table-striped table-hovered" id="tableList">
@@ -37,6 +44,7 @@
                                 <td><?= $each->user_type?></td>
                                 <td><?= $each->article_type?></td>
                                 <td>
+                                    <?php if($access[1]->limits == 'yes'): ?>
                                     <button class="btn btn-primary btn-sm btn-edit" 
                                     userid="<?= $each->user_id?>" 
                                     u_fname="<?= $each->f_name?>"
@@ -49,10 +57,13 @@
                                     u_article="<?= $each->article_type_id?>">
                                         <i class="ti-pencil-alt"></i> 
                                     </button>
+                                    <?php endif;?>
+                                    <?php if($access[2]->limits == 'yes'): ?>
                                     <button class="btn btn-danger btn-sm btn-delete" 
                                     userid="<?= $each->user_id?>">
                                         <i class="ti-trash"></i> 
                                     </button>
+                                    <?php endif;?>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -1,3 +1,8 @@
+<?php
+    $ci =&get_instance();
+	$ci->load->model('admin_model');
+    $access = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'notif');
+?>
 <style>
     .dropdown-toggle{
         height: 38px;
@@ -12,7 +17,9 @@
                         <h3 class="card-title">Notification</h3>
                     </div>
                     <div class="float-right">
+                        <?php if($access[0]->limits == 'yes'): ?>
                         <a href="#" class="btn btn-secondary btn-sm mb-4 btn-add"><i class="ti-plus"></i> Add Notfication</a>
+                        <?php endif;?>
                     </div>
                 </div>
                 <table class="table table-bordered table-striped table-hovered" id="tableList">
