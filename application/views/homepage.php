@@ -114,14 +114,12 @@
     <div class="row mt-4">
     <?php foreach($officer as $each):?>
         <div class="col-md-4">
-            <a class="facultyView" fid="<?= $each->id?>" style="cursor: pointer">
-                <div class="card mb-5 border">
-                    <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $each->name?></h5>
-                    </div>
+            <div class="card mb-5 border">
+                <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $each->name?></h5>
                 </div>
-            </a>
+            </div>
         </div>
     <?php endforeach;?>
     </div>
@@ -130,14 +128,12 @@
     <div class="row mt-4">
     <?php foreach($editor as $each):?>
         <div class="col-md-4">
-            <a class="facultyView" fid="<?= $each->id?>" style="cursor: pointer">
-                <div class="card mb-5 border">
-                    <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $each->name?></h5>
-                    </div>
+            <div class="card mb-5 border">
+                <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $each->name?></h5>
                 </div>
-            </a>
+            </div>
         </div>
     <?php endforeach;?>
     </div>
@@ -146,7 +142,7 @@
         <div class="modal-content">
             <div class="modal-body text-center">
                 <div class="form-group">
-                    <img class="facultyPic" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;; display: block; margin: 0 auto; display: block;in: 0 auto;" alt="Card image cap">
+                    <img class="facultyPic" style="height: 150px; width: 150px; margin: 0 auto; display: block;; display: block; margin: 0 auto; display: block;in: 0 auto;" alt="Card image cap">
                 </div>
                 <div class="form-group">
                     <h4 class="facultyName"></h4>
