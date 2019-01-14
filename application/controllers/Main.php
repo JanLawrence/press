@@ -10,6 +10,8 @@ class Main extends CI_Controller {
         $data['vice'] = $this->admin_model->getVicePres();
         $data['dean'] = $this->admin_model->getDean();
         $data['head'] = $this->admin_model->getHead();
+        $data['editor'] = $this->admin_model->getEditor();
+        $data['officer'] = $this->admin_model->getOfficer();
         $this->load->view('homepage' ,$data); 
     }
 	public function login() // login page of admin

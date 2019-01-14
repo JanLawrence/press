@@ -87,14 +87,12 @@
         </div>
     </div>
     </div>
-    <hr>
-
-    <h2> EVSU FACULTY </h2>
     <div class="row mt-4">
-    <?php foreach($faculty as $each):?>
-        <div class="col-md-4">
+    <?php foreach($pres as $each):?>
+
+        <div class="col-md-4 offset-md-4">
             <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
-                <div class="card mb-5 border">
+                <div class="card">
                     <?php if($each->image_name != ''):?>
                         <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
                     <?php else:?>
@@ -109,38 +107,83 @@
         </div>
     <?php endforeach;?>
     </div>
-    <hr>
-    <h2> INTER OFFICER </h2>
     <div class="row mt-4">
-    <?php foreach($officer as $each):?>
-        <div class="col-md-4">
-            <a class="facultyView" fid="<?= $each->id?>" style="cursor: pointer">
-                <div class="card mb-5 border">
-                    <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+    <?php foreach($vice as $each):?>
+        <div class="col-md-4 offset-md-4">
+            <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
+                <div class="card">
+                    <?php if($each->image_name != ''):?>
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
+                    <?php else:?>
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                    <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
+                        <p class="card-text"><?= $each->position?></p>
                     </div>
                 </div>
             </a>
         </div>
     <?php endforeach;?>
     </div>
-    <hr>
-    <h2> EDITORIAL STAFF </h2>
     <div class="row mt-4">
-    <?php foreach($editor as $each):?>
-        <div class="col-md-4">
-            <a class="facultyView" fid="<?= $each->id?>" style="cursor: pointer">
-                <div class="card mb-5 border">
-                    <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+    <?php foreach($dean as $each):?>
+        <div class="col-md-4 offset-md-4">
+            <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
+                <div class="card">
+                    <?php if($each->image_name != ''):?>
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
+                    <?php else:?>
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                    <?php endif;1?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $each->name?></h5>
+                        <p class="card-text"><?= $each->position?></p>
                     </div>
                 </div>
             </a>
         </div>
     <?php endforeach;?>
     </div>
+    <div class="row mt-4">
+    <?php foreach($head as $each):?>
+        <div class="col-md-4 offset-md-4">
+            <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
+                <div class="card">
+                    <?php if($each->image_name != ''):?>
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
+                    <?php else:?>
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                    <?php endif;1?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $each->name?></h5>
+                        <p class="card-text"><?= $each->position?></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <?php endforeach;?>
+    </div>
+    <div class="row mt-4">
+    <?php foreach($faculty as $each):?>
+        <div class="col-md-4">
+            <a class="facultyView" fid="<?= $each->faculty_id?>" style="cursor: pointer">
+                <div class="card">
+                    <?php if($each->image_name != ''):?>
+                        <img class="card-img-top" src="data:image/<?= $each->type?>;base64, <?= base64_encode($each->content) ?>" style="height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
+                    <?php else:?>
+                        <img class="card-img-top" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="height: 150px; width: 150px; margin: 0 auto; display: block;">
+                    <?php endif;1?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $each->name?></h5>
+                        <p class="card-text"><?= $each->position?></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <?php endforeach;?>
+</div>
+</div>
 <div class="modal" id="viewModal">
     <div class="modal-dialog">
         <div class="modal-content">

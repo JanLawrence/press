@@ -546,6 +546,7 @@ class Admin_model extends CI_Model{
             "position" => $_POST['position'],
             "contact_num" => $_POST['contact'],
             "email" => $_POST['email'],
+            "designation" => $_POST['designation'],
             "created_by" => $this->user->id,
             "date_created" => date('Y-m-d H:i:s')
         );
@@ -600,6 +601,7 @@ class Admin_model extends CI_Model{
             $this->db->set("position", $_POST['position']);
             $this->db->set("contact_num", $_POST['contact']);
             $this->db->set("email", $_POST['email']);
+            $this->db->set("designation", $_POST['designation']);
             $this->db->set("modified_by", $this->user->id);
             $this->db->set("date_modified", date('Y-m-d H:i:s'));
             $this->db->where('id',$_POST['id']);
@@ -720,14 +722,36 @@ class Admin_model extends CI_Model{
         ")
         ->from("tbl_faculty f")
         ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");
-        $this->db->where("f.position", "Faculty");
+        $this->db->order_by("f.lname");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getOfficer(){
+        $this->db->select("f.id,
+            CONCAT(fp.lname, ', ' ,fp.fname, ' ', fp.mname) name
+        ")
+        ->from("tbl_user f")
+        ->join("tbl_user_info fp","ON f.id = fp.user_id","left");
+        $this->db->where('f.user_type', 'admin');
+        $this->db->order_by("fp.lname");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getEditor(){
+        $this->db->select("f.id,
+            CONCAT(fp.lname, ', ' ,fp.fname, ' ', fp.mname) name
+        ")
+        ->from("tbl_user f")
+        ->join("tbl_user_info fp","ON f.id = fp.user_id","left");
+        $this->db->where('f.user_type = "editor" OR f.user_type = "writer"');
+        $this->db->order_by("fp.lname");
         $query = $this->db->get();
         return $query->result();
     }
     public function getFacultyById(){
         $data = array();
         $this->db->select("f.id faculty_id,
-            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, f.address, fp.type, fp.name image_name, fp.content, f.position
+            CONCAT(f.lname, ', ' ,f.fname, ' ', f.mname) name, f.address, fp.type, fp.name image_name, fp.content, f.position, f.designation
         ")
         ->from("tbl_faculty f")
         ->join("tbl_faculty_picture fp","ON f.id = fp.faculty_id","left");

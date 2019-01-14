@@ -79,6 +79,7 @@ $(function(){
         var contact = $(this).attr('a_contact');
         var address = $(this).attr('a_address');
         var email = $(this).attr('a_email');
+        var designation = $(this).attr('a_designation');
 
         // put attr values on each specific input 
         $('#editForm').find('input[name="id"]').val(id);
@@ -89,6 +90,7 @@ $(function(){
         $('#editForm').find('select[name="position"]').val(pos).change();
         $('#editForm').find('input[name="contact"]').val(contact);
         $('#editForm').find('input[name="email"]').val(email);
+        $('#editForm').find('input[name="designation"]').val(designation);
         $('#editForm').find('textarea[name="address"]').val(address);
 
         $.post(URL +'admin/getFacultySched', {'id': id})

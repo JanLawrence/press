@@ -81,6 +81,7 @@
                                     a_contact="<?= $each->contact_num?>"
                                     a_address="<?= $each->address?>"
                                     a_email="<?= $each->email?>"
+                                    a_designation="<?= $each->designation?>"
                                     >
                                         <i class="ti-pencil-alt"></i> 
                                     </button>
@@ -157,6 +158,10 @@
                                 <div class="col-md-6">
                                     <label> Email:</label>
                                     <input type="text" class="form-control" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label> Desination/Degree Holder:</label>
+                                    <input type="text" class="form-control" name="designation" required>
                                 </div>
                                 <!-- <div class="col-md-6">
                                     <label> Upload Profile Picture:</label>
@@ -257,6 +262,10 @@
                                 <div class="col-md-6">
                                     <label> Email:</label>
                                     <input type="text" class="form-control" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label> Desination/Degree Holder:</label>
+                                    <input type="text" class="form-control" name="designation" required>
                                 </div>
                                 <!-- <div class="col-md-6">
                                     <label> Upload Profile Picture:</label>

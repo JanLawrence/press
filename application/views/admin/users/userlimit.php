@@ -51,6 +51,7 @@
                 $.post(URL + 'admin/saveUserlimit', form)
                 .done(function(returnData){
                     alert('Changes successfully saved');
+                    location.reload();
                 })
                 return false;
             } else {
