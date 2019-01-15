@@ -36,6 +36,17 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'article/articles' ? 'active' : ''?>" href="<?= base_url()?>article/articles"> Article</a>
 			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link <?= $controller.'/'.$method == 'games' ? 'active' : ''?>" id="articleDropdown" 
+				role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Games
+				</a>
+				<div class="dropdown-menu dropdown-article" aria-labelledby="articleDropdown">
+					<a class="dropdown-item" href="<?=base_url()?>games/game1">Maze Game</a>
+					<a class="dropdown-item" href="<?=base_url()?>games/game2">Tic Tac Toe</a>
+					<a class="dropdown-item" href="<?=base_url()?>games/game3">Memory Game</a>
+				</div>
+			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto nav-tabs-standard">
 			<li class="nav-item dropdown">
