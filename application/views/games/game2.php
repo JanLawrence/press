@@ -314,7 +314,7 @@
 </style>
 <h5 class="text-center">Tic-Tac-Toe Game</h5>
 <div class="text-center mb-2">
-    <a href="https://codepen.io/ziga-miklic/pen/Fagmh">Link</a> for the game
+    <a href="https://codepen.io/ziga-miklic/pen/Fagmh" target="_blank">Link</a> for the game
 </div>
 <div class="tic-tac-toe">
 	<input class="player-1 left first-column top first-row first-diagonal turn-1" id="block1-1-1" type="radio" />

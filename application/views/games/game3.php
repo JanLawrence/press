@@ -275,7 +275,7 @@
 </style>
 <h5 class="text-center">Memory Game</h5>
 <div class="text-center mb-2">
-    <a href="https://codepen.io/natewiley/pen/HBrbL">Link</a> for the game
+    <a href="https://codepen.io/natewiley/pen/HBrbL" target="_blank">Link</a> for the game
 </div>
 <div class="wrap">
 	<div class="game"></div>

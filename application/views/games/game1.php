@@ -181,7 +181,7 @@
 </style>
 <h5 class="text-center">Pickle Rick Maze Game</h5>
 <div class="text-center mb-4">
-	<a href="https://codepen.io/TheCodeDepository/pen/jKBaoN">Link</a> for the game
+	<a href="https://codepen.io/TheCodeDepository/pen/jKBaoN" target="_blank">Link</a> for the game
 </div>
 <div id="Message-Container">
 	<div id="message">
