@@ -33,6 +33,11 @@
         <form class="form-signin" action="register" method="post">
             <div class="text-center mb-5" style="font-size: 25px;"><span>INTEL</span><span><strong>PRESS</strong></span></div>
             <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" class="form-control" required="" autofocus="" name="studId">
+                <?= form_error('studId', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
+            </div>
+            <div class="form-group">
                 <label>First Name</label>
                 <input type="text" class="form-control" required="" autofocus="" name="fname">
                 <?= form_error('fname', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
@@ -72,7 +77,7 @@
                 <?= form_error('section', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>
             <div class="form-group">
-                <label>Student ID</label>
+                <label>Username</label>
                 <input type="text" class="form-control" required="" autofocus="" name="username">
                 <?= form_error('username', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>

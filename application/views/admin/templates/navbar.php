@@ -47,6 +47,12 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/student' ? 'active' : ''?>" href="<?= base_url()?>admin/student"> Student</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/contactus' ? 'active' : ''?>" href="<?= base_url()?>admin/contactus"> About Us / Contact Us</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/permit' ? 'active' : ''?>" href="<?= base_url()?>admin/permit"> Parent's Permit</a>
+			</li>
 			<?php endif; ?>
 			<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
 				<li class="nav-item">

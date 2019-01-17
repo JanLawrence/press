@@ -137,6 +137,15 @@
         </div>
     <?php endforeach;?>
     </div>
+    <?php if(!empty($contact)):?>
+    <hr>
+    <h2> Contact Us / About Us </h2>
+    <div class="row mb-5">
+        <div class="col-md-12 text-center">
+            <h5><?= $contact[0]->content?></h5>
+        </div>
+    </div>
+    <?php endif;?>
 <div class="modal" id="viewModal">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -325,6 +325,12 @@ class Admin extends CI_Controller {
     public function saveUserlimit(){
         $this->admin_model->saveUserlimit();
     }
+    public function saveContactUs(){
+        $this->admin_model->saveContactUs();
+    }
+    public function savePermit(){
+        $this->admin_model->savePermit();
+    }
     public function notification()
 	{
         if(!empty($this->session->userdata['user'])){ // if has session
@@ -374,6 +380,57 @@ class Admin extends CI_Controller {
                 $data['mission'] = $this->admin_model->getUserLimit($_POST['user'], 'mission');
                 $data['faculty'] = $this->admin_model->getUserLimit($_POST['user'], 'faculty');
                 $this->load->view('admin/users/ajax/limit', $data);
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function activitylog()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['logs'] = $this->admin_model->getUserLogs($_REQUEST);
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/logs/index', $data);
+                $this->load->view('admin/templates/footer');
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function contactus()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['contact'] = $this->admin_model->getContactUs();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/contact_us/index', $data);
+                $this->load->view('admin/templates/footer');
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
+    public function permit()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['permit'] = $this->admin_model->getPermit();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/permit/index', $data);
+                $this->load->view('admin/templates/footer');
             } else { 
                 show_404(); // show 404 error page
             }

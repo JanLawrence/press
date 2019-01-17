@@ -12,6 +12,7 @@ class Main extends CI_Controller {
         $data['head'] = $this->admin_model->getHead();
         $data['editor'] = $this->admin_model->getEditor();
         $data['officer'] = $this->admin_model->getOfficer();
+        $data['contact'] = $this->admin_model->getContactUs();
         $this->load->view('homepage' ,$data); 
     }
 	public function login() // login page of admin
@@ -75,6 +76,7 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('fname', 'First Name', 'required');
             $this->form_validation->set_rules('lname', 'Last Name', 'required');
             $this->form_validation->set_rules('bday', 'Birthday', 'required');
+            $this->form_validation->set_rules('studId', 'Student Id', 'required|is_unique[tbl_user_info.student_id]');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tbl_user_info.email]');
             $this->form_validation->set_rules('contact', 'Contact', 'required');
             $this->form_validation->set_rules('course', 'Course', 'required');
@@ -102,7 +104,7 @@ class Main extends CI_Controller {
                     "mname" => $_POST['mname'],
                     "lname" => $_POST['lname'],
                     "email" => $_POST['email'],
-                    "student_id" => $_POST['username'],
+                    "student_id" => $_POST['studId'],
                     "bday" => $_POST['bday'],
                     "contact_no" => $_POST['contact'],
                     "course" => $_POST['course'],
