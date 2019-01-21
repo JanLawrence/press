@@ -105,6 +105,23 @@ class Admin extends CI_Controller {
             show_404(); // show 404 error page
 		}
 	}
+	public function studentExport()
+	{
+		if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+				// load view
+				$data['userList'] = $this->admin_model->userListStudent();
+				$this->load->view('admin/users/student_export', $data);
+			} else { 
+                show_404(); // show 404 error page
+			}
+		} else {
+            show_404(); // show 404 error page
+		}
+    }
+    public function validateStudent(){
+        $this->admin_model->validateStudent();
+    }
 	public function confirmStudent()
 	{
 		$this->admin_model->confirmStudent();

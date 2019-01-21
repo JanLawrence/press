@@ -4,6 +4,9 @@ $(function(){
         $('select[name=article]').prop('required', 'false');
         $('#addModal').modal('toggle'); // toggle add modal
     });
+    $('.btn-validate').click(function(){
+        $('#validateModal').modal('toggle'); // toggle add modal
+    })
     $("#tableList").dataTable();
     $('select[name=usertype]').change(function(){
         var type = $(this).val();
@@ -37,7 +40,37 @@ $(function(){
             return false;
         }
         return false;
-    })
+    })    
+    $('#validateForm').submit(function(){
+        /* $.post(URL+'admin/validateStudent',$(this).serialize()) 
+        .done(function(returnData){
+            alert(returnData);
+            return false;
+
+            // location.reload();
+        }) */
+        var form = new FormData(this);
+        $.ajax({
+            url: URL + 'admin/validateStudent', // post to admin/validateStudent
+            type: "POST",
+            data:  form,
+            contentType: false, // for file uploading purposes
+            cache: false,  // for file uploading purposes
+            processData:false, // for file uploading purposes
+            success: function(returnData){ // get returned data in the posted link by using returnData variable
+                alert(returnData);
+                return false;
+                if(returnData == 1){ // if returned data is equal to 1 success
+                    alert('Article was successfully published.') //alert success
+                    location.reload(); //reload page
+                } else if(returnData == 2){ // if returned data is equal to 2 deleted
+                    location.reload(); //reload page
+                } else {
+                    // alert(returnData); return false; // show error
+                }
+            }
+        })   
+    }) 
     $("#tableList").on('click','.btn-edit',function(){ // on click edit button on user list
         $('#editModal').modal('toggle'); // toggle edit modal
         
