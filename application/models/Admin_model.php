@@ -58,6 +58,10 @@ class Admin_model extends CI_Model{
             $this->db->where('id', $_POST['id']);
             $this->db->update('tbl_user');
         } else if($_POST['status'] == 'deactivate'){
+            $query = $this->db->get_where('tbl_user_info', array('user_id' => $_POST['id']));
+            $data = $query->result();
+            $message = 'Your account has been deactivated. Please see the INTEL OFFICE';
+            $this->itexmo($data[0]->contact_no, $message, 'TR-JANLA010408_MEPFB');
             $this->db->set('confirm', 'no');
             $this->db->where('id', $_POST['id']);
             $this->db->update('tbl_user');
@@ -1001,81 +1005,54 @@ class Admin_model extends CI_Model{
         }
     }
     public function validateStudent(){
-        
-        echo 'adasdsadsad';
-        print_r($_FILES['file']['name']);
-        exit;
-        if (isset($_REQUEST['file'])) {
-            $ok = true;
-            $file = $_FILES['csv_file']['tmp_name'];
-            $handle = fopen($file, "r");
-            if ($file == NULL) {
-              error(_('Please select a file to import'));
-              redirect(page_link_to('admin_export'));
-            }
-            else {
-              while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+        $this->load->library('excel');
+        $data = array();
+        if(isset($_FILES["file"]["name"]) && $_FILES['file']['name'] !== '')
+        {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = PHPExcel_IOFactory::load($path);
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                for($row=2; $row<=$highestRow; $row++)
                 {
-                  $nick_name = $filesop[0];
-                  $first_name = $filesop[1];
-                  $last_name = $filesop[2];
-                  $email = $filesop[3];
-                  $age = $filesop[4];
-                  $current_city = $filesop[5];
-                  $password = $filesop[6];
-                  $mobile = $filesop[7];
-        // example error handling. We can add more as required for the database.
-        
-                if ( strlen($email) && preg_match("/^[a-z0-9._+-]{1,64}@(?:[a-z0-9-]{1,63}\.){1,125}[a-z]{2,63}$/", $mail) > 0) {
-                  if (! check_email($email)) {
-                    $ok = false;
-                    $msg .= error(_("E-mail address is not correct."), true);
-                  }
-                }
-        // error handling for password        
-                if (strlen($password) >= MIN_PASSWORD_LENGTH) {
-                    $ok = true;
-                  } else {
-                    $ok = false;
-                    $msg .= error(sprintf(_("Your password is too short (please use at least %s characters)."), MIN_PASSWORD_LENGTH), true);
-                }
-         // If the tests pass we can insert it into the database.       
-                if ($ok) {
-                  $sql = sql_query("
-                    INSERT INTO `User` SET
-                    `Nick Name`='" . sql_escape($nick_name) . "',
-                    `First Name`='" . sql_escape($first_name) . "',
-                    `Last Name`='" . sql_escape($last_name) . "',
-                    `email`='" . sql_escape($email) . "',
-                    `Age`='" . sql_escape($age) . "',
-                    `current_city`='" . sql_escape($current_city) . "',
-                    `Password`='" . sql_escape($password) . "',
-                     `mobile`='" . sql_escape($mobile) . "',");
-                }
-              }
-        
-              if ($sql) {
-                success(_("You database has imported successfully!"));
-                redirect(page_link_to('admin_export'));
-              } else {
-                error(_('Sorry! There is some problem in the import file.'));
-                redirect(page_link_to('admin_export'));
+                    $id = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    $schoolId = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $data[] = array(
+                        'id'  => $id,
+                        'school_id'   => $schoolId,
+                        'name'    => $name,
+                    );
                 }
             }
-          }
-        //form_submit($name, $label) Renders the submit button of a form
-        //form_file($name, $label) Renders a form file box
-        
-         return page_with_title("Import Data", array(
-           msg(),
-          div('row', array(
-                  div('col-md-12', array(
-                      form(array(
-                        form_file('csv_file', _("Import user data from a csv file")),
-                        form_submit('upload', _("Import"))
-                      ))
-                  ))
-              ))
-          ));
+        }
+        echo json_encode($data);
+    }
+    public function validateStudent2(){
+        // print_r($_POST); exit;
+        // if(isset($_POST['id']) && !empty($_POST['id'])){
+            foreach($_POST['id'] as $each){
+                $query = $this->db->get_where('tbl_user_info', array('user_id' => $each));
+                $data = $query->result();
+                $this->db->set('confirm', 'yes');
+                $this->db->set("modified_by", $this->user->id);
+                $this->db->set("date_modified", date('Y-m-d H:i:s'));
+                $this->db->where('id', $each);
+                $this->db->update('tbl_user');
+            }
+        // }
+    }
+    function itexmo($number,$message,$apicode){
+        $ch = curl_init();//TR-JANTO643312_6Q854
+        $itexmo = array('1' => $number, '2' => $message, '3' => $apicode);
+        curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, 
+                  http_build_query($itexmo));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return curl_exec ($ch);
+        curl_close ($ch);
     }
 }

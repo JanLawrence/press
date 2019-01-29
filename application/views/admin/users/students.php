@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th style="width: 5%">#</th>
-                            <th style="width: 20%">Shool ID</th>
+                            <th style="width: 20%">School ID</th>
                             <th style="width: 50%">Name</th>
                             <th style="width: 20%">Contact No.</th>
                             <th style="width: 20%">Username</th>
@@ -57,10 +57,10 @@
                                 <td><?= $each->status = 'saved' ? 'Active' : 'Inactive' ?></td>
                                 <td>
                                     <?php if($each->confirm == 'no') :?>
-                                        <button class="btn btn-primary btn-sm btn-act" 
+                                        <!-- <button class="btn btn-primary btn-sm btn-act" 
                                         userid="<?= $each->user_id?>" stat="activate">
                                             Activate
-                                        </button>
+                                        </button> -->
                                     <?php endif;?>
                                     <?php if($each->confirm == 'yes') :?>
                                         <button class="btn btn-danger btn-sm btn-deac" 
@@ -95,6 +95,39 @@
                             </div>
                         </div>
                     </div>                
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <a href="#" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="ti-close"></i> Close</a>
+                        <button class="btn btn-success btn-sm btn-submit" type="submit" atr-type="validate"><i class="ti-check"></i> Validate</button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</form>
+<form id="validateForm2" method="post" enctype="multipart/form-data">
+    <div class="modal" id="validateModal2">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4><i class="ti-check"></i> Validate Student</h4>
+                </div>
+                <div class="modal-body">
+                    <p> 
+                        Below are the active student/s. Once you proceed, the student/s who are not <br>
+                        displayed below, will have an inactive status. Therefore, they can not be able to login.
+                    </p>
+                    <table class="table table-bordered" id="displayValidatedStudentsTable">
+                        <thead>
+                            <tr>
+                                <th>Student Id</th>
+                                <th>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">

@@ -122,6 +122,9 @@ class Admin extends CI_Controller {
     public function validateStudent(){
         $this->admin_model->validateStudent();
     }
+    public function validateStudent2(){
+        $this->admin_model->validateStudent2();
+    }
 	public function confirmStudent()
 	{
 		$this->admin_model->confirmStudent();

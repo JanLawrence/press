@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th style="border: 1px solid black; width: 5%">ID</th>
-                            <th style="border: 1px solid black; width: 20%">Shool ID</th>
+                            <th style="border: 1px solid black; width: 20%">School ID</th>
                             <th style="border: 1px solid black; width: 50%">Name</th>
                         </tr>
                     </thead>

@@ -58,19 +58,39 @@ $(function(){
             cache: false,  // for file uploading purposes
             processData:false, // for file uploading purposes
             success: function(returnData){ // get returned data in the posted link by using returnData variable
-                alert(returnData);
-                return false;
-                if(returnData == 1){ // if returned data is equal to 1 success
-                    alert('Article was successfully published.') //alert success
-                    location.reload(); //reload page
-                } else if(returnData == 2){ // if returned data is equal to 2 deleted
-                    location.reload(); //reload page
+                if(returnData != '[]'){
+                    let data = JSON.parse(returnData);
+                    let append = '';
+                    $.each(data, function(key, a){
+                        append += '<tr>'+
+                        '<td><input type="hidden" name="id[]" value="'+a.id+'">'+(a.school_id == null ? '' : a.school_id)+'</td>'+
+                        '<td>'+a.name+'</td>'+
+                        '</tr>';
+                    })
+                    $('#displayValidatedStudentsTable tbody').html(append);
+                    $('#validateModal2').modal('toggle');
                 } else {
-                    // alert(returnData); return false; // show error
+                    alert('No data imported');
                 }
             }
         })   
+        return false;
     }) 
+    $("#validateForm2").submit(function(){ // on click delete button on user list
+        // get values on attr of the button clicked
+        var form = $(this).serialize();
+        if(confirm('Are you sure you want to validate this user/s?')){
+
+            $.post(URL+'admin/validateStudent2', form)  // post to admin/deleteUser
+            .done(function(returnData){
+                alert('You have successfully validated the user/s.'); //alert success
+                location.reload(); // reload
+            })
+        } else {
+            return false;
+        }    
+        return false;
+    })
     $("#tableList").on('click','.btn-edit',function(){ // on click edit button on user list
         $('#editModal').modal('toggle'); // toggle edit modal
         

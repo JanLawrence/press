@@ -1,0 +1,33 @@
+<!-- List of Users -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card rounded-0">
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-hovered datatables" id="tableList">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; width: 5%">ID</th>
+                            <th style="border: 1px solid black; width: 20%">Shool ID</th>
+                            <th style="border: 1px solid black; width: 50%">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Variable $userList was declared in Admin Controller $data['userList'] -->
+                        <!-- Displays Data of $userList -->
+                                                    <tr>
+                                <td style="border: 1px solid black;">4</td>
+                                <td style="border: 1px solid black;"></td>
+                                <td style="border: 1px solid black;">Student, Student W.</td>
+                            </tr>
+                                                    <tr>
+                                <td style="border: 1px solid black;">6</td>
+                                <td style="border: 1px solid black;"></td>
+                                <td style="border: 1px solid black;">Tolentino, Jan Lawrence Dela Cruz</td>
+                            </tr>
+                                            </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://localhost/press/assets/modules/js/admin/user.js"></script>
