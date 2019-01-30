@@ -29,6 +29,10 @@
 <div class="container">
 <div class="row">
     <div class="col-md-12">
+        <div style="margin: 0 auto; display: block"">
+            <img src="<?= base_url()?>assets/img/logo1.jpg" class="mx-auto" style="width: 70px;">&nbsp
+            <img src="<?= base_url()?>assets/img/logo2.jpg" class="mx-auto" style="width: 70px;">
+        </div>
         <div class="form-group text-right">
             <a href="<?=base_url('main/login')?>">Login</a> | 
             <a href="<?=base_url('main/register')?>">Signup</a>
