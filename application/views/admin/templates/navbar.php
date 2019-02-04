@@ -53,6 +53,9 @@
 			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/permit' ? 'active' : ''?>" href="<?= base_url()?>admin/permit"> Parent's Permit</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/newspaper' ? 'active' : ''?>" href="<?= base_url()?>admin/newspaper"> Newspaper</a>
+			</li>
 			<?php endif; ?>
 			<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
 				<li class="nav-item">

@@ -1055,4 +1055,33 @@ class Admin_model extends CI_Model{
         return curl_exec ($ch);
         curl_close ($ch);
     }
+    function newspaperList(){
+        $this->db->select("n.id, n.month, n.year, IF(SUM(np.id) IS NOT NULL, SUM(np.id), 0) pages ")
+        ->from("tbl_newspaper n")
+        ->join("tbl_newspaper_pages np","ON n.id = np.newspaper_id","left");
+        $this->db->group_by("n.id");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function saveNewspaper(){
+        $data = array(
+            'month' => $_POST['month'],
+            'year' => $_POST['year'],
+            'created_by' => $this->user->id,
+            'date_created' => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_newspaper', $data);
+        $newspaper = $this->db->insert_id();
+
+        foreach($_POST['content'] as $key => $each){
+            $data = array(
+                'newspaper_id' => $newspaper,
+                'page' => $key+1,
+                'context' => $each,
+                'created_by' => $this->user->id,
+                'date_created' => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_newspaper_pages', $data);
+        }
+    }
 }
