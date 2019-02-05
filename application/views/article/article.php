@@ -45,7 +45,7 @@
                             <?php foreach($article as $each): ?>
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="data:image/<?= $each->image_type?>;base64, <?= base64_encode($each->image_content) ?>" alt="Card image" style="width:40%">
+                                        <img class="card-img-top" src="data:image/<?= $each->image_type?>;base64, <?= base64_encode($each->image_content) ?>" alt="Card image cap" style="height: 200px; width: 300px; margin: 0 auto; display: block;">
                                         <div class="card-body">
                                             <h4 class="card-title"><?= $each->title?></h4>
                                             <p class="card-text"><?= $each->sub_article.'...'?></p>
