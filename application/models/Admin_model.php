@@ -946,17 +946,23 @@ class Admin_model extends CI_Model{
         }
     }
     public function getUserLogs($filter){
+        if(empty($_REQUEST)):
+            $from = date("Y-m-d");
+            $to = date("Y-m-d");
+        else:
+            $from = $filter['from'];
+            $to = $filter['to'];
+        endif;
+
         $this->db->select("u.id,
             CONCAT(ui.lname, ', ' ,ui.fname, ' ', ui.mname) name, u.user_type, ul.transaction, ul.date_created
         ")
         ->from("tbl_user u")
-        ->join("tbl_user_info ui","ON ui.user_id = u.id","inner")
-        ->join("tbl_user_logs ul","ON ul.created_by = u.id","inner");
+        ->join("tbl_user_info ui","ON ui.user_id = u.id","left")
+        ->join("tbl_user_logs ul","ON ul.created_by = u.id","left");
         $this->db->where("u.confirm", 'yes');
-        if(isset($filter)){
-            $this->db->where("ul.date_created >= '".$filter['from']."' &&  ul.date_created <= '".$filter['to']."'");
-        }
-        $this->db->order_by("ul.id", 'DESC');
+        $this->db->where("DATE(ul.date_created) >= '".$from."' &&  DATE(ul.date_created) <= '".$to."'");
+        $this->db->order_by("ul.date_created", 'DESC');
         $query = $this->db->get();
         return $query->result();
     }

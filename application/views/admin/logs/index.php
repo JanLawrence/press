@@ -20,11 +20,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>From:</label>
-                                    <input type="date" class="form-control" name="from" value="<?= isset($_GET['from']) ? $_GET['from'] : ''?>">
+                                    <input type="date" class="form-control" name="from" value="<?= isset($_GET['from']) ? $_GET['from'] : DATE('Y-m-d')?>">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>To:</label>
-                                    <input type="date" class="form-control" name="to" value="<?= isset($_GET['to']) ? $_GET['to'] : ''?>">
+                                    <input type="date" class="form-control" name="to" value="<?= isset($_GET['to']) ? $_GET['to'] : DATE('Y-m-d')?>">
                                 </div>
                             </div>
                         </div>
