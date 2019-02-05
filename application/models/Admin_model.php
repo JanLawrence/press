@@ -535,7 +535,7 @@ class Admin_model extends CI_Model{
         ->join("tbl_user_info ui","ON ui.user_id = nl.user_id","inner");
         $this->db->where("n.status", "saved");
         $this->db->where("nl.user_id", $this->user->id);
-        $this->db->order_by("n.date_created");
+        $this->db->order_by("n.date_created DESC");
         $this->db->group_by("n.id");
         $query = $this->db->get();
         return $query->result();
