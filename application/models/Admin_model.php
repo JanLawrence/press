@@ -1082,4 +1082,110 @@ class Admin_model extends CI_Model{
             $this->db->insert('tbl_newspaper_pages', $data);
         }
     }
+    function changepass(){
+        $oldpass = $_POST['oldpass'];
+        $pass = $_POST['pass'];
+        $confirmpass = $_POST['confirmpass'];
+        $userData = $this->session->userdata['user'];
+        $realpass = $this->encryptpass->pass_crypt($userData->password, 'd');
+        if($realpass == $oldpass){
+
+            $this->db->set('password', $this->encryptpass->pass_crypt($_POST['pass']));
+            $this->db->where('username', $userData->username);
+            $this->db->update('tbl_user'); //update status to logged in from tbl_user
+   
+            $query = $this->db->get_where('tbl_user', array('username' => $userData->username));
+            $data = $query->result();
+            $this->session->set_userdata('user', $data[0]);
+
+
+        } else {
+            echo 1;
+        }
+    }
+    function manageaccounts(){
+        $query = $this->db->get_where('tbl_user', array('id' => $_POST['id']));
+		$data = $query->result();
+        $query3 = $this->db->get_where('tbl_user_info', array('user_id' => $_POST['id']));
+        $data3 = $query3->result();
+		if($data[0]->username == $_POST['username']){
+            if($data3[0]->email == $_POST['email']){
+                $this->db->set('fname', $_POST['firstName']);
+                $this->db->set('mname', $_POST['middleName']);
+                $this->db->set('lname', $_POST['lastName']);
+                $this->db->set('email', $_POST['email']);
+                $this->db->set('contact_no', $_POST['phone']);
+                $this->db->where('user_id', $_POST['id']);
+                $this->db->update('tbl_user_info');
+
+                $this->db->set('username', $_POST['username']);
+                $this->db->where('id', $_POST['id']);
+                $this->db->update('tbl_user');
+            } else {
+                $query4 = $this->db->get_where('tbl_user_info', array('email' => $_POST['email']));
+                $data4 = $query4->result();
+                if(!empty($data4)){
+                    echo 3;
+                } else {
+                    $this->db->set('fname', $_POST['firstName']);
+                    $this->db->set('mname', $_POST['middleName']);
+                    $this->db->set('lname', $_POST['lastName']);
+                    $this->db->set('email', $_POST['email']);
+                    $this->db->set('contact_no', $_POST['phone']);
+                    $this->db->where('user_id', $_POST['id']);
+                    $this->db->update('tbl_user_info');
+    
+                    $this->db->set('username', $_POST['username']);
+                    $this->db->where('id', $_POST['id']);   
+                    $this->db->update('tbl_user');
+                }
+            }
+        } else {
+            $query2 = $this->db->get_where('tbl_user', array('username' => $_POST['username']));
+            $data2 = $query2->result();
+            if(!empty($data2)){
+				echo 2;
+			} else {
+                if($data3[0]->email == $_POST['email']){
+                    $this->db->set('fname', $_POST['firstName']);
+                    $this->db->set('mname', $_POST['middleName']);
+                    $this->db->set('lname', $_POST['lastName']);
+                    $this->db->set('email', $_POST['email']);
+                    $this->db->set('contact_no', $_POST['phone']);
+                    $this->db->where('user_id', $_POST['id']);
+                    $this->db->update('tbl_user_info');
+
+                    $this->db->set('username', $_POST['username']);
+                    $this->db->where('id', $_POST['id']);
+                    $this->db->update('tbl_user');
+
+                    $query = $this->db->get_where('tbl_user', array('id' => $_POST['id']));
+                    $data = $query->result();
+                    $this->session->set_userdata('user', $data[0]);
+                } else {
+                    $query4 = $this->db->get_where('tbl_user_info', array('email' => $_POST['email']));
+                    $data4 = $query4->result();
+                    if(!empty($data4)){
+                        echo 3;
+                    } else {
+                        $this->db->set('fname', $_POST['firstName']);
+                        $this->db->set('mname', $_POST['middleName']);
+                        $this->db->set('lname', $_POST['lastName']);
+                        $this->db->set('email', $_POST['email']);
+                        $this->db->set('contact_no', $_POST['phone']);
+                        $this->db->where('user_id', $_POST['id']);
+                        $this->db->update('tbl_user_info');
+        
+                        $this->db->set('username', $_POST['username']);
+                        $this->db->where('id', $_POST['id']);   
+                        $this->db->update('tbl_user');
+
+                        $query = $this->db->get_where('tbl_user', array('id' => $_POST['id']));
+                        $data = $query->result();
+                        $this->session->set_userdata('user', $data[0]);
+                    }
+                }
+			}
+        }
+    }
 }

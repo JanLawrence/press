@@ -495,4 +495,19 @@ class Admin extends CI_Controller {
     public function saveNewspaper(){
         $this->admin_model->saveNewspaper();
     }
+    public function changepass(){
+        $this->admin_model->changepass();
+    }
+    public function manageaccounts(){
+        $this->admin_model->manageaccounts();
+    }
+    public function accounts(){
+        if(!empty($this->session->userdata['user'])){ // if has session
+            $this->load->view('admin/templates/header');
+            $this->load->view('admin/accounts/manage');
+            $this->load->view('admin/templates/footer');
+        } else {
+            show_404(); // show 404 error page
+        }
+    }
 }

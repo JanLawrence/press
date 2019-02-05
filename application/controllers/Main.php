@@ -15,6 +15,18 @@ class Main extends CI_Controller {
         $data['contact'] = $this->admin_model->getContactUs();
         $this->load->view('homepage' ,$data); 
     }
+    public function index2(){
+        $data['coe'] = $this->admin_model->getCoe();
+        $data['faculty'] = $this->admin_model->getFaculty();
+        $data['pres'] = $this->admin_model->getPres();
+        $data['vice'] = $this->admin_model->getVicePres();
+        $data['dean'] = $this->admin_model->getDean();
+        $data['head'] = $this->admin_model->getHead();
+        $data['editor'] = $this->admin_model->getEditor();
+        $data['officer'] = $this->admin_model->getOfficer();
+        $data['contact'] = $this->admin_model->getContactUs();
+        $this->load->view('homepage3' ,$data); 
+    }
 	public function login() // login page of admin
 	{
         if(empty($this->session->userdata['user'])){ // if empty session
@@ -137,6 +149,15 @@ class Main extends CI_Controller {
         } else { // if confirm pass is not inputed validation false
             $this->form_validation->set_message('validateconfirm', 'Password does not match');
             return FALSE;
+        }
+    }
+    public function accounts(){
+        if(!empty($this->session->userdata['user'])){ // if has session
+            $this->load->view('templates/header');
+            $this->load->view('admin/accounts/manage');
+            $this->load->view('templates/footer');
+        } else {
+            show_404(); // show 404 error page
         }
     }
 }

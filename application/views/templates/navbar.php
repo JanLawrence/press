@@ -59,12 +59,72 @@
 					<!-- <a class="dropdown-item" href="#"><i class="ti-settings"></i> Manage Accounts</a>
 					<a class="dropdown-item" href="#"><i class="ti-key"></i> Change Password</a>
 					<div class="dropdown-divider"></div> -->
+					<a class="dropdown-item" href="#" id="openPass"><i class="ti-key"></i> Change Password</a>
+					<a class="dropdown-item" href="<?=base_url()?>main/accounts"><i class="ti-settings"></i> Manage Accounts</a>
 					<a class="dropdown-item" href="<?=base_url()?>admin/logout"><i class="ti-power-off"></i> Logout</a>
 				</div>
 			</li>
 		</ul>
 	</div>
 </nav>
+<form id="changePassForm" method="post">
+    <div class="modal fade" id="changePassModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="ti-key"></i> Change Password</h5>
+                </div>
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label>Old Password</label>
+                            <input type="password" class="form-control" name="oldpass">
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-control" name="pass">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" name="confirmpass">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"><i class="ti-close"></i> Close</button>
+                    <button type="submit" class="btn btn-default"><i class="ti-save"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+	$('#openPass').click(function(){
+		$('#changePassModal').modal('toggle');
+	})
+	$('#changePassForm').submit(function(){
+		var r = confirm('Are you sure you want to change your password?');
+		if(r==true){
+			var form = $(this).serialize(); // get form declare to variable form
+			var pass = $('#changePassForm').find('input[name=pass]').val(); // get value of pass input to changepassform
+			var confirmpass = $('#changePassForm').find('input[name=confirmpass]').val(); // get value of confirmpass input to changepassform
+			if(pass == confirmpass){ //if equal return to post
+				$.post(URL+'admin/changepass', form) // post to register/changepass
+				.done(function(returnData){
+					if(returnData == 1){
+						alert('Invalid Old Password'); // alert error if old password is invalid
+					} else {
+						alert('Password successfully changed');
+						location.reload();
+					}
+				})
+			} else {
+				alert('Password do not match'); // alert error
+			}
+		} else {
+			return false;
+		}
+		return false;
+	})
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-4">
