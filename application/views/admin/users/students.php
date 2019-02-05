@@ -54,7 +54,7 @@
                                 <td><?= $each->username?></td>
                                 <td><?= $each->course?></td>
                                 <td><?= $each->section?></td>
-                                <td><?= $each->status = 'saved' ? 'Active' : 'Inactive' ?></td>
+                                <td><?= $each->confirm == 'yes' ? 'Active' : 'Inactive' ?></td>
                                 <td>
                                     <?php if($each->confirm == 'no') :?>
                                         <!-- <button class="btn btn-primary btn-sm btn-act" 
