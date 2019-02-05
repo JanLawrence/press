@@ -12,11 +12,13 @@ class Article_model extends CI_Model{
                     ,a_type.`type`,
                     a.description,
                     a.article,
+                    ab.name image_name, ab.type image_type, ab.content image_content,
                     SUBSTRING(a.article,1,300) sub_article,
                     a.date_published,
                     a.date_created")
         ->from("tbl_article a")
         ->join("tbl_article_type a_type","ON a_type.id = a.article_type","left")
+        ->join("tbl_article_banner ab","ON ab.article_id = a.id","left")
         ->join("tbl_user_info ui","ON ui.user_id = a.created_by","left");
         if($id == 0){
             $where = "a_type.`type` LIKE '%".$_GET['type']."%' AND a.id LIKE '%%' AND a.published = 'yes'";

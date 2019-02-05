@@ -48,7 +48,7 @@
                                     a_writer="<?= $each->writer?>"
                                     a_type="<?= $each->article_type?>"
                                     a_description="<?= $each->description?>"
-                                    a_article="<?= $each->article?>"
+                                    a_article='<?= $each->article?>'
                                     >
                                         <i class="ti-pencil-alt"></i> 
                                     </button>
