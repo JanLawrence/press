@@ -40,7 +40,6 @@
                         <tr>
                             <th style="width: 5%">#</th>
                             <th>Name</th>
-                            <th>Department</th>
                             <th>Position</th>
                             <th>Contact Number</th>
                             <th>Address</th>
@@ -57,7 +56,6 @@
                             <tr>
                                 <td><?= $ctr++?></td>
                                 <td><?= $each->name?></td>
-                                <td><?= $each->department?></td>
                                 <td><?= $each->position?></td>
                                 <td><?= $each->contact_num?></td>
                                 <td><?= $each->address?></td>
@@ -76,7 +74,6 @@
                                     a_fname="<?= $each->fname?>"
                                     a_mname="<?= $each->mname?>"
                                     a_lname="<?= $each->lname?>"
-                                    a_dept="<?= $each->department?>"
                                     a_position="<?= $each->position?>"
                                     a_contact="<?= $each->contact_num?>"
                                     a_address="<?= $each->address?>"
@@ -131,27 +128,8 @@
                                     <textarea name="address" class="form-control" type="text" required></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <label> Department:</label>
-                                    <input type="text" class="form-control" name="department" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
                                     <label> Contact Number:</label>
                                     <input type="text" class="form-control" name="contact" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Position:</label>
-                                    <select name="position" class="form-control" required>
-                                        <option value="" selected disabled> Select Position</option>
-                                        <?php
-                                            $pos = array('University President','Vice President of Academic Affairs','Dean, College of Engineering','Head','Faculty');
-                                            foreach($pos as $each){ 
-                                        ?> 
-                                            <option value="<?= $each?>" <?= in_array($each, $posi) ? 'hidden' : ''?>><?= $each?></option>
-                                        <?php }             
-                                        ?>
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -171,12 +149,27 @@
                                     </div>
                                 </div> -->
                             </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label> Position:</label>
+                                    <select name="position" class="form-control" required>
+                                        <option value="" selected disabled> Select Position</option>
+                                        <?php
+                                            $pos = array('University President','Vice President of Academic Affairs','Dean, College of Engineering','Head','Faculty');
+                                            foreach($pos as $each){ 
+                                        ?> 
+                                            <option value="<?= $each?>" <?= in_array($each, $posi) ? 'hidden' : ''?>><?= $each?></option>
+                                        <?php }             
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-success btn-sm btnAppendSched"><i class="ti-plus"></i></button>
                                 <table class="table table-bordered" id="appendSched">
                                     <thead>
                                         <tr>
-                                            <th>Subjectsss</th>
+                                            <th>Subjects</th>
                                             <th>Days</th>
                                             <th>Time</th>
                                             <th></th>
@@ -236,26 +229,8 @@
                                     <textarea name="address" class="form-control" type="text" required></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <label> Department:</label>
-                                    <input type="text" class="form-control" name="department" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
                                     <label> Contact Number:</label>
                                     <input type="text" class="form-control" name="contact" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label> Position:</label>
-                                    <select name="position" class="form-control" required>
-                                        <option value="" selected disabled> Select Position</option>
-                                        <?php 
-                                            $pos = array('University President','Vice President of Academic Affairs','Dean, College of Engineering','Head','Faculty');
-                                            foreach($pos as $each){
-                                        ?>
-                                            <option value="<?= $each?>" <?= in_array($each, $posi) ? 'hidden' : ''?>><?= $each?></option>
-                                        <?php } ?>
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -275,12 +250,26 @@
                                     </div>
                                 </div> -->
                             </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label> Position:</label>
+                                    <select name="position" class="form-control" required>
+                                        <option value="" selected disabled> Select Position</option>
+                                        <?php 
+                                            $pos = array('University President','Vice President of Academic Affairs','Dean, College of Engineering','Head','Faculty');
+                                            foreach($pos as $each){
+                                        ?>
+                                            <option value="<?= $each?>" <?= in_array($each, $posi) ? 'hidden' : ''?>><?= $each?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-success btn-sm btnAppendSched"><i class="ti-plus"></i></button>
                                 <table class="table table-bordered appendSchedEdit" id="appendSched">
                                     <thead>
                                         <tr>
-                                            <th>Subjectsss</th>
+                                            <th>Subjects</th>
                                             <th>Days</th>
                                             <th>Time</th>
                                             <th></th>

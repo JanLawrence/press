@@ -74,7 +74,6 @@ $(function(){
         var fname = $(this).attr('a_fname');
         var mname = $(this).attr('a_mname');
         var lname = $(this).attr('a_lname');
-        var dept = $(this).attr('a_dept');
         var pos = $(this).attr('a_position');
         var contact = $(this).attr('a_contact');
         var address = $(this).attr('a_address');
@@ -86,7 +85,6 @@ $(function(){
         $('#editForm').find('input[name="fname"]').val(fname);
         $('#editForm').find('input[name="mname"]').val(mname);
         $('#editForm').find('input[name="lname"]').val(lname);
-        $('#editForm').find('input[name="department"]').val(dept);
         $('#editForm').find('select[name="position"]').val(pos).change();
         $('#editForm').find('input[name="contact"]').val(contact);
         $('#editForm').find('input[name="email"]').val(email);

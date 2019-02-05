@@ -600,7 +600,6 @@ class Admin_model extends CI_Model{
             "mname" => $_POST['mname'],
             "lname" => $_POST['lname'],
             "address" => $_POST['address'],
-            "department" => $_POST['department'],
             "position" => $_POST['position'],
             "contact_num" => $_POST['contact'],
             "email" => $_POST['email'],
@@ -661,7 +660,6 @@ class Admin_model extends CI_Model{
             $this->db->set("mname", $_POST['mname']);
             $this->db->set("lname", $_POST['lname']);
             $this->db->set("address", $_POST['address']);
-            $this->db->set("department", $_POST['department']);
             $this->db->set("position", $_POST['position']);
             $this->db->set("contact_num", $_POST['contact']);
             $this->db->set("email", $_POST['email']);
