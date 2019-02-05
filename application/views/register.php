@@ -67,11 +67,6 @@
                 <?= form_error('contact', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
             </div>
             <div class="form-group">
-                <label>Course</label>
-                <input type="text" class="form-control" required="" autofocus="" name="course">
-                <?= form_error('course', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>
-            </div>
-            <div class="form-group">
                 <label>Section</label>
                 <input type="text" class="form-control" required="" autofocus="" name="section">
                 <?= form_error('section', '<span class="error"><i class="ti-alert"></i> ','</span>')?></span>

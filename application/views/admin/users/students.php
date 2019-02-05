@@ -33,7 +33,6 @@
                             <th style="width: 50%">Name</th>
                             <th style="width: 20%">Contact No.</th>
                             <th style="width: 20%">Username</th>
-                            <th style="width: 20%">Course</th>
                             <th style="width: 20%">Section</th>
                             <th style="width: 20%">Status</th>
                             <th style="width: 10%"><i class="ti-settings"></i></th>
@@ -52,7 +51,6 @@
                                 <td><?= $each->name?></td>
                                 <td><?= $each->contact_no?></td>
                                 <td><?= $each->username?></td>
-                                <td><?= $each->course?></td>
                                 <td><?= $each->section?></td>
                                 <td><?= $each->confirm == 'yes' ? 'Active' : 'Inactive' ?></td>
                                 <td>

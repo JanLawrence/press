@@ -79,7 +79,6 @@ class Main extends CI_Controller {
             $this->form_validation->set_rules('studId', 'Student Id', 'required|is_unique[tbl_user_info.student_id]');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tbl_user_info.email]');
             $this->form_validation->set_rules('contact', 'Contact', 'required');
-            $this->form_validation->set_rules('course', 'Course', 'required');
             $this->form_validation->set_rules('section', 'Section', 'required');
             $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tbl_user.username]');
             $this->form_validation->set_rules('password', 'Password', 'callback_validateconfirm'); // validation is on validate method
@@ -107,7 +106,6 @@ class Main extends CI_Controller {
                     "student_id" => $_POST['studId'],
                     "bday" => $_POST['bday'],
                     "contact_no" => $_POST['contact'],
-                    "course" => $_POST['course'],
                     "section" => $_POST['section'],
                     "status" => 'saved',
                     "created_by" => 0,
