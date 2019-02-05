@@ -45,6 +45,9 @@
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/faculty' ? 'active' : ''?>" href="<?= base_url()?>admin/faculty"> Faculty</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/activitylog' ? 'active' : ''?>" href="<?= base_url()?>admin/activitylog"> Activity Log</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link <?= $controller.'/'.$method == 'admin/student' ? 'active' : ''?>" href="<?= base_url()?>admin/student"> Student</a>
 			</li>
 			<li class="nav-item">
