@@ -492,6 +492,23 @@ class Admin extends CI_Controller {
         }
         
     }
+    public function newspaperprint()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['newspaper'] = $this->admin_model->newspaperListId();
+                // $this->load->view('admin/templates/header');
+                $this->load->view('admin/newspaper/print', $data);
+                // $this->load->view('admin/templates/footer');
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
+    }
     public function saveNewspaper(){
         $this->admin_model->saveNewspaper();
     }

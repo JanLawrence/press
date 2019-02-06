@@ -28,7 +28,6 @@
                             <th>Year</th>
                             <th>Pages</th>
                             <th>Print</th>
-                            <th>Export</th>
                             <!-- <th style="width: 10%"><i class="ti-settings"></i></th> -->
                         </tr>
                     </thead>
@@ -38,8 +37,7 @@
                                 <td><?= $month[$each->month]?></td>
                                 <td><?= $each->year?></td>
                                 <td><?= $each->pages?></td>
-                                <td></td>
-                                <td></td>
+                                <td><a class="btn btn-success" target="_blank" href="<?= base_url()?>admin/newspaperprint/?id=<?= $each->id?>">Print</a></td>
                             </tr>
                         <?php endforeach;?>
                     </tbody>

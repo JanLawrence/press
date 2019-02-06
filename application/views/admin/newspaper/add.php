@@ -97,8 +97,13 @@
 
                 $.post(URL + 'admin/saveNewspaper', form)
                 .done(function(returnData){
-                    alert('Newspaper Successfully saved');
-                    location.href = URL + "admin/newspaper";
+                    if(returnData == 1){
+                        alert('Newspaper is already existing for this month and year.')
+                    } else {
+                        alert('Newspaper Successfully saved');
+                        location.href = URL + "admin/newspaper";
+
+                    }
                 })
                 return false;
             } else {

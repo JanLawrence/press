@@ -1060,32 +1060,47 @@ class Admin_model extends CI_Model{
         curl_close ($ch);
     }
     function newspaperList(){
-        $this->db->select("n.id, n.month, n.year, IF(SUM(np.id) IS NOT NULL, SUM(np.id), 0) pages ")
+        $this->db->select("n.id, n.month, n.year, IF(COUNT(np.id) IS NOT NULL, COUNT(np.id), 0) pages ")
         ->from("tbl_newspaper n")
         ->join("tbl_newspaper_pages np","ON n.id = np.newspaper_id","left");
         $this->db->group_by("n.id");
         $query = $this->db->get();
         return $query->result();
     }
+    function newspaperListId(){
+        $this->db->select("n.id, n.month, n.year, np.context")
+        ->from("tbl_newspaper n")
+        ->join("tbl_newspaper_pages np","ON n.id = np.newspaper_id","left");
+        $this->db->where("n.id", $_REQUEST['id']);
+        $query = $this->db->get();
+        return $query->result();
+    }
     function saveNewspaper(){
-        $data = array(
-            'month' => $_POST['month'],
-            'year' => $_POST['year'],
-            'created_by' => $this->user->id,
-            'date_created' => date('Y-m-d H:i:s')
-        );
-        $this->db->insert('tbl_newspaper', $data);
-        $newspaper = $this->db->insert_id();
+        $query = $this->db->get_where('tbl_newspaper', array('month' => $_POST['month'], 'year' => $_POST['year']));
+        $check =  $query->result();
+        if(empty($check)){
 
-        foreach($_POST['content'] as $key => $each){
             $data = array(
-                'newspaper_id' => $newspaper,
-                'page' => $key+1,
-                'context' => $each,
+                'month' => $_POST['month'],
+                'year' => $_POST['year'],
                 'created_by' => $this->user->id,
                 'date_created' => date('Y-m-d H:i:s')
             );
-            $this->db->insert('tbl_newspaper_pages', $data);
+            $this->db->insert('tbl_newspaper', $data);
+            $newspaper = $this->db->insert_id();
+            
+            foreach($_POST['content'] as $key => $each){
+                $data = array(
+                    'newspaper_id' => $newspaper,
+                    'page' => $key+1,
+                    'context' => $each,
+                    'created_by' => $this->user->id,
+                    'date_created' => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_newspaper_pages', $data);
+            }
+        } else  {
+            echo 1;
         }
     }
     function changepass(){

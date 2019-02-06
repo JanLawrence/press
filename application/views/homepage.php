@@ -21,6 +21,7 @@
     <script src="<?= base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?= base_url();?>assets/js/popper.min.js"></script>
     <script src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
+    <script> var URL = "<?= base_url()?>"; </script>
     <style>
         .txt-12{
             font-size: 12px;
@@ -33,7 +34,6 @@
         }
     </style>
 </head>
-
 <body>
 
 	<!-- Navigation -->
@@ -170,7 +170,7 @@
             </div>
         </div>
     </section>
-    <section style="background: #fff">
+    <!-- <section style="background: #fff">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-12 text-center">
@@ -190,8 +190,127 @@
             <?php endforeach;?>
             </div>
         </div>
+    </section> -->
+    <section style="background: #fff">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-lg-12 text-center">
+                    <h3 class="post-title">Intel Officer</h3>
+                </div>
+            </div><hr>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Kurt Emil A. Peckson</h5>
+                            <p class="card-text" style="margin: 0;">President</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Hinna Orquiola</h5>
+                            <p class="card-text" style="margin: 0;">Vice-President</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Shara Christine Serrano</h5>
+                            <p class="card-text" style="margin: 0;">Secretary</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Smile Lily Rosaldo</h5>
+                            <p class="card-text" style="margin: 0;">Asst. Secretary</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Rheylan Gonzales</h5>
+                            <p class="card-text" style="margin: 0;">Treasurer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Melissa Lauronal</h5>
+                            <p class="card-text" style="margin: 0;">Auditor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Gabriel Steven Tragura</h5>
+                            <p class="card-text" style="margin: 0;">Business Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Catherine Bohol</h5>
+                            <p class="card-text" style="margin: 0;">P.R.O / P.I.O</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Kenneth A. Araza</h5>
+                            <p class="card-text" style="margin: 0;">1st Representative</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ronnel V. Traya</h5>
+                            <p class="card-text" style="margin: 0;">1st Representative</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Crister Corsanes</h5>
+                            <p class="card-text" style="margin: 0;">2nd Representative</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Juancho Maceda</h5>
+                            <p class="card-text" style="margin: 0;">3rd Representative</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <section style="background: #f8f9fa">
+    <!-- <section style="background: #f8f9fa">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-12 text-center">
@@ -209,6 +328,134 @@
                     </div>
                 </div>
             <?php endforeach;?>
+            </div>
+        </div>
+    </section> -->
+    <section style="background: #f8f9fa">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-lg-12 text-center">
+                    <h3 class="post-title">Editorial Staff</h3>
+                </div>
+            </div><hr>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Publisher</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor-in-chief</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Managing Editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">News Editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor (Science)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor (Business)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor (Sports)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor (City)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Editor (Features)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Sub Editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Reporter</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Staff Writer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-5" style="background: transparent; border: 0">
+                        <img class="card-img-top rounded-circle" src="<?= base_url('assets/img/no-image.png')?>" alt="Card image cap" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sample Name</h5>
+                            <p class="card-text" style="margin: 0;">Photographer</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -236,6 +483,79 @@
 			</div>
 		</div>
 	</footer>
+<div class="modal" id="viewModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="form-group">
+                    <img class="facultyPic rounded-circle" style="border: 3px solid #333333;height: 150px; width: 150px; margin: 0 auto; display: block;" alt="Card image cap">
+                </div>
+                <div class="form-group">
+                    <h4 class="facultyName"></h4>
+                </div>
+                <div class="form-group">
+                    <span class="facultyPosition"></span>
+                </div>
+                <div class="form-group">
+                    <span class="facultyAddress"></span>
+                </div>
+                <div class="form-group">
+                    <span class="facultyDesignation"></span>
+                </div>
+                <div class="form-group">
+                   <table class="table table-bordered facultySched">
+                        <thead>
+                            <th>Subject</th>
+                            <th>Days</th>
+                            <th>Time</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <a href="#" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="ti-close"></i> Close</a>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script>
+    $(function(){
+        $('.facultyView').click(function(){
+            var id = $(this).attr('fid');
+            $.post(URL +'admin/getFacultyById', {'id': id})
+            .done(function(returnData){
+                var data = $.parseJSON(returnData);
+                if(data['info'].content == ''){
+                    $('#viewModal').find('.facultyPic').attr('src', "<?= base_url('assets/img/no-image.png')?>");
+                } else {
+                    $('#viewModal').find('.facultyPic').attr('src', 'data:image/'+data['info'].type+';base64, '+data['info'].content);
+                }
+                $('#viewModal').find('.facultyName').text(data['info'].name);
+                $('#viewModal').find('.facultyPosition').text(data['info'].position);
+                $('#viewModal').find('.facultyAddress').text(data['info'].address);
+                $('#viewModal').find('.facultyDesignation').text(data['info'].designation);
+                var append = '';
+                if(data['sched'] != ''){
+                    $.each(data['sched'], function(key,a){
+                        append += '<tr>'+
+                                    '<td>'+a.subject+'</td>'+
+                                    '<td>'+a.days+'</td>'+
+                                    '<td>'+a.time+'</td>'+
+                                '</tr>';
+                    })
+                } else {
+                    append = '<tr><td colspan="3" class="text-center">No Schedule</td>';
+                }
+                $('#viewModal').find('.facultySched tbody').html(append);
+                $('#viewModal').modal('toggle');
+            })
+        })
+    })
+</script>
 </body>
 
 </html>
