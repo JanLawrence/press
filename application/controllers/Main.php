@@ -51,13 +51,13 @@ class Main extends CI_Controller {
                 }
                 // set session and redirect based on user_type
                 $userSession = $this->session->userdata['user'];
-				redirect(base_url('article'));
+				redirect(base_url('article/articles'));
             } else {
 				$this->load->view('login'); // redirect to login page if validation failed
             }
         } else { // if there is a session redirect to specific link in redirect_admin method
             $userSession = $this->session->userdata['user']; 
-			redirect(base_url('article'));
+			redirect(base_url('article/articles'));
         }
 	}
     public function validate($pass){ // validate username and password, will be used in callback for form validation
