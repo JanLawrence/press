@@ -9,6 +9,19 @@
     $accessPublish = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'publish');
     $accessMission = $ci->admin_model->getUserLimit($_SESSION['user']->id, 'mission');
 ?>
+<style>
+    div.file {
+        position: relative;
+        overflow: hidden;
+    }
+    input[type=file]{
+        position: absolute;
+        font-size: 50px;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand ml-2" href="#">INTEL<strong>PRESS</strong></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -18,9 +31,14 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto nav-tabs-standard ml-3">
-		
+			
 		</ul>
 		<ul class="navbar-nav ml-auto nav-tabs-standard">
+			<?php if($userSession->user_type == 'admin'): ?>
+			<li class="nav-item">
+				<a class="nav-link backup-btn" href="#"> Backup and Restore</a>
+			</li>
+			<?php endif;?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
 				 aria-expanded="false">
@@ -48,6 +66,7 @@
 						<a class="dropdown-item <?= $controller.'/'.$method == 'admin/contactus' ? 'active' : ''?>" href="<?= base_url()?>admin/contactus"> About Us / Contact Us</a>
 						<a class="dropdown-item <?= $controller.'/'.$method == 'admin/permit' ? 'active' : ''?>" href="<?= base_url()?>admin/permit"> Parent's Permit</a>
 						<a class="dropdown-item <?= $controller.'/'.$method == 'admin/newspaper' ? 'active' : ''?>" href="<?= base_url()?>admin/newspaper"> Newspaper</a>
+						<a class="dropdown-item <?= $controller.'/'.$method == 'admin/announcement' ? 'active' : ''?>" href="<?= base_url()?>admin/announcement"> Announcement</a>
 					<?php endif; ?>
 					<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
 
@@ -107,7 +126,65 @@
         </div>
     </div>
 </form>
+<div class="modal fade" id="backupModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="ti-key"></i> Backup and Restore</h5>
+                </div>
+                <div class="modal-body">
+					<div class="form-group text-center">
+						<button class="btn btn-info btn-backup"> Backup </button>
+						<!-- <button class="btn btn-info btn-restore"> Restore </button> -->
+					</div>
+					<form id="formRestore" method="post" enctype="multipart/form-data">
+						<div class="form-group text-center">
+							<div class="file btn btn-info text-center">
+								<label class="m-0"> Restore</label>
+								<input type="file" name="file"/>
+							</div>
+						</div>
+					</form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"><i class="ti-close"></i> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <script>
+	$('.backup-btn').click(function(){
+		$('#backupModal').modal('toggle');
+	})
+	$('.btn-backup').click(function(){
+		var r = confirm('Are you sure you want to backup your file?');
+		if(r==true){
+			alert('Backup successfully saved, please visit the Backup database folder in local disk C')
+			location.href = URL + "backup/add";
+		} else {
+			return false;
+		}
+	})
+	$('input[name="file"]').change(function(){
+		var alrtmsg = 'Are you sure you want to restore your data?';
+		var form = new FormData($('#formRestore')[0]);
+		if(confirm(alrtmsg)){ // if yes in alert message
+            $.ajax({
+                url: URL + 'backup/restore',
+                type: "POST",
+                data:  form,
+                contentType: false, // for file uploading purposes
+                cache: false,  // for file uploading purposes
+                processData:false, // for file uploading purposes
+                success: function(returnData){
+					alert("Backup file succcessfully restored. You'll be logged out") 
+					location.href = URL + 'admin/logout';
+                }
+            });
+        } else {
+            return false;
+        }
+	})
 	$('#openPass').click(function(){
 		$('#changePassModal').modal('toggle');
 	})
