@@ -42,8 +42,15 @@ class Article extends CI_Controller {
 				// load view
                 // $data['articles'] = $this->article_model->getArticles();
                 // $data['articleType'] = ucwords($_GET['type']);
+                $logs = array(
+                    "transaction" => 'Login',
+                    "created_by" => $this->session->userdata['user']->id,
+                    "date_created" => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_user_logs', $logs);
                 $data['article_type'] = $this->article_model->getArticlesType();
                 $data['headline'] = $this->article_model->showHeadlineArticle();
+                $data['announcement'] = $this->admin_model->getAnnouncements();
                 $this->load->view('templates/header');
                 $this->load->view('article/article',$data);
                 $this->load->view('templates/footer');

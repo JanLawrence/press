@@ -87,6 +87,7 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <a href="<?= base_url()?>" class="btn btn-lg btn-primary btn-block">Back</a>
                 <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
             </div>
         </form>

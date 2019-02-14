@@ -223,6 +223,12 @@ class Admin extends CI_Controller {
         if($session->user_type== 'admin' || $session->user_type== 'editor' || $session->user_type== 'writer'){
             redirect('admin');
         } else if($session->user_type== 'student'){
+            $logs = array(
+                "transaction" => 'Logout',
+                "created_by" => $session->id,
+                "date_created" => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('tbl_user_logs', $logs);
             redirect('');
         }
     }
@@ -518,6 +524,9 @@ class Admin extends CI_Controller {
     public function manageaccounts(){
         $this->admin_model->manageaccounts();
     }
+    public function saveAnnouncement(){
+        $this->admin_model->saveAnnouncement();
+    }
     public function accounts(){
         if(!empty($this->session->userdata['user'])){ // if has session
             $this->load->view('admin/templates/header');
@@ -526,5 +535,23 @@ class Admin extends CI_Controller {
         } else {
             show_404(); // show 404 error page
         }
+    }
+    public function announcement()
+	{
+        if(!empty($this->session->userdata['user'])){ // if has session
+            if($this->session->userdata['user']->user_type == 'admin'){ // if user type admin 
+                // load view
+                $data['announcement'] = $this->admin_model->getAnnouncements();
+                $data['series'] = $this->admin_model->seriesIDAnnouncement();
+                $this->load->view('admin/templates/header');
+                $this->load->view('admin/announcement/announcement', $data);
+                $this->load->view('admin/templates/footer');
+            } else { 
+                show_404(); // show 404 error page
+            }
+        } else {
+            show_404(); // show 404 error page
+        }
+        
     }
 }

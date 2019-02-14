@@ -6,7 +6,7 @@
             <?php foreach($notif as $each): ?>
                 <div class="card m-4">
                     <div class="card-body">
-                        <label><?=date('F m, Y', strtotime($each->date_created))?></label>
+                        <label><?=date('F d, Y', strtotime($each->date_created))?></label>
                         <p><?=$each->summary?></p>
                         <a notif-id="<?=$each->id?>" href="#" class="read-more">Read More</a>
                     </div>

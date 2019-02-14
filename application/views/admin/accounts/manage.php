@@ -13,7 +13,7 @@
 						<div class="form-group row">
 							<label class="col-sm-3 col-form-label">First Name:</label>
 							<div class="col-sm-9">
-								<!-- <input type="text" class="form-control" name="id" value="<?= $userInfo[0]->user_id?>"> -->
+								<input type="hidden" class="form-control" name="id" value="<?= $userInfo[0]->user_id?>">
 								<input type="text" class="form-control" name="firstName" value="<?= $userInfo[0]->fname?>">
 							</div>
 						</div>

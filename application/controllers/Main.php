@@ -41,6 +41,14 @@ class Main extends CI_Controller {
                 $query = $this->db->get_where('tbl_user', array('username' => $user));
                 $data = $query->result();
                 $this->session->set_userdata('user', $data[0]);
+                if($data[0]->user_type == 'student'){
+                    $logs = array(
+                        "transaction" => 'Login',
+                        "created_by" => $data[0]->id,
+                        "date_created" => date('Y-m-d H:i:s')
+                    );
+                    $this->db->insert('tbl_user_logs', $logs);
+                }
                 // set session and redirect based on user_type
                 $userSession = $this->session->userdata['user'];
 				redirect(base_url('article'));

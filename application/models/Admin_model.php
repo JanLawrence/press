@@ -61,7 +61,8 @@ class Admin_model extends CI_Model{
             $query = $this->db->get_where('tbl_user_info', array('user_id' => $_POST['id']));
             $data = $query->result();
             $message = 'Your account has been deactivated. Please see the INTEL OFFICE';
-            $this->itexmo($data[0]->contact_no, $message, 'TR-JANLA010408_MEPFB');
+            // $this->itexmo($data[0]->contact_no, $message, 'TR-JANLA010408_MEPFB');
+            SMSSender_API::addSms($data[0]->contact_no, $message);
             $this->db->set('confirm', 'no');
             $this->db->where('id', $_POST['id']);
             $this->db->update('tbl_user');
@@ -1208,5 +1209,48 @@ class Admin_model extends CI_Model{
                 }
 			}
         }
+    }
+    public function getAnnouncements(){
+        $this->db->order_by("date_created");
+        $data = $this->db->get('tbl_announcement');
+        return $data->result();
+
+    }
+    public function seriesIDAnnouncement(){
+		//get data of NEW research series number
+		$this->db->select("r.announcement_no lastnum,
+		CONCAT('AN-',LPAD(TRIM(LEADING '0' FROM TRIM(LEADING 'AN-' FROM r.announcement_no)) + 1,7,'0')) newnum")
+				->from('tbl_announcement r');
+		$this->db->where('r.announcement_no = (
+			SELECT
+				MAX(r.announcement_no) lastnum
+			FROM tbl_announcement r
+		)');
+		$query = $this->db->get();
+        return $query->result();
+
+    }
+    public function saveAnnouncement(){
+
+        $data = $this->db->get('tbl_user', array('user_type' => 'student', 'confirm' => 'yes'));
+        $check = $data->result();
+
+        if($_POST['sms'] == 'yes'){
+            foreach($check as $each){
+                $data = $this->db->get('tbl_user_info', array('user_id' => $each->id));
+                $check = $data->result();       
+                SMSSender_API::addSms($check[0]->contact_no, $_POST['announcement']);
+            }
+        }
+        $data = array(
+            'announcement_no' => $_POST['announcement_no'],
+            'date' => $_POST['date'],
+            'content' => $_POST['announcement'],
+            'sms' => $_POST['sms'],
+            'display' => $_POST['display'],
+            'created_by' => $this->user->id,
+            'date_created' => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('tbl_announcement', $data);
     }
 }

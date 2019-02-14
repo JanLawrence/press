@@ -39,7 +39,7 @@
                             <td><?=ucwords($each->user_type)?></td>
                             <td><?=$each->names?></td>
                             <td><?=$each->summary?></td>
-                            <td><?=date('F m, Y', strtotime($each->date_created))?></td>
+                            <td><?=date('F d, Y', strtotime($each->date_created))?></td>
                             <td><?=date('H:i A', strtotime($each->date_created))?></td>
                         </tr>
                         <?php endforeach;?>
