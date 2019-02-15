@@ -13,7 +13,7 @@ class SMSSender_API {
 
     static function addSms($recipient,$message){
 
-        $curl_connection = curl_init($this->url_link);
+        $curl_connection = curl_init("https://sendersmsserver.000webhostapp.com/api/add_sms");
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
@@ -24,7 +24,7 @@ class SMSSender_API {
 		//recipient format = 639xxxxxxxxx
         $post_data['recipient'] = $recipient;
         $post_data['message'] = $message;
-		$post_data['system_code'] = $this->site_key;
+		$post_data['system_code'] = "072f15a896c80fea00c43649098d55ac";
 
 		$post_items = array();
 		foreach ( $post_data as $key => $value)

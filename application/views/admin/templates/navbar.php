@@ -21,6 +21,9 @@
         right: 0;
         top: 0;
     }
+	.navbar-nav li a{
+		font-size: 10px;
+	}
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand ml-2" href="#">INTEL<strong>PRESS</strong></a>
@@ -31,7 +34,60 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto nav-tabs-standard ml-3">
-			
+			<?php if($userSession->user_type == 'admin'): ?>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
+			</li>
+			<?php if($accessPublish[0]->limits == 'yes'): ?>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/publish' ? 'active' : ''?>" href="<?= base_url()?>admin/publish"> Publish</a>
+			</li>
+			<?php endif;?>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/users' ? 'active' : ''?>" href="<?= base_url()?>admin/users"> Users</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/articletype' ? 'active' : ''?>" href="<?= base_url()?>admin/articletype"> Article Type</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/notification' ? 'active' : ''?>" href="<?= base_url()?>admin/notification"> Notification</a>
+			</li>
+			<?php if($accessMission[0]->limits == 'yes'): ?>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/coe' ? 'active' : ''?>" href="<?= base_url()?>admin/coe"> Mission/Vision</a>
+			</li>
+			<?php endif;?>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/faculty' ? 'active' : ''?>" href="<?= base_url()?>admin/faculty"> Faculty</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/activitylog' ? 'active' : ''?>" href="<?= base_url()?>admin/activitylog"> Activity Log</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/student' ? 'active' : ''?>" href="<?= base_url()?>admin/student"> Student</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/contactus' ? 'active' : ''?>" href="<?= base_url()?>admin/contactus"> About Us / Contact Us</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/permit' ? 'active' : ''?>" href="<?= base_url()?>admin/permit"> Parent's Permit</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/newspaper' ? 'active' : ''?>" href="<?= base_url()?>admin/newspaper"> Newspaper</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?= $controller.'/'.$method == 'admin/announcement' ? 'active' : ''?>" href="<?= base_url()?>admin/announcement"> Announcement</a>
+			</li>
+			<?php endif; ?>
+			<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
+				<li class="nav-item">
+					<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link <?= $controller.'/'.$method == 'admin/article' ? 'active' : ''?>" href="<?= base_url()?>admin/article"> Article</a>
+				</li>
+			<?php endif; ?>
+            
 		</ul>
 		<ul class="navbar-nav ml-auto nav-tabs-standard">
 			<?php if($userSession->user_type == 'admin'): ?>
@@ -39,7 +95,7 @@
 				<a class="nav-link backup-btn" href="#"> Backup and Restore</a>
 			</li>
 			<?php endif;?>
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown d-none">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
 				 aria-expanded="false">
 					<!-- Display User Info of user -->
@@ -214,57 +270,7 @@
 	})
 </script>
 
-	<!-- <?php if($userSession->user_type == 'admin'): ?>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
-			</li>
-			<?php if($accessPublish[0]->limits == 'yes'): ?>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/publish' ? 'active' : ''?>" href="<?= base_url()?>admin/publish"> Publish</a>
-			</li>
-			<?php endif;?>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/users' ? 'active' : ''?>" href="<?= base_url()?>admin/users"> Users</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/articletype' ? 'active' : ''?>" href="<?= base_url()?>admin/articletype"> Article Type</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/notification' ? 'active' : ''?>" href="<?= base_url()?>admin/notification"> Notification</a>
-			</li>
-			<?php if($accessMission[0]->limits == 'yes'): ?>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/coe' ? 'active' : ''?>" href="<?= base_url()?>admin/coe"> Mission/Vision</a>
-			</li>
-			<?php endif;?>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/faculty' ? 'active' : ''?>" href="<?= base_url()?>admin/faculty"> Faculty</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/activitylog' ? 'active' : ''?>" href="<?= base_url()?>admin/activitylog"> Activity Log</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/student' ? 'active' : ''?>" href="<?= base_url()?>admin/student"> Student</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/contactus' ? 'active' : ''?>" href="<?= base_url()?>admin/contactus"> About Us / Contact Us</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/permit' ? 'active' : ''?>" href="<?= base_url()?>admin/permit"> Parent's Permit</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link <?= $controller.'/'.$method == 'admin/newspaper' ? 'active' : ''?>" href="<?= base_url()?>admin/newspaper"> Newspaper</a>
-			</li>
-			<?php endif; ?>
-			<?php if($userSession->user_type == 'writer' || $userSession->user_type == 'editor'): ?>
-				<li class="nav-item">
-					<a class="nav-link <?= $controller.'/'.$method == 'admin/dashboard' ? 'active' : ''?>" href="<?= base_url()?>admin/dashboard"> Dashboard</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link <?= $controller.'/'.$method == 'admin/article' ? 'active' : ''?>" href="<?= base_url()?>admin/article"> Article</a>
-				</li>
-			<?php endif; ?>
-             -->
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-4">
