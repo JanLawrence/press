@@ -1211,7 +1211,7 @@ class Admin_model extends CI_Model{
         }
     }
     public function getAnnouncements(){
-        $this->db->order_by("date_created");
+        $this->db->order_by("date_created DESC");
         $data = $this->db->get('tbl_announcement');
         return $data->result();
 

@@ -82,54 +82,6 @@
                             <p style="font-size: 16px;"><?= $each->content?></p>
                         </div>
                     </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <h6 style="font-size: 9px; font-weight: 800;"><?= date('F d, Y', strtotime($each->date))?></h6>
-                            <p style="font-size: 16px;"><?= $each->content?></p>
-                        </div>
-                    </div>
                     <?php endif;?>
                 <?php endforeach; ?>
             </div>

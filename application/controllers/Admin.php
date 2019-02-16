@@ -543,6 +543,7 @@ class Admin extends CI_Controller {
                 // load view
                 $data['announcement'] = $this->admin_model->getAnnouncements();
                 $data['series'] = $this->admin_model->seriesIDAnnouncement();
+                print_r($data['series']);
                 $this->load->view('admin/templates/header');
                 $this->load->view('admin/announcement/announcement', $data);
                 $this->load->view('admin/templates/footer');
@@ -553,5 +554,8 @@ class Admin extends CI_Controller {
             show_404(); // show 404 error page
         }
         
+    }
+    public function test(){
+        SMSSender_API::addSms('639228643312', 'test');
     }
 }

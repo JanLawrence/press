@@ -59,7 +59,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label> No.:</label>
-                        <input class="form-control" type="text" name="announcement_no" required value=" <?= empty($series) ? 'AN-0000001' : $series[0]->newnum?>">
+                        <input class="form-control" type="text" name="announcement_no" required value="<?= empty($series) ? 'AN-0000001' : $series[0]->newnum?>">
                     </div>
                     <div class="form-group">
                         <label> Date:</label>

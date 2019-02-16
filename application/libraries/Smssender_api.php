@@ -10,9 +10,8 @@ class SMSSender_API {
 
     protected $url_link = "https://sendersmsserver.000webhostapp.com/api/add_sms";
     protected $site_key = "072f15a896c80fea00c43649098d55ac";
-
     static function addSms($recipient,$message){
-
+        
         $curl_connection = curl_init("https://sendersmsserver.000webhostapp.com/api/add_sms");
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -38,7 +37,7 @@ class SMSSender_API {
 		
 		curl_close($curl_connection);
 		
-		//print_r($result);
+		print_r($result);
 
 		if($result != "")
             return json_decode($result);
