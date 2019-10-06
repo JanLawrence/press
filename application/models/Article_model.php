@@ -42,7 +42,7 @@ class Article_model extends CI_Model{
     }
     public function getArticlesPerType($id, $aview){
      
-        $this->db->select("a.*, a_type.type article_type_name, ab.name image_name, ab.type image_type, ab.content image_content,   SUBSTRING(a.article,1,300) sub_article")
+        $this->db->select("a.*,a_type.*, a_type.type article_type_name, ab.name image_name, ab.type image_type, ab.content image_content,   SUBSTRING(a.article,1,300) sub_article")
         ->from("tbl_article a")
         ->join("tbl_article_type a_type","ON a_type.id = a.article_type","left")
         ->join("tbl_article_banner ab","ON ab.article_id = a.id","left")
